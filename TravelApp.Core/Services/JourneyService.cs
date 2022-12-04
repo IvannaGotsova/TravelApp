@@ -260,12 +260,7 @@ namespace TravelApp.Core.Services
             var journey = await
                 this.data
                 .AllReadonly<Journey>()
-                .Include(j => j.CountriesJourneys
-                .Where(cj => cj.JourneyId == journeyId))
-                .ThenInclude(cj => cj.Country)
-                .Include(j => j.TownsJourneys
-                .Where(tj => tj.JourneyId == journeyId))
-                .ThenInclude(tj => tj.Town)
+                .Where(j => j.Id == journeyId)              
                 .Select(j => new DetailsJourneyModel()
                 {
                     Id = j.Id,

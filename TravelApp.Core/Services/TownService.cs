@@ -141,30 +141,24 @@ namespace TravelApp.Core.Services
             var town = await
                this.data
               .AllReadonly<Town>()
-              .Include(t => t.Country)
-              .ThenInclude(c => c!.CountriesJourneys)
-              .ThenInclude(cj => cj.Journey)
               .Where(t => t.Id == townId)
               .Select(t => new DetailsTownModel()
               {
                   Id = t.Id,
                   Name = t.Name,
+                  Description = t.Description,
                   Population = t.Population,
                   Area = t.Area,
                   Image = t.Image,
-                  CountryName = t.Country!.Name,
-                  Description = t.Description,
-                  JourneysForTown = t.Country.CountriesJourneys.Where(cj => cj.Country!.Towns.Any(t => t.Id == townId))
-                  
-                                                           .Select(cj => new DetailsJourneyModel()
+                  JourneysForTown = t.TownsJourneys.Where(tj => tj.TownId == townId)
+                                                           .Select(tj => new DetailsJourneyModel()
                                                            {
-                                                               Id = cj.Journey!.Id,
-                                                               Image = cj.Journey!.Image,
-                                                               Title = cj.Journey.Title,
-                                                               Days = cj.Journey.Days
+                                                               Id = tj.Journey!.Id,
+                                                               Image = tj.Journey.Image,
+                                                               Title = tj.Journey.Title,
+                                                               Days = tj.Journey.Days
                                                            }).ToList()
-              })
-              .FirstOrDefaultAsync();
+              }).FirstOrDefaultAsync();
 
             if (town == null)
             {

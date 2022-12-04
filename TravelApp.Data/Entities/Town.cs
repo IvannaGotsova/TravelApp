@@ -28,5 +28,8 @@ namespace TravelApp.Data.Entities
         [StringLength(TownMaxLengthImage)]
         public string Image { get; set; } = null!;
 
+        public IEnumerable<TownJourney> TownsJourneys { get; set; } = new List<TownJourney>();
+
+
     }
 }
