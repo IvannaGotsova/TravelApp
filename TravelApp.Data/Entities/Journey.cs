@@ -18,6 +18,7 @@ namespace TravelApp.Data.Entities
         [StringLength(JourneyMaxLengthTitle)]
         public string Title { get; set; } = null!;
         public IEnumerable<CountryJourney> CountriesJourneys { get; set; } = new List<CountryJourney>();
+        public IEnumerable<TownJourney> TownsJourneys { get; set; } = new List<TownJourney>();
         public IEnumerable<Trip> Trips { get; set; } = new List<Trip>();
         [Required]
         [StringLength(JourneyMaxLengthDescription)]

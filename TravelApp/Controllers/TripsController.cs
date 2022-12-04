@@ -105,7 +105,7 @@ namespace TravelApp.Controllers
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
-
+            
             try
             {
                 var tripModel = await tripService

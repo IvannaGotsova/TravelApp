@@ -20,14 +20,11 @@ namespace TravelApp.Core.Services
     public class JourneyService : IJourneyService
     {
         private readonly IRepository data;
-        private readonly ITownService townService;
+        
 
-
-        public JourneyService(IRepository data,
-                              ITownService townService)
+        public JourneyService(IRepository data)
         {
-            this.data = data;
-            this.townService = townService;
+            this.data = data;         
         }
 
         public async Task Add(AddJourneyModel addJourneyModel, string currentUserId)
@@ -36,7 +33,7 @@ namespace TravelApp.Core.Services
             {
                 Title = addJourneyModel.Title,
                 Description = addJourneyModel.Description,
-                StartDate =addJourneyModel.StartDate,
+                StartDate = addJourneyModel.StartDate,
                 EndDate = addJourneyModel.EndDate,
                 Image = addJourneyModel.Image,
                 Days = addJourneyModel.Days,
@@ -44,6 +41,7 @@ namespace TravelApp.Core.Services
                 NumberOfPeople = addJourneyModel.NumberOfPeople,
                 CountriesJourneys = new List<CountryJourney>(),
                 ApplicationUsersJourneys = new List<ApplicationUserJourney>(),
+                TownsJourneys = new List<TownJourney>()
                 
             };
 
@@ -59,6 +57,18 @@ namespace TravelApp.Core.Services
                 };
 
                 await this.data.AddAsync(journeyCountryToAdded);
+            }
+
+            foreach (var town in addJourneyModel.TownIds)
+            {
+                var journeyTownToAdded = new TownJourney()
+                {
+                    TownId = town,
+                    Journey = journeyToBeAdded,
+
+                };
+
+                await this.data.AddAsync(journeyTownToAdded);
             }
 
             var journeyUserToBeAdded = new ApplicationUserJourney()
@@ -161,6 +171,25 @@ namespace TravelApp.Core.Services
                 await this.data.AddAsync(journeyCountryToAdded);
             }
 
+            var townsJourneysToDelete = await
+                this.data
+                .AllReadonly<TownJourney>()
+                .Where(tj => tj.JourneyId == journeyId)
+                .ToListAsync();
+
+            this.data.DeleteRange<TownJourney>(townsJourneysToDelete);
+
+            foreach (var townJourney in editJourneyModel.TownIds)
+            {
+                var journeyTownToAdded = new TownJourney()
+                {
+                    TownId = townJourney,
+                    Journey = journeyToBeEdited,
+
+                };
+
+                await this.data.AddAsync(journeyTownToAdded);
+            }
             await this.data.SaveChangesAsync();
         }
 
@@ -227,13 +256,16 @@ namespace TravelApp.Core.Services
         }
 
         public async Task<DetailsJourneyModel> GetJourneyDetailsById(int journeyId)
-        {
+        {         
             var journey = await
                 this.data
                 .AllReadonly<Journey>()
-                .Include(j => j.CountriesJourneys.Where(cj => cj.JourneyId == journeyId))
+                .Include(j => j.CountriesJourneys
+                .Where(cj => cj.JourneyId == journeyId))
                 .ThenInclude(cj => cj.Country)
-                .Where(j => j.Id == journeyId)
+                .Include(j => j.TownsJourneys
+                .Where(tj => tj.JourneyId == journeyId))
+                .ThenInclude(tj => tj.Town)
                 .Select(j => new DetailsJourneyModel()
                 {
                     Id = j.Id,
@@ -246,8 +278,8 @@ namespace TravelApp.Core.Services
                     NumberOfPeople = j.NumberOfPeople,
                     Image = j.Image,
                     Countries = string.Join(", ", j.CountriesJourneys.Select(cj => cj.Country!.Name)),
-                    Towns = string.Join(", ", j.CountriesJourneys.Select(cj => cj.Country!.Towns.Select(t => t).Select(t => t.Name).ToString()))
-                }).FirstOrDefaultAsync();
+                    Towns = string.Join(", ", j.TownsJourneys.Select(tj => tj.Town!.Name))
+                }).FirstOrDefaultAsync();           
 
 
             if (journey == null)

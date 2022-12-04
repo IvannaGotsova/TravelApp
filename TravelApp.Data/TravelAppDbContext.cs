@@ -21,6 +21,7 @@ namespace TravelApp.Data
         public DbSet<Request> Requests { get; set; } = null!;
         public DbSet<ApplicationUserJourney> ApplicationUsersJourneys { get; set; } = null!;
         public DbSet<CountryJourney> CountriesJourneys { get; set; } = null!;
+        public DbSet<TownJourney> TownsJourneys { get; set; } = null!;
         public DbSet<ApplicationRole> ApplicationRoles { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -60,6 +61,9 @@ namespace TravelApp.Data
                 .Entity<CountryJourney>()
                 .HasKey(cj => new { cj.JourneyId, cj.CountryId });
 
+            builder
+                .Entity<TownJourney>()
+                .HasKey(cj => new { cj.JourneyId, cj.TownId });
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
@@ -71,6 +75,7 @@ namespace TravelApp.Data
             builder.ApplyConfiguration(new ApplicationUserJourneyConfiguration());
             builder.ApplyConfiguration(new CountryJourneyConfiguration());
             builder.ApplyConfiguration(new RequestConfiguration());
+            builder.ApplyConfiguration(new TownJourneyConfiguration());
 
 
             base.OnModelCreating(builder);

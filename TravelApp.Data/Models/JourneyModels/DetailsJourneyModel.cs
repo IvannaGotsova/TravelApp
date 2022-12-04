@@ -42,7 +42,7 @@ namespace TravelApp.Data.Models.JourneyModels
         public string Countries { get; set; } = null!;
         [Required]
         public string Towns { get; set; } = null!;
-        public IEnumerable<DetailsJourneyModel> JourneysForCountries { get; set; } = new List<DetailsJourneyModel>();
+        
      
 
     }
