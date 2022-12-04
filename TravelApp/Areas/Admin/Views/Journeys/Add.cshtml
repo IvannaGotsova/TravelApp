@@ -13,18 +13,18 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="@Model.Title" class="form-label">Name</label>
+                <label asp-for="@Model.Title" class="form-label">Journey Name</label>
                 <input asp-for="@Model.Title" class="form-control" aria-required="true" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Image" class="form-label">Image </label>
+                <label asp-for="@Model.Image" class="form-label">Journey Image </label>
                 <input asp-for="@Model.Image" class="form-control" aria-required="true" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
            
             <div class="mb-3">
-                <label asp-for="@Model.CountryIds" class="form-label">Countries</label>
+                <label asp-for="@Model.CountryIds" class="form-label">Add Countries for the Journey</label>
                 <select multiple="multiple" class="multi-select" id="@Model.CountryIds" asp-for="@Model.CountryIds" asp-for="@Model.Countries" asp-items="ViewBag.Countries">
                     class="form-control">
                     @foreach (var country in Model.Countries)
@@ -35,7 +35,7 @@
                 <span asp-validation-for="CountryIds" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.TownIds" class="form-label">Towns</label>
+                <label asp-for="@Model.TownIds" class="form-label">Add Towns for the Journey</label>
                 <select multiple="multiple" class="multi-select" id="@Model.TownIds" asp-for="@Model.TownIds" asp-for="@Model.Towns" asp-items="ViewBag.Towns">
                     class="form-control">
                     @foreach (var town in @Model.Towns)
@@ -46,33 +46,33 @@
                 <span asp-validation-for="TownIds" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Description" class="form-label">Description</label>
+                <label asp-for="@Model.Description" class="form-label">Journey Description</label>
                 <input asp-for="@Model.Description" class="form-control" aria-required="true" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>     
     
             <div class="mb-3">
-                <label asp-for="@Model.StartDate" class="form-label">Start Date</label>
+                <label asp-for="@Model.StartDate" class="form-label">Journey Start Date</label>
                 <input asp-for="@Model.StartDate" class="form-control" aria-required="true" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>     
             <div class="mb-3">
-                <label asp-for="@Model.EndDate" class="form-label">End Date</label>
+                <label asp-for="@Model.EndDate" class="form-label">Journey End Date</label>
                 <input asp-for="@Model.EndDate" class="form-control" aria-required="true" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Days" class="form-label">Days</label>
+                <label asp-for="@Model.Days" class="form-label">Journey Days</label>
                 <input asp-for="@Model.Days" class="form-control" aria-required="true" />
                 <span asp-validation-for="Days" class="text-danger"></span>
             </div>     
             <div class="mb-3">
-                <label asp-for="@Model.Price" class="form-label">Price</label>
+                <label asp-for="@Model.Price" class="form-label">Journey Price</label>
                 <input asp-for="@Model.Price" class="form-control" aria-required="true" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
              <div class="mb-3">
-                <label asp-for="@Model.NumberOfPeople" class="form-label">Available</label>
+                <label asp-for="@Model.NumberOfPeople" class="form-label">Journey Available Places</label>
                 <input asp-for="@Model.NumberOfPeople" class="form-control" aria-required="true" />
                 <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
             </div>

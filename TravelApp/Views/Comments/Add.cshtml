@@ -13,7 +13,7 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="@Model.Title" class="form-label">Title</label>
+                <label asp-for="@Model.Title" class="form-label">Comment Title</label>
                 <input asp-for="@Model.Title" class="form-control" aria-required="true" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
@@ -28,7 +28,7 @@
                 <span asp-validation-for="PostId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Description" class="form-label">Description </label>
+                <label asp-for="@Model.Description" class="form-label">Comment Description </label>
                 <input asp-for="@Model.Description" class="form-control" aria-required="true" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
