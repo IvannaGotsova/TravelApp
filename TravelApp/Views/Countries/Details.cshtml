@@ -1,0 +1,68 @@
+﻿@model DetailsCountryModel
+
+@{
+    ViewBag.Title = $"Country - {Model.Name}";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+   <div class="card col-4" style="width: 20rem; ">           
+     <img class="card-img-top" style="width: 18rem;"
+          src="@Model.Image" alt="Country Image">
+             <div class="card-body">
+            <input type="hidden" asp-for="@Model.Id" />
+                   <h5 class="card-title mt-1">@Model.Name</h5>
+                   
+                   <p class="mb-0">Description: @Model.Description</p>
+                   <p class="mb-0">Population: @Model.Population</p>
+                   <p class="mb-0">Area: @Model.Area</p>
+     
+                   @if (this.User?.Identity?.IsAuthenticated ?? false)
+                   {
+                           @if (this.User.IsInRole("Admin"))
+                           {
+                               <a class="btn btn-warning" asp-area="Admin" asp-controller="Countries" asp-action="Edit"
+                          asp-route-id="@Model.Id" asp-route-information="" class="btn btn-success">Edit</a>
+                          
+                               <a class="btn btn-warning" asp-area="Admin" asp-controller="Countries" asp-action="Delete"
+                          asp-route-id="@Model.Id" asp-route-information="" class="btn btn-success">Delete</a>
+                           }
+                   }
+
+             </div>
+                   
+   </div>
+</div>
+
+<hr/>
+
+@if(Model.JourneysForCountry.Count() > 0)
+{
+    @foreach(var journey in Model.JourneysForCountry)
+{
+    <div class="text-center row">
+        <div class="card col-4" style="width: 20rem; ">
+                <input type="hidden" asp-for="@journey.Id" />
+            <div class="card-body">
+
+                    <img class="card-img-top" style="width: 18rem;"
+                      src="@journey.Image" alt="Journey Image">
+                    <p class="mb-0">Title: @journey.Title</p>
+                    <p class="mb-0">Days: @journey.Days</p>
+
+
+            </div>
+        </div>         
+    </div>
+        <a class="btn btn-warning" asp-area="" asp-controller="Journeys" asp-action="Details"
+   asp-route-id="@journey.Id" asp-route-information="" class="btn btn-success">Learn more about this Journey</a>
+}
+}
+else
+{
+   <p>There is no journeys for this country right now!</p>
+}
+

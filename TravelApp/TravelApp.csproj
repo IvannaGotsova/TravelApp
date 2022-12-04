@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-TravelApp-F3476367-75C9-4E51-B1C0-890C3FB7797A</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Photos\Bulgaria.jpg" />
+    <Content Remove="wwwroot\Photos\Croatia.jpg" />
+    <Content Remove="wwwroot\Photos\LA.jpg" />
+    <Content Remove="wwwroot\Photos\NY.jpg" />
+    <Content Remove="wwwroot\Photos\Plovdiv.jpg" />
+    <Content Remove="wwwroot\Photos\USA.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TravelApp.Core\TravelApp.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Photos\Bulgaria.jpg" />
+    <None Include="wwwroot\Photos\Croatia.jpg" />
+    <None Include="wwwroot\Photos\Plovdiv.jpg" />
+    <None Include="wwwroot\Photos\USA.jpg" />
+  </ItemGroup>
+
+</Project>

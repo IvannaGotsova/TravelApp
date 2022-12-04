@@ -1,0 +1,85 @@
+﻿@model EditJourneyModel 
+
+@{
+    ViewBag.Title = "Admin Edit Journey";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" placeholder="Title...">
+                <span asp-validation-for="Title" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image"></label>
+                <input asp-for="Image" class="form-control" placeholder="Image...">
+                <span asp-validation-for="Image" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Description..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+             <div class="mb-3">
+                <label asp-for="@Model.StartDate" class="form-label">Start Date</label>
+                <input asp-for="@Model.StartDate" class="form-control" aria-required="true" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>     
+            <div class="mb-3">
+                <label asp-for="@Model.EndDate" class="form-label">End Date</label>
+                <input asp-for="@Model.EndDate" class="form-control" aria-required="true" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.CountryIds" class="form-label">Countries</label>
+                <select multiple="multiple" class="multi-select" id="@Model.CountryIds" asp-for="@Model.CountryIds" asp-for="@Model.Countries" asp-items="ViewBag.Countries">
+                    class="form-control">
+                    @foreach (var country in Model.Countries)
+                    {
+                        <option value="@country.Id">@country.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CountryIds" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.TownIds" class="form-label">Towns</label>
+                <select multiple="multiple" class="multi-select" id="@Model.TownIds" asp-for="@Model.TownIds" asp-for="@Model.Towns" asp-items="ViewBag.Towns">
+                    class="form-control">
+                    @foreach (var town in Model.Towns)
+                    {
+                        <option value="@town.Id">@town.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="TownIds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfPeople"></label>
+                <input asp-for="NumberOfPeople" class="form-control" placeholder="Number Of People...">
+                <span asp-validation-for="NumberOfPeople" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="Price...">>
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Days"></label>
+                <input asp-for="Days" class="form-control" placeholder="Days...">
+                <span asp-validation-for="Days" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

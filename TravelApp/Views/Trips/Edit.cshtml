@@ -1,0 +1,43 @@
+﻿@model EditTripModel 
+
+@{
+    ViewBag.Title = "Edit your Trip";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" placeholder="Title...">
+                <span asp-validation-for="Title" class="small text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="JourneyId"></label>
+                <select asp-for="JourneyId" class="form-control">
+                    @foreach (var journey in Model.Journeys)
+                    {
+                        <option value="@journey.Id">@journey.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="JourneyId" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rating"></label>
+                <input asp-for="Rating" class="form-control" placeholder="Rating...">
+                <span asp-validation-for="Rating" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

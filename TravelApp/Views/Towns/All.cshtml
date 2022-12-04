@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AllTownsModel>
+
+@{
+    ViewBag.Title = "All Towns";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+@if (this.User.IsInRole("Admin"))
+{
+   <a class="btn btn-warning" asp-area="Admin" asp-controller="Towns" asp-action="Add"
+   sp-route-information="" class="btn btn-success">Add Town</a>
+}
+
+<hr />
+
+<div class="text-center row">
+    @if (Model.Count() > 0)
+    {
+
+        @foreach (var town in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <img class="card-img-top" style="width: 18rem;"
+             src="@town.Image" alt="Town Image">
+                <div class="card-body">
+
+                    <h5 class="card-title mt-1">@town.Name</h5>
+                    <p class="mb-0">Description: @town.Description</p>
+                    <p class="mb-0">Population: @town.Population</p>
+                    <p class="mb-0">Area: @town.Area</p>
+                    <p>Country: @town.CountryName</p>
+                </div>
+                @if (this.User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <a class="btn btn-warning" asp-controller="Towns" asp-action="Details" asp-route-id="@town.Id"
+                    asp-route-information="" class="btn btn-success">Details</a>
+                }
+            </div>
+        }
+    }
+    else 
+    {
+        <p class="mb-0">There are no towns yet!</p>
+    }
+</div>

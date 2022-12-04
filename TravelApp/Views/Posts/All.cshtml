@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AllPostsModel> 
+
+@{
+    ViewBag.Title = "All Posts";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<a class="btn btn-warning" asp-controller="Posts" asp-action="Add"       
+   sp-route-information="" class="btn btn-success">Add new Post</a>
+<hr />
+
+<div class="text-center row">
+    @if (Model.Count() > 0)
+    {
+        @foreach (var post in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <img class="card-img-top" style="width: 18rem;"
+             src="@post.Image" alt="Post Image">
+                <div class="card-body">
+                    <p class="mb-0">Trip: @post.TripName</p>
+                    <h5 class="card-title mt-1">@post.Title</h5>
+                    <p class="mb-0">Description: @post.Description</p>
+                </div>
+                @if (this.User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <a class="btn btn-warning" asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id"
+                    asp-route-information="" class="btn btn-success">Details</a>
+                }
+            </div>
+        }
+    }
+    else 
+    {
+        <p class="mb-0">There are no posts yet!</p>
+    }
+   
+</div>
+

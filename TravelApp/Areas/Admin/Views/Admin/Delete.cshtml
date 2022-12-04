@@ -1,0 +1,30 @@
+﻿@model AllUsersModelView
+
+@{
+    ViewBag.Title = "Delete User";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<form asp-action="Delete">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" disabled="disabled" />
+            </div>
+             <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Delete" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>

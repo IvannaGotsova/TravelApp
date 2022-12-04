@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>ADMIN</p>
+    <p>This is ADMIN AREA.<p/> 
+    <p>You can add, edit and delete Journeys, Countries and Towns.</p>
+    <p>You can manage users and requests.</p>
+    <hr />
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Journeys" asp-action="Add" sp-route-information="" class="btn btn-success">Add Journey</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Countries" asp-action="Add" sp-route-information="" class="btn btn-success">Add Country</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Towns" asp-action="Add" sp-route-information="" class="btn btn-success">Add Town</a>
+</div>

@@ -1,0 +1,64 @@
+﻿@model DetailsTripModel
+
+@{
+    ViewBag.Title = $"Trip - {Model.Title}";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+ <a class="btn btn-warning" asp-controller="Posts" asp-action="Add" 
+asp-route-information="" class="btn btn-success">Add Post</a>
+<hr />
+
+<div class="text-center row">
+   <div class="card col-4" style="width: 20rem; ">
+        <input type="hidden" asp-for="@Model.Id" />
+                <div class="card-body">
+
+                      <h5 class="card-title mt-1">@Model.Title</h5>
+                      <p class="mb-0">Journey Name: @Model.JourneyName</p>
+                      <p class="mb-0">Rating: @Model.Rating</p>
+                      <p class="mb-0">User: @this.User.GetCurrentUserName()</p>
+
+                      @if (this.User?.Identity?.IsAuthenticated ?? false)
+                      {
+
+                       <a class="btn btn-warning" asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id"       
+                   sp-route-information="" class="btn btn-success">Edit</a>
+                   
+                       <a class="btn btn-warning" asp-controller="Trips" asp-action="Delete" asp-route-id="@Model.Id"     
+                   sp-route-information="" class="btn btn-success">Delete</a>
+                      }
+                </div>
+    </div>
+</div>
+
+
+<hr />
+
+
+<div class="text-center row">
+@foreach (var post in @Model.PostsAboutTrip)
+{
+    <div class="text-center row">
+        <div class="card col-4" style="width: 20rem; ">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="card-body">
+
+                    <p class="mb-0">Title: @post.Title</p>
+                    <img class="card-img-top" style="width: 18rem;"
+                     src="@post.Image" alt="Post Image">
+                    <p class="mb-0">Description: @post.Description</p>
+                    <p class="mb-0">Trip: @post.Trip!.Title</p>
+
+                   <a class="btn btn-warning" asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id"
+                   sp-route-information="" class="btn btn-success">Full Post</a>
+
+            </div>
+        </div>
+    </div>
+}
+</div>
+

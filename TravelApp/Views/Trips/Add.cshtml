@@ -1,0 +1,47 @@
+﻿@model AddTripModel 
+
+@{
+    ViewBag.Title = "Add your new Trip";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="@Model.Title" class="form-label">Title</label>
+                <input asp-for="@Model.Title" class="form-control" aria-required="true" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.JourneyId" class="form-label">Journey</label>
+                <select asp-for="@Model.JourneyId" class="form-control">
+                    @foreach (var journey in Model.Journeys)
+                    {
+                        <option value="@journey.Id">@journey.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="JourneyId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Rating" class="form-label">Rating </label>
+                <input asp-for="@Model.Rating" class="form-control" aria-required="true" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+           
+ 
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Add" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

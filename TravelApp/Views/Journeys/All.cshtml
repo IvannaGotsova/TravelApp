@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AllJourneysModel>  
+
+@{
+    ViewBag.Title = "All Journeys";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+@if (this.User.IsInRole("Admin"))
+{
+   <a class="btn btn-warning" asp-area="Admin" asp-controller="Journeys" asp-action="Add"
+   sp-route-information="" class="btn btn-success">Add Journey</a>
+}
+
+<hr />
+
+<div class="text-center row">
+     @if (Model.Count()  > 0)
+    {
+        @foreach (var journey in Model)
+        {
+            <div class="card col-4" style="width: 20rem; ">
+                <img class="card-img-top" style="width: 18rem;"
+             src="@journey.Image" alt="Journey Image">
+                <div class="card-body">
+
+                    <h5 class="card-title mt-1">@journey.Title</h5>
+                    <p class="mb-0">Description: @journey.Description</p>
+                    <p class="mb-0">Country: @journey.Countries</p>
+                </div>
+                @if (this.User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <a class="btn btn-warning" asp-controller="Journeys" asp-action="Details" asp-route-id="@journey.Id"
+                    asp-route-information="" class="btn btn-success">Details</a>
+                }
+            </div>
+        }
+    }
+    else 
+    {
+        <p class="mb-0">There are no journeys yet!</p>
+    }
+   
+</div>
+
+                 

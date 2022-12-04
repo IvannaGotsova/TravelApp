@@ -1,0 +1,63 @@
+﻿@model DetailsPostModel
+
+@{
+    ViewBag.Title = $"Post - {Model.Title}";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<a class="btn btn-warning" asp-controller="Comments" asp-action="Add" 
+   asp-route-information="" class="btn btn-success">Add comment</a>
+<hr />
+
+<div class="text-center row">
+   <div class="card col-4" style="width: 20rem; ">
+        <input type="hidden" asp-for="@Model.Id" />
+        <img class="card-img-top" style="width: 18rem;"
+             src="@Model.Image" alt="Town Image">
+                <div class="card-body">
+
+                      <h5 class="card-title mt-1">@Model.Title</h5>
+                      <p class="mb-0">Trip Name: @Model.TripName</p>
+                      
+                      <p class="mb-0">Description: @Model.Description</p>
+
+                       @if (this.User?.Identity?.IsAuthenticated ?? false)
+                       {
+                           @if (this.User.GetCurrentUserId() == Model.ApplicationUserId)
+                           {
+
+                               <a class="btn btn-warning" asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id"
+                          asp-route-information="" class="btn btn-success">Edit</a>
+                       
+                               <a class="btn btn-warning" asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id"
+                          asp-route-information="" class="btn btn-success">Delete</a>
+                           }
+                       }
+
+       </div>
+    </div>
+</div>
+
+    <hr />
+
+@foreach (var comment in @Model.CommentsAboutPost)
+{
+    <div class="text-center row">
+        <div class="card col-4" style="width: 20rem; ">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="card-body">
+
+                    <p class="mb-0">Title: @comment.Title</p>
+                    <p class="mb-0">Description: @comment.Description</p>
+                    <p class="mb-0">Trip: @comment.Author</p>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+

@@ -1,0 +1,43 @@
+﻿@model DetailsJourneyModel
+
+@{
+    ViewBag.Title = $"Journey - {Model.Title}";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+   <div class="card col-4" style="width: 20rem; ">
+           
+        <img class="card-img-top" style="width: 18rem;"
+             src="@Model.Image" alt="Journey Image">
+                <div class="card-body">
+            <input type="hidden" asp-for="@Model.Id" />
+                      <h5 class="card-title mt-1">@Model.Title</h5>
+                      <p class="mb-0">Description: @Model.Description</p>
+                      <p class="mb-0">Start Date: @Model.StartDate.ToString("MM-dd-yyyy")</p>
+                      <p class="mb-0">End Date: @Model.EndDate.ToString("MM-dd-yyyy")</p>
+                      <p class="mb-0">Price: @Model.Price</p>
+                      <p class="mb-0">Days: @Model.Days</p>
+                      <p class="mb-0">Available: @Model.NumberOfPeople</p>
+                      <p class="mb-0">Country: @Model.Countries</p>
+                      <p class="mb-0">Town: @Model.Towns</p>
+                </div>
+                      @if (this.User?.Identity?.IsAuthenticated ?? false)
+                      {
+                              <a class="btn btn-warning" asp-area="" asp-controller="Requests" asp-action="Add" asp-route-id="@Model.Id" asp-route-information="" class="btn btn-success">Make a request</a>
+
+                          @if (this.User.IsInRole("Admin"))
+                          {
+                            
+                              <a class="btn btn-warning" asp-area="Admin" asp-controller="Journeys" asp-action="Edit" asp-route-id="@Model.Id" asp-route-information="" class="btn btn-success">Edit</a>
+                      
+                              <a class="btn btn-warning" asp-area="Admin" asp-controller="Journeys" asp-action="Delete" asp-route-id="@Model.Id" asp-route-information="" class="btn btn-success">Delete</a>
+                            
+                          }
+                      }       
+                </div>
+</div>
+

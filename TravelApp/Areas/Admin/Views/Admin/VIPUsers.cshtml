@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AllUsersModelView>
+
+@{
+    ViewBag.Title = "All VIP Users";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @if (Model.Count() > 0)
+    {
+        @foreach (var user in Model)
+        {
+            <div class="card col-4" style="width: 20rem;">
+                <div class="card-body">
+
+                    <h5 class="card-title mt-1">@user.UserName</h5>
+                    <p class="mb-0">FirstName: @user.FirstName</p>
+                    <p class="mb-0">LastName: @user.LastName</p>
+                    <p class="mb-0">Number of trips: @user.TripsCount</p>
+
+                    @if (user.IsVIP == "Regular")
+                    {
+                        <a class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="MakeVIP" asp-route-id="@user.Id"
+               asp-route-information="" class="btn btn-success">Make VIP</a>
+
+
+                    }
+                    else 
+                    {
+                        <a class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="RemoveVIP" asp-route-id="@user.Id"
+               asp-route-information="" class="btn btn-success">Remove VIP</a>
+                    }
+                    <a class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="Delete" asp-route-id="@user.Id"
+               asp-route-information="" class="btn btn-success">Delete</a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="mb-0">There are no VIP users yet!</p>
+    }
+
+</div>
