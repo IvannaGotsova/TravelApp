@@ -126,7 +126,8 @@ namespace TravelApp.Core.Services
                     FinalSum = r.ApplicationUser!.IsVIP ? (r.NumberOfPeople * r.Journey.Price) * 90/100 : r.NumberOfPeople * r.Journey.Price,
                     Status = r.IsApproved is true ? "Approved" : "Not Approved",
                     Management = r.IsManaged is true ? "Managed" : "Not Managed",
-                    JourneyId = r.JourneyId
+                    JourneyId = r.JourneyId,
+                    ApplicationUserId = r.ApplicationUser.UserName.ToString()
                 })
                 .ToList();
         }
