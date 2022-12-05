@@ -78,6 +78,8 @@ namespace TravelApp.Controllers
                 await tripService
                     .Add(addTripModel, currentUserId);
 
+                TempData["message"] = $"You have successfully added a trip!";
+
                 return RedirectToAction("All", "Trips");
             }
             catch (Exception)
@@ -165,6 +167,8 @@ namespace TravelApp.Controllers
                 await tripService
                     .Edit(id, editTripModel);
 
+                TempData["message"] = $"You have successfully edited a trip!";
+
                 return RedirectToAction("All", "Trips");
             }
             catch (Exception)
@@ -215,6 +219,8 @@ namespace TravelApp.Controllers
             {
                 await tripService
                     .Delete(deleteCommentModel.Id);
+
+                TempData["message"] = $"You have successfully deleted a trip!";
 
                 return RedirectToAction("All", "Trips");
             }

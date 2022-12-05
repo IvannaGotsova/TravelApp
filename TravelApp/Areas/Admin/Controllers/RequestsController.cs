@@ -27,6 +27,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await requestService
                     .Approve(id);
 
+                TempData["message"] = $"You have successfully approved a request!";
+
                 return RedirectToAction("All", "Requests", new { area = "Admin" });
             }
             catch (Exception)
@@ -49,6 +51,8 @@ namespace TravelApp.Areas.Admin.Controllers
             {
                 await requestService
                     .Decline(id);
+
+                TempData["message"] = $"You have successfully declined a request!";
 
                 return RedirectToAction("All", "Requests", new { area = "Admin" });
             }

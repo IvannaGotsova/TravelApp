@@ -101,6 +101,7 @@ namespace TravelApp.Areas.Admin.Controllers
 
             try
             {
+                TempData["message"] = $"You have successfully added a journey!";
 
                 await journeyService.Add(addJourneyModel, currentUserId);
 
@@ -179,6 +180,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await journeyService
                     .Edit(id, editJourneyModel);
 
+                TempData["message"] = $"You have successfully edited a journey!";
+
                 return RedirectToAction("All", "Journeys", new { area = "" });
             }
             catch (Exception)
@@ -231,6 +234,8 @@ namespace TravelApp.Areas.Admin.Controllers
             {
                 await journeyService
                     .Delete(deleteJourneyModel.Id, currentUserId);
+
+                TempData["message"] = $"You have successfully deleted a journey!";
 
                 return RedirectToAction("All", "Journeys", new { area = "" });
             }

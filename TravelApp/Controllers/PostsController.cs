@@ -65,6 +65,8 @@ namespace TravelApp.Controllers
                 await postService
                     .Add(addPostModel);
 
+                TempData["message"] = $"You have successfully added a post!";
+
                 return RedirectToAction("All", "Posts");
             }
             catch (Exception)
@@ -143,6 +145,8 @@ namespace TravelApp.Controllers
                 await postService
                     .Edit(id, editPostModel);
 
+                TempData["message"] = $"You have successfully edited a post!";
+
                 return RedirectToAction("All", "Posts");
             }
             catch (Exception)
@@ -193,6 +197,8 @@ namespace TravelApp.Controllers
             {
                 await postService
                     .Delete(deletePostModel.Id);
+
+                TempData["message"] = $"You have successfully deleted a post!";
 
                 return RedirectToAction("All", "Posts");
             }

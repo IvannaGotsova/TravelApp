@@ -91,6 +91,8 @@ namespace TravelApp.Controllers
                 await requestService
                     .Add(addRequestModel, addRequestModel.ApplicationUserId, id);
 
+                TempData["message"] = $"You have successfully made a request!";
+
                 return RedirectToAction("All", "Journeys");
             }
             catch (Exception)

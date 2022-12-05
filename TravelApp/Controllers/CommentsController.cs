@@ -34,8 +34,7 @@ namespace TravelApp.Controllers
             catch (Exception)
             {
 
-                return RedirectToAction("Error", "Home", new { area = "" });
-            }
+                return RedirectToAction("Error", "Home", new { area = "" });            }
         }
 
         [HttpGet]
@@ -67,6 +66,8 @@ namespace TravelApp.Controllers
                     GetCurrentUserName();
                 await commentService
                     .Add(addCommentModel);
+
+                TempData["message"] = $"You have successfully added a comment!";
 
                 return RedirectToAction("All", "Comments");
             }
@@ -145,6 +146,8 @@ namespace TravelApp.Controllers
                 await commentService
                     .Edit(id, editCommentModel);
 
+                TempData["message"] = $"You have successfully edited a comment!";
+
                 return RedirectToAction("All", "Comments");
             }
             catch (Exception)
@@ -192,6 +195,8 @@ namespace TravelApp.Controllers
             {
                 await commentService
                     .Delete(deleteCommentModel.Id);
+
+                TempData["message"] = $"You have successfully deleted a comment!";
 
                 return RedirectToAction("All", "Comments");
             }

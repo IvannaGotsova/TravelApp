@@ -33,6 +33,7 @@ namespace TravelApp.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
+            
             return View();
         }
 
@@ -55,8 +56,7 @@ namespace TravelApp.Areas.Admin.Controllers
 
         public async Task<IActionResult> MakeVIP(string id)
         {
-            if (await applicationUserService
-                .GetApplicaionUserById(id) == null)
+            if (await applicationUserService.GetApplicaionUserById(id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
@@ -65,6 +65,8 @@ namespace TravelApp.Areas.Admin.Controllers
             {
                 await applicationUserService
                     .MakeVIP(id);
+
+                TempData["message"] = $"You have successfully added new VIP user!";
 
                 return RedirectToAction("AllUsers", "Admin");
 
@@ -90,6 +92,8 @@ namespace TravelApp.Areas.Admin.Controllers
             {
                 await applicationUserService
                     .RemoveVIP(id);
+
+                TempData["message"] = $"You have successfully remove VIP user!";
 
                 return RedirectToAction("VIPUsers", "Admin");
 
@@ -164,6 +168,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await applicationUserService
                     .Delete(allUsersModelView.Id);
 
+                TempData["message"] = $"You have successfully deleted user!";
+
                 return RedirectToAction("AllUsers", "Admin", new { area = "Admin" });
             }
             catch (Exception)
@@ -179,7 +185,7 @@ namespace TravelApp.Areas.Admin.Controllers
             await signInManager
                 .SignOutAsync();
 
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

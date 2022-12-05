@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using TravelApp.Common;
 using TravelApp.Data.Entities;
 using TravelApp.Data.Models.ApplicationUser;
 using static TravelApp.ErrorConstants.ErrorConstants.UserErrorConstants;
@@ -85,6 +87,8 @@ namespace TravelApp.Controllers
 
             LoginModelView modelToBeLogin = new LoginModelView();
 
+            TempData["message"] = $"Hello! Have a great time!";
+
             return View(modelToBeLogin);
         }
 
@@ -121,6 +125,8 @@ namespace TravelApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
+
+            TempData["message"] = $"Goodbye! We are waiting for you to come back";
 
             return RedirectToAction("Index", "Home");
         }

@@ -15,8 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<TravelAppDbContext>(options =>
-    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("TravelApp.Data")));
+builder.Services.AddDbContext<TravelAppDbContext>
+    (options => {
+        options.UseSqlServer(connectionString, b => b.MigrationsAssembly("TravelApp.Data"));
+        options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>

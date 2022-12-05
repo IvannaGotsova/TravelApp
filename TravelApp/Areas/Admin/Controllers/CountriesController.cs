@@ -37,6 +37,8 @@ namespace TravelApp.Areas.Admin.Controllers
             
             try
             {
+                TempData["message"] = $"You have successfully added a country!";
+
                 await countryService.Add(modelCountry);
 
                 return RedirectToAction("All", "Countries", new { area = "" });
@@ -87,6 +89,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await countryService
                     .Edit(id, editCountryModel);
 
+                TempData["message"] = $"You have successfully edited a country!";
+
                 return RedirectToAction("All", "Countries", new { area = ""});
             }
             catch (Exception)
@@ -132,6 +136,8 @@ namespace TravelApp.Areas.Admin.Controllers
             try
             {
                 await countryService.Delete(deleteCountryModel.Id);
+
+                TempData["message"] = $"You have successfully deleted a country!";
 
                 return RedirectToAction("All", "Countries", new { area = ""});
             }

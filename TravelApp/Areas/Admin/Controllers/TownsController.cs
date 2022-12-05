@@ -55,6 +55,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await townService
                     .Add(addTownModel);
 
+                TempData["message"] = $"You have successfully added a town!";
+
                 return RedirectToAction("All", "Towns", new { area = "" });
             }
             catch (Exception)
@@ -109,6 +111,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await townService
                     .Edit(id, editTownModel);
 
+                TempData["message"] = $"You have successfully edited a town!";
+
                 return RedirectToAction("All", "Towns", new { area = "" });
             }
             catch (Exception)
@@ -159,6 +163,8 @@ namespace TravelApp.Areas.Admin.Controllers
             {
                 await townService
                     .Delete(deleteTownModel.Id);
+
+                TempData["message"] = $"You have successfully deleted a town!";
 
                 return RedirectToAction("All", "Towns", new { area = ""});
             }
