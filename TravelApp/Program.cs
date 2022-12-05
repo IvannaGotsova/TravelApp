@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.X509Certificates;
 using TravelApp.Common;
@@ -32,7 +33,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>
     .AddRoles<ApplicationRole>()
     .AddEntityFrameworkStores<TravelAppDbContext>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(
+    options => {
+        options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
