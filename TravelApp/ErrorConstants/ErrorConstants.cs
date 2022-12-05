@@ -22,7 +22,7 @@
 
         public static class RequestErrorConstants
         {
-            public const string wrongNumberOfPeople = "Number of people must greater or equal to available";
+            public const string wrongNumberOfPeople = "Number of people must be greater or equal to available";
         }
     }
 }

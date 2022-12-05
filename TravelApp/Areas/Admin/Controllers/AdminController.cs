@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.Extensions.Caching.Memory;
 using TravelApp.Core.Contracts;
 using TravelApp.Core.Services;
 using TravelApp.Data.Entities;
 using TravelApp.Data.Models.ApplicationUserModels;
 using TravelApp.Data.Models.TownModels;
 using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
-
+using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
 {
@@ -19,17 +20,19 @@ namespace TravelApp.Areas.Admin.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IApplicationUserService applicationUserService;
-        
+        private readonly IMemoryCache memoryCache;  
 
         public AdminController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IApplicationUserService applicationUserService
+            IApplicationUserService applicationUserService,
+            IMemoryCache memoryCache
             )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.applicationUserService = applicationUserService;
+            this.memoryCache = memoryCache;
         }
         public IActionResult Index()
         {
@@ -41,8 +44,22 @@ namespace TravelApp.Areas.Admin.Controllers
         {
             try
             {
-                var allUsers = await 
-                    applicationUserService.GetApplicationUsers();
+                //var allUsers = await 
+                //    applicationUserService.GetApplicationUsers();
+
+                var allUsers = this.memoryCache
+                    .Get<IEnumerable<AllUsersModelView>>(ApplicationUsersCacheKey);
+
+                if (allUsers == null)
+                {
+                    allUsers = await 
+                        this.applicationUserService.GetApplicationUsers();
+
+                    var cacheOPtions = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(1));
+
+                    this.memoryCache.Set(ApplicationUsersCacheKey, allUsers, cacheOPtions);
+                }
 
                 return View(allUsers);
             }
@@ -63,6 +80,8 @@ namespace TravelApp.Areas.Admin.Controllers
 
             try
             {
+                this.memoryCache.Remove(Constants.CacheConstants.ApplicationUsersCacheKey);
+
                 await applicationUserService
                     .MakeVIP(id);
 

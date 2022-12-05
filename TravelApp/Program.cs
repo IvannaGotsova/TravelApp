@@ -53,6 +53,7 @@ builder.Services.AddScoped<IJourneyService, JourneyService>();
 builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
 
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 

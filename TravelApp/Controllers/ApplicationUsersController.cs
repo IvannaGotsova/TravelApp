@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Microsoft.Extensions.Caching.Memory;
+using System.Reflection.Metadata;
 using TravelApp.Common;
 using TravelApp.Data.Entities;
 using TravelApp.Data.Models.ApplicationUser;
@@ -13,14 +15,17 @@ namespace TravelApp.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IMemoryCache memoryCache;
 
         public ApplicationUsersController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager
+            SignInManager<ApplicationUser> signInManager,
+            IMemoryCache memoryCache 
             )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -66,6 +71,8 @@ namespace TravelApp.Controllers
 
                 return View(modelToBeRegistered);
             }
+
+            this.memoryCache.Remove(Constants.CacheConstants.ApplicationUsersCacheKey);
 
             return RedirectToAction("Login", "ApplicationUsers");
         }
