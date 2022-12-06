@@ -12,7 +12,9 @@ using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
 using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
-{
+{/// <summary>
+/// 
+/// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
@@ -188,7 +190,7 @@ namespace TravelApp.Areas.Admin.Controllers
             await signInManager
                 .SignOutAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = ""});
         }
     }
 }
