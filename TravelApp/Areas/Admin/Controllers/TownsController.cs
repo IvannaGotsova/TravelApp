@@ -13,7 +13,9 @@ using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
 using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
-{
+{/// <summary>
+/// Controls adding, editing and deletion of towns.
+/// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class TownsController : Controller
@@ -30,7 +32,9 @@ namespace TravelApp.Areas.Admin.Controllers
             this.townService = townService;
             this.memoryCache = memoryCache;
         }
-
+        /// <summary>
+        /// This method creates form for adding a town.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -42,10 +46,13 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View(modelTown);
         }
-
+        /// <summary>
+        /// This method adds a town to the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Add(AddTownModel addTownModel)
         {
+            //check if model state is valid
             if (!ModelState.IsValid)
             {
                 addTownModel.Countries = await 
@@ -77,8 +84,12 @@ namespace TravelApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        /// <summary>
+        /// This method creates form for editing a town.
+        /// </summary>
         public async Task<IActionResult> Edit(int id)
         {
+            //check if the town is null
             if (await townService
                 .GetTownDetailsById(id) == null)
             {
@@ -102,10 +113,13 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method edits a town with given id.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditTownModel editTownModel)
         {
+            //check if the town is null
             if (await townService
                 .GetTownById(id) == null)
             {
@@ -133,10 +147,13 @@ namespace TravelApp.Areas.Admin.Controllers
                 return View(editTownModel);
             }
         }
-
+        /// <summary>
+        /// This method creates form for deleting a town.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            //check if the town is null
             if (await townService
                 .GetTownDetailsById(id) == null)
             {
@@ -157,10 +174,13 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method deletes a town from the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Delete(DeleteTownModel deleteTownModel)
         {
+            //check if the town is null
             if (await townService
                 .GetTownById(deleteTownModel.Id) == null)
             {

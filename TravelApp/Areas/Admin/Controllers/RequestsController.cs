@@ -4,7 +4,9 @@ using System.Data;
 using TravelApp.Core.Contracts;
 
 namespace TravelApp.Areas.Admin.Controllers
-{
+{/// <summary>
+/// Controls all the requests - shows, approve and decline them.
+/// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class RequestsController : Controller
@@ -15,8 +17,12 @@ namespace TravelApp.Areas.Admin.Controllers
         {
             this.requestService = requestService;
         }
+        /// <summary>
+        /// This method approves pending request.
+        /// </summary>
         public async Task<IActionResult> Approve(int id)
         {
+            //check if the request is null
             if (await requestService
                 .GetRequestById(id) == null)
             {
@@ -37,10 +43,12 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method declines pending request.
+        /// </summary>
         public async Task<IActionResult> Decline(int id)
         {
-
+            //check if the request is null
             if (await requestService
                 .GetRequestById(id) == null)
             {
@@ -62,7 +70,9 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method returns all the requests..
+        /// </summary>
         public async Task<IActionResult> All()
         {
             
@@ -80,7 +90,9 @@ namespace TravelApp.Areas.Admin.Controllers
 
             }
         }
-
+        /// <summary>
+        /// This method returns all approved requests.
+        /// </summary>
         public async Task<IActionResult> AllApproved()
         {
             try
@@ -98,6 +110,9 @@ namespace TravelApp.Areas.Admin.Controllers
 
             }
         }
+        /// <summary>
+        /// This method returns all not approved requests.
+        /// </summary>
         public async Task<IActionResult> AllNotApproved()
         {
             try
@@ -116,6 +131,9 @@ namespace TravelApp.Areas.Admin.Controllers
             }
             
         }
+        /// <summary>
+        /// This method returns all managed requests.
+        /// </summary>
         public async Task<IActionResult> AllManaged()
         {
             try
@@ -134,6 +152,9 @@ namespace TravelApp.Areas.Admin.Controllers
             }
            
         }
+        /// <summary>
+        /// This method returns all not managed requests.
+        /// </summary>
         public async Task<IActionResult> AllNotManaged()
         {
             try

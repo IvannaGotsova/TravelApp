@@ -13,7 +13,8 @@ using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
 {/// <summary>
-/// 
+///  Controls all users and VIP users;
+///  Controls deletion of users and their VIP Status;
 /// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -32,15 +33,19 @@ namespace TravelApp.Areas.Admin.Controllers
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.applicationUserService = applicationUserService;
-           
+            this.applicationUserService = applicationUserService;          
         }
+        /// <summary>
+        /// This method returns Admin Index Page.
+        /// </summary>
         public IActionResult Index()
         {
             
             return View();
         }
-
+        /// <summary>
+        /// This method returns all the registered users.
+        /// </summary>
         public async Task<IActionResult> AllUsers()
         {
             try
@@ -57,9 +62,12 @@ namespace TravelApp.Areas.Admin.Controllers
 
             }
         }
-
+        /// <summary>
+        /// This method gives user a VIP Status.
+        /// </summary>
         public async Task<IActionResult> MakeVIP(string id)
         {
+            //check if the user is null
             if (await applicationUserService.GetApplicaionUserById(id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
@@ -84,9 +92,12 @@ namespace TravelApp.Areas.Admin.Controllers
             }
 
         }
-
+        /// <summary>
+        /// This method remove VIP status of user who is already VIP.
+        /// </summary>
         public async Task<IActionResult> RemoveVIP(string id)
         {
+            //check if the user is null
             if (await applicationUserService
                 .GetApplicaionUserById(id) == null)
             {
@@ -111,8 +122,9 @@ namespace TravelApp.Areas.Admin.Controllers
             }
            
         }
-
-
+        /// <summary>
+        /// This method returns all the VIP users.
+        /// </summary>
         public async Task<IActionResult> VIPUsers()
         {
 
@@ -133,10 +145,13 @@ namespace TravelApp.Areas.Admin.Controllers
             }
             
         }
-
+        /// <summary>
+        /// This method creates form for user with given id.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
+            //check if the user is null
             if (await applicationUserService
                 .GetApplicaionUserById(id) == null)
             {
@@ -158,10 +173,13 @@ namespace TravelApp.Areas.Admin.Controllers
             }
             
         }
-
+        /// <summary>
+        /// This method deletes user with given id.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Delete(AllUsersModelView allUsersModelView)
         {
+            //check if the user is null
             if (await applicationUserService
                 .GetApplicaionUserById(allUsersModelView.Id) == null)
             {
@@ -184,7 +202,9 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// Logout method.
+        /// </summary>
         public async Task<IActionResult> Logout()
         {
             await signInManager

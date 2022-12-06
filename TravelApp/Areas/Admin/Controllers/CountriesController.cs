@@ -9,7 +9,9 @@ using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
 using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
-{
+{/// <summary>
+/// Controls adding, editing and deletion of countries.
+/// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class CountriesController : Controller
@@ -23,7 +25,9 @@ namespace TravelApp.Areas.Admin.Controllers
             this.countryService = countryService;
             this.memoryCache = memoryCache;
         }
-
+        /// <summary>
+        /// This method creates form for adding a country.
+        /// </summary>
         [HttpGet]
         public IActionResult Add()
         {
@@ -31,10 +35,13 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View(modelCountry);
         }
-
+        /// <summary>
+        /// This method adds a country to the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Add(AddCountryModel modelCountry)
         {
+            //check if model state is valid
             if (!ModelState.IsValid)
             {
                 return View(modelCountry);
@@ -57,14 +64,17 @@ namespace TravelApp.Areas.Admin.Controllers
                 return View(modelCountry);
             }
         }
-
+        /// <summary>
+        /// This method creates form for editing a country.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            //check if the country is null
             if (await countryService
                 .GetCountryDetailsById(id) == null)
             {
-                return BadRequest();
+                return RedirectToAction("Error", "Home", new { area = "" });
             }
 
             try
@@ -81,10 +91,13 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method edits a country with given id.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditCountryModel editCountryModel)
         {
+            //check if the country is null
             if (await countryService
                 .GetCountryById(id) == null)
             {
@@ -109,10 +122,13 @@ namespace TravelApp.Areas.Admin.Controllers
                 return View(editCountryModel);
             }
         }
-
+        /// <summary>
+        /// This method creates form for deleting a country.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            //check if the country is null
             if (await countryService
                 .GetCountryDetailsById(id) == null)
             {
@@ -133,10 +149,13 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method deletes a country from the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Delete(DeleteCountryModel deleteCountryModel)
         {
+            //check if the country is null
             if (await countryService.GetCountryById(deleteCountryModel.Id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });

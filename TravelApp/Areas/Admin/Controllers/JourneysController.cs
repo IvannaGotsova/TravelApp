@@ -12,7 +12,9 @@ using Microsoft.Extensions.Caching.Memory;
 using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
-{
+{/// <summary>
+/// Controls adding, editing and deletion of journeys.
+/// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class JourneysController : Controller
@@ -32,7 +34,9 @@ namespace TravelApp.Areas.Admin.Controllers
             this.journeyService = journeyService;
             this.memoryCache = memoryCache;
         }
-
+        /// <summary>
+        /// This method creates form for adding a journey.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -44,16 +48,20 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View(modelJourney);
         }
-
+        /// <summary>
+        /// This method adds a journey to the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Add(AddJourneyModel addJourneyModel)
         {
+            //returns current user Id
             string currentUserId = this.User
                 .GetCurrentUserId();
 
             addJourneyModel
                 .ApplicationUserId = currentUserId;
 
+            //check if model state is valid
             if (!ModelState.IsValid)
             {
                 addJourneyModel.Countries = await 
@@ -64,6 +72,7 @@ namespace TravelApp.Areas.Admin.Controllers
                 return View(addJourneyModel);
             }
 
+            //check if start date of the journey is before today
             if (addJourneyModel.StartDate < DateTime.Now)
             {
                 ModelState.AddModelError("", startBeforeToday);
@@ -76,6 +85,7 @@ namespace TravelApp.Areas.Admin.Controllers
                 return View(addJourneyModel);
             }
 
+            //check if start date of journey is greater or equal to end date of journey
             if (addJourneyModel.StartDate >= addJourneyModel.EndDate)
             {
                 ModelState.AddModelError("", endBeforeStart);
@@ -90,6 +100,7 @@ namespace TravelApp.Areas.Admin.Controllers
 
             TimeSpan daysOfJourney = addJourneyModel.EndDate.Subtract(addJourneyModel.StartDate);
 
+            //check if days calculated from user start date and end date are equal to the days generated from the user
             if (daysOfJourney.Days + 1 != addJourneyModel.Days)
             {
                 ModelState.AddModelError("", wrongNumberDays);
@@ -102,7 +113,6 @@ namespace TravelApp.Areas.Admin.Controllers
                 return View(addJourneyModel);
 
             }
-
 
             try
             {
@@ -126,10 +136,13 @@ namespace TravelApp.Areas.Admin.Controllers
                 return View(addJourneyModel);
             }
         }
-
+        /// <summary>
+        /// This method creates form for editing a journey.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            //check if the journey is null
             if (await journeyService
                 .GetJourneyDetailsById(id) == null)
             {
@@ -154,21 +167,26 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method edits a journey with given id.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditJourneyModel editJourneyModel)
         {
+            //check if the journey is null
             if (await journeyService
                 .GetJourneyById(id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
 
+            //check if start date of the journey is before today
             if (editJourneyModel.StartDate < DateTime.Now)
             {
                 ModelState.AddModelError("", startBeforeToday);
             }
 
+            // check if start date of journey is greater or equal to end date of journey
             if (editJourneyModel.StartDate >= editJourneyModel.EndDate)
             {
                 ModelState.AddModelError("", endBeforeStart);
@@ -176,6 +194,7 @@ namespace TravelApp.Areas.Admin.Controllers
 
             TimeSpan daysOfJourney = editJourneyModel.EndDate.Subtract(editJourneyModel.StartDate);
 
+            //check if days calculated from user start date and end date are equal to the days generated from the user
             if (daysOfJourney.Days + 1 != editJourneyModel.Days)
             {
                 ModelState.AddModelError("", wrongNumberDays);
@@ -203,11 +222,13 @@ namespace TravelApp.Areas.Admin.Controllers
                 return View(editJourneyModel);
             }
         }
-
-
+        /// <summary>
+        /// This method creates form for deleting a journey.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            //check if the journey is null
             if (await journeyService.GetJourneyDetailsById(id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
@@ -227,12 +248,16 @@ namespace TravelApp.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method deletes a journey from the database.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Delete(DeleteJourneyModel deleteJourneyModel)
         {
+            //returns current user Id
             string currentUserId = this.User.GetCurrentUserId();
 
+            //check if the journey is null
             if (await journeyService
                 .GetJourneyById(deleteJourneyModel.Id) == null)
             {
