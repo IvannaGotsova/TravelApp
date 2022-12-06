@@ -65,6 +65,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method gives user a VIP Status.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> MakeVIP(string id)
         {
             //check if the user is null
@@ -95,6 +97,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method remove VIP status of user who is already VIP.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> RemoveVIP(string id)
         {
             //check if the user is null
@@ -125,6 +129,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method returns all the VIP users.
         /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> VIPUsers()
         {
 
@@ -148,6 +153,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for user with given id.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
@@ -176,10 +183,12 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method deletes user with given id.
         /// </summary>
+        /// <param name="allUsersModelView"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Delete(AllUsersModelView allUsersModelView)
         {
-            //check if the user is null
+             //check if the user is null
             if (await applicationUserService
                 .GetApplicaionUserById(allUsersModelView.Id) == null)
             {
@@ -205,6 +214,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// Logout method.
         /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Logout()
         {
             await signInManager

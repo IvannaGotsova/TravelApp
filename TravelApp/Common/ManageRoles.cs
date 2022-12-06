@@ -3,10 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using TravelApp.Data.Entities;
 
 namespace TravelApp.Common
-{
+{/// <summary>
+/// This class manage roles.
+/// </summary>
     public static class ManageRoles
     {
-
+        /// <summary>
+        /// This method seed roles for the users.
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
         public static IApplicationBuilder SeedUsersRoles(this IApplicationBuilder applicationBuilder)
         {
             using var scopedServices = applicationBuilder.ApplicationServices.CreateScope();
@@ -21,7 +26,10 @@ namespace TravelApp.Common
 
             return applicationBuilder;
         }
-
+        /// <summary>
+        /// This method creates roles for the users.
+        /// </summary>
+        /// <param name="roleManager"></param>
         private static void CreateRoles(RoleManager<ApplicationRole> roleManager)
         {
             Task
@@ -40,7 +48,10 @@ namespace TravelApp.Common
                  .GetAwaiter()
                  .GetResult();
         }
-
+        /// <summary>
+        /// This method assign users to roles.
+        /// </summary>
+        /// <param name="userManager"></param>
         private static void AssignUsers(UserManager<ApplicationUser> userManager)
         {
             Task

@@ -37,6 +37,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for adding a journey.
         /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -51,6 +52,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method adds a journey to the database.
         /// </summary>
+        /// <param name="addJourneyModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddJourneyModel addJourneyModel)
         {
@@ -139,6 +142,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for editing a journey.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -170,6 +175,9 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method edits a journey with given id.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="editJourneyModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditJourneyModel editJourneyModel)
         {
@@ -225,6 +233,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for deleting a journey.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -251,6 +261,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method deletes a journey from the database.
         /// </summary>
+        /// <param name="deleteJourneyModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Delete(DeleteJourneyModel deleteJourneyModel)
         {

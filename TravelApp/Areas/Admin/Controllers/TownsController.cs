@@ -35,6 +35,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for adding a town.
         /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -49,6 +50,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method adds a town to the database.
         /// </summary>
+        /// <param name="addTownModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddTownModel addTownModel)
         {
@@ -87,6 +90,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for editing a town.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int id)
         {
             //check if the town is null
@@ -116,6 +121,9 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method edits a town with given id.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="editTownModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditTownModel editTownModel)
         {
@@ -150,6 +158,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for deleting a town.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -177,6 +187,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method deletes a town from the database.
         /// </summary>
+        /// <param name="deleteTownModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Delete(DeleteTownModel deleteTownModel)
         {

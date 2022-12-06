@@ -28,6 +28,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for adding a country.
         /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Add()
         {
@@ -38,6 +39,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method adds a country to the database.
         /// </summary>
+        /// <param name="modelCountry"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddCountryModel modelCountry)
         {
@@ -65,8 +68,10 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method creates form for editing a country.
+        /// This method adds a country to the database.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -94,6 +99,9 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method edits a country with given id.
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="editCountryModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditCountryModel editCountryModel)
         {
@@ -125,6 +133,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method creates form for deleting a country.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -152,6 +162,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method deletes a country from the database.
         /// </summary>
+        /// <param name="deleteCountryModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Delete(DeleteCountryModel deleteCountryModel)
         {

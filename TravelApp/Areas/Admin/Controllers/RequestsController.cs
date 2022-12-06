@@ -20,6 +20,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method approves pending request.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Approve(int id)
         {
             //check if the request is null
@@ -46,6 +48,8 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method declines pending request.
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Decline(int id)
         {
             //check if the request is null
@@ -71,8 +75,9 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method returns all the requests..
+        /// This method returns all the requests.
         /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> All()
         {
             
@@ -93,6 +98,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method returns all approved requests.
         /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> AllApproved()
         {
             try
@@ -113,6 +119,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method returns all not approved requests.
         /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> AllNotApproved()
         {
             try
@@ -134,6 +141,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method returns all managed requests.
         /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> AllManaged()
         {
             try
@@ -155,6 +163,7 @@ namespace TravelApp.Areas.Admin.Controllers
         /// <summary>
         /// This method returns all not managed requests.
         /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> AllNotManaged()
         {
             try
