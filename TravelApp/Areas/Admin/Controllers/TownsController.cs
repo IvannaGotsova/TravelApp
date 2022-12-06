@@ -13,9 +13,10 @@ using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
 using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
-{/// <summary>
-/// Controls adding, editing and deletion of towns.
-/// </summary>
+{
+    /// <summary>
+    /// Controls adding, editing and deletion of towns.
+    /// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class TownsController : Controller

@@ -4,9 +4,10 @@ using System.Data;
 using TravelApp.Core.Contracts;
 
 namespace TravelApp.Areas.Admin.Controllers
-{/// <summary>
-/// Controls all the requests - shows, approve and decline them.
-/// </summary>
+{
+    /// <summary>
+    /// Controls all the requests - shows, approve and decline them.
+    /// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class RequestsController : Controller

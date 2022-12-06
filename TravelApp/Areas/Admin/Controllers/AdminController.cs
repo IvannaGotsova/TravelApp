@@ -12,10 +12,11 @@ using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
 using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
-{/// <summary>
-///  Controls all users and VIP users;
-///  Controls deletion of users and their VIP Status;
-/// </summary>
+{
+    /// <summary>
+    ///  Controls all users and VIP users;
+    ///  Controls deletion of users and their VIP Status;
+    /// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller

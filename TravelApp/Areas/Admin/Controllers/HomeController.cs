@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
 namespace TravelApp.Areas.Admin.Controllers
-{/// <summary>
-/// Redirects to the Admin Controller, Index Action.
-/// </summary>
+{
+    /// <summary>
+    /// Redirects to the Admin Controller, Index Action.
+    /// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class HomeController : Controller

@@ -12,9 +12,10 @@ using Microsoft.Extensions.Caching.Memory;
 using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
-{/// <summary>
-/// Controls adding, editing and deletion of journeys.
-/// </summary>
+{
+    /// <summary>
+    /// Controls adding, editing and deletion of journeys.
+    /// </summary>
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class JourneysController : Controller
