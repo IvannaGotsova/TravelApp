@@ -8,6 +8,8 @@ using TravelApp.Data.Models.JourneyModels;
 using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
 using static TravelApp.ErrorConstants.ErrorConstants.JourneyErrorConstants;
 using static TravelApp.Common.GetCurrentUser;
+using Microsoft.Extensions.Caching.Memory;
+using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
 {
@@ -18,14 +20,17 @@ namespace TravelApp.Areas.Admin.Controllers
         private readonly ICountryService countryService;
         private readonly ITownService townService;
         private readonly IJourneyService journeyService;
+        private readonly IMemoryCache memoryCache;
 
         public JourneysController(ITownService townService,
                                   ICountryService countryService,
-                                  IJourneyService journeyService)
+                                  IJourneyService journeyService, 
+                                  IMemoryCache memoryCache)
         {
             this.townService = townService;
             this.countryService = countryService;
             this.journeyService = journeyService;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -105,6 +110,8 @@ namespace TravelApp.Areas.Admin.Controllers
 
                 await journeyService.Add(addJourneyModel, currentUserId);
 
+                this.memoryCache.Remove(JourneyCacheKey);
+
                 return RedirectToAction("All", "Journeys", new { area = "" });
             }
             catch (Exception)
@@ -176,11 +183,13 @@ namespace TravelApp.Areas.Admin.Controllers
             }
 
             try
-            {
+            {              
+                TempData["message"] = $"You have successfully edited a journey!";
+
                 await journeyService
                     .Edit(id, editJourneyModel);
 
-                TempData["message"] = $"You have successfully edited a journey!";
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Journeys", new { area = "" });
             }
@@ -232,10 +241,12 @@ namespace TravelApp.Areas.Admin.Controllers
 
             try
             {
+                TempData["message"] = $"You have successfully deleted a journey!";
+
                 await journeyService
                     .Delete(deleteJourneyModel.Id, currentUserId);
 
-                TempData["message"] = $"You have successfully deleted a journey!";
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Journeys", new { area = "" });
             }

@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using TravelApp.Core.Contracts;
+using TravelApp.Core.Services;
+using TravelApp.Data.Models.CountryModels;
+using TravelApp.Data.Models.JourneyModels;
+using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Controllers
 {
@@ -8,18 +13,35 @@ namespace TravelApp.Controllers
     public class JourneysController : Controller
     {
         private readonly IJourneyService journeyService;
-
-        public JourneysController(IJourneyService journeyService)
+        private readonly IMemoryCache memoryCache;
+        public JourneysController(IJourneyService journeyService, 
+                                  IMemoryCache memoryCache)
         {
             this.journeyService = journeyService;
+            this.memoryCache = memoryCache;
         }
+
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             try
             {
-                var journeys = await journeyService
-                .GetAllJourneys();
+                //var journeys = await journeyService
+                //.GetAllJourneys();
+
+                var journeys = this.memoryCache
+                   .Get<IEnumerable<AllJourneysModel>>(JourneyCacheKey);
+
+                if (journeys == null)
+                {
+                    journeys = await journeyService
+                        .GetAllJourneys();
+                }
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(2));
+
+                this.memoryCache.Set(JourneyCacheKey, journeys, cacheOptions);
 
                 return View(journeys);
             }
@@ -42,6 +64,9 @@ namespace TravelApp.Controllers
             {
                 var journeyModel = await journeyService
                .GetJourneyDetailsById(id);
+
+                this.memoryCache.Remove(JourneyCacheKey);
+
 
                 return View(journeyModel);
             }

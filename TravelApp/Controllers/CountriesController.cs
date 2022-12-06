@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using TravelApp.Core.Contracts;
 using TravelApp.Core.Services;
 using TravelApp.Data.Models.CountryModels;
+using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Controllers
 {
@@ -10,10 +12,12 @@ namespace TravelApp.Controllers
     public class CountriesController : Controller
     {
         private readonly ICountryService countryService;
-
-        public CountriesController(ICountryService countryService)
+        private readonly IMemoryCache memoryCache;
+        public CountriesController(ICountryService countryService, 
+                                   IMemoryCache memoryCache)
         {
             this.countryService = countryService;
+            this.memoryCache = memoryCache;
         }
 
         [AllowAnonymous]
@@ -21,8 +25,22 @@ namespace TravelApp.Controllers
         {
             try
             {
-                var countries = await countryService
-               .GetAllCountries();
+                // var countries = await countryService
+                //.GetAllCountries();
+
+                var countries = this.memoryCache
+                    .Get<IEnumerable<AllCountriesModel>>(CountryCacheKey);
+
+                if (countries == null)
+                {
+                    countries = await countryService
+                        .GetAllCountries();
+                }
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(2));
+
+                this.memoryCache.Set(CountryCacheKey, countries, cacheOptions);
 
                 return View(countries);
             }
@@ -44,6 +62,8 @@ namespace TravelApp.Controllers
             {
                 var countryModel = await countryService
                 .GetCountryDetailsById(id);
+
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return View(countryModel);
             }

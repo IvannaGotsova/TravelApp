@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using TravelApp.Core.Contracts;
 using TravelApp.Core.Services;
 using TravelApp.Data.Models.CommentModels;
 using TravelApp.Data.Models.CountryModels;
 using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
+using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
 {
@@ -13,10 +15,13 @@ namespace TravelApp.Areas.Admin.Controllers
     public class CountriesController : Controller
     {
         private readonly ICountryService countryService;
+        private readonly IMemoryCache memoryCache;
 
-        public CountriesController(ICountryService countryService)
+        public CountriesController(ICountryService countryService, 
+                                   IMemoryCache memoryCache)
         {
             this.countryService = countryService;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -40,6 +45,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 TempData["message"] = $"You have successfully added a country!";
 
                 await countryService.Add(modelCountry);
+
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Countries", new { area = "" });
             }
@@ -86,10 +93,12 @@ namespace TravelApp.Areas.Admin.Controllers
 
             try
             {
-                await countryService
-                    .Edit(id, editCountryModel);
-
                 TempData["message"] = $"You have successfully edited a country!";
+
+                await countryService
+                    .Edit(id, editCountryModel);             
+
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Countries", new { area = ""});
             }
@@ -135,9 +144,11 @@ namespace TravelApp.Areas.Admin.Controllers
 
             try
             {
+                TempData["message"] = $"You have successfully deleted a country!";
+
                 await countryService.Delete(deleteCountryModel.Id);
 
-                TempData["message"] = $"You have successfully deleted a country!";
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Countries", new { area = ""});
             }

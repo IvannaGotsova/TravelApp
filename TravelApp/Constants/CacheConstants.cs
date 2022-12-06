@@ -2,6 +2,9 @@
 {
     public static class CacheConstants
     {
-        public const string ApplicationUsersCacheKey = "ApplicationUsersCacheKey";
+        public const string CountryCacheKey = "CountryCacheKey";
+        public const string TownCacheKey = "CountryCacheKey";
+        public const string JourneyCacheKey = "JourneyCacheKey";
+
     }
 }

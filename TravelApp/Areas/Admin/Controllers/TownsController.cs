@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Data;
 using TravelApp.Core.Contracts;
 using TravelApp.Core.Services;
@@ -9,7 +10,7 @@ using TravelApp.Data.Models.CountryModels;
 using TravelApp.Data.Models.JourneyModels;
 using TravelApp.Data.Models.TownModels;
 using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
-
+using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Areas.Admin.Controllers
 {
@@ -19,12 +20,15 @@ namespace TravelApp.Areas.Admin.Controllers
     {
         private readonly ICountryService countryService;
         private readonly ITownService townService;
+        private readonly IMemoryCache memoryCache;
 
         public TownsController(ICountryService countryService, 
-            ITownService townService)
+                               ITownService townService, 
+                               IMemoryCache memoryCache)
         {
             this.countryService = countryService;
             this.townService = townService;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -52,10 +56,12 @@ namespace TravelApp.Areas.Admin.Controllers
 
             try
             {
+                TempData["message"] = $"You have successfully added a town!";
+                
                 await townService
                     .Add(addTownModel);
 
-                TempData["message"] = $"You have successfully added a town!";
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Towns", new { area = "" });
             }
@@ -108,10 +114,12 @@ namespace TravelApp.Areas.Admin.Controllers
 
             try
             {
+                TempData["message"] = $"You have successfully edited a town!";
+             
                 await townService
                     .Edit(id, editTownModel);
 
-                TempData["message"] = $"You have successfully edited a town!";
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Towns", new { area = "" });
             }
@@ -161,10 +169,12 @@ namespace TravelApp.Areas.Admin.Controllers
 
             try
             {
+                TempData["message"] = $"You have successfully deleted a town!";
+                
                 await townService
                     .Delete(deleteTownModel.Id);
 
-                TempData["message"] = $"You have successfully deleted a town!";
+                this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Towns", new { area = ""});
             }

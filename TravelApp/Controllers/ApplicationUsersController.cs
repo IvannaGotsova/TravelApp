@@ -15,17 +15,13 @@ namespace TravelApp.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IMemoryCache memoryCache;
-
+       
         public ApplicationUsersController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            IMemoryCache memoryCache 
-            )
+            SignInManager<ApplicationUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -72,7 +68,7 @@ namespace TravelApp.Controllers
                 return View(modelToBeRegistered);
             }
 
-            this.memoryCache.Remove(Constants.CacheConstants.ApplicationUsersCacheKey);
+           
 
             return RedirectToAction("Login", "ApplicationUsers");
         }
