@@ -3,7 +3,7 @@
     public static class CacheConstants
     {
         public const string CountryCacheKey = "CountryCacheKey";
-        public const string TownCacheKey = "CountryCacheKey";
+        public const string TownCacheKey = "TownCacheKey";
         public const string JourneyCacheKey = "JourneyCacheKey";
 
     }
