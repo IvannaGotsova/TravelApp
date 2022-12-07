@@ -1,5 +1,8 @@
 ﻿namespace TravelApp.ErrorConstants
-{
+{   
+    /// <summary>
+    /// This class holds Error constants messages.
+    /// </summary>
     public static class ErrorConstants
     {
         public static class GlobalErrorConstants

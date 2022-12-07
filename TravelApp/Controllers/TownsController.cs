@@ -9,6 +9,9 @@ using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Controllers
 {
+    /// <summary>
+    /// Shows all towns and details about them.
+    /// </summary>
     [Authorize]
     public class TownsController : Controller
     {
@@ -20,13 +23,17 @@ namespace TravelApp.Controllers
             this.townService = townService;
             this.memoryCache = memoryCache;
         }
-
+        /// <summary>
+        /// This method returns all the available towns.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             //var towns = await townService
             //    .GetAllTowns();
 
+            //creates cache
             var towns = this.memoryCache
                    .Get<IEnumerable<AllTownsModel>>(TownCacheKey);
 
@@ -43,9 +50,14 @@ namespace TravelApp.Controllers
 
             return View(towns);
         }
-
+        /// <summary>
+        /// This method returns a details about town with given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int id)
         {
+            //check if town is null
             if (await townService
                 .GetTownDetailsById(id) == null)
             {

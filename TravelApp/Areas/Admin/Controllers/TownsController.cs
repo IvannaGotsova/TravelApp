@@ -72,6 +72,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await townService
                     .Add(addTownModel);
 
+                //remove cache 
+
                 this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Towns", new { area = "" });
@@ -142,6 +144,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await townService
                     .Edit(id, editTownModel);
 
+                //remove cache 
+
                 this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Towns", new { area = "" });
@@ -206,6 +210,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 
                 await townService
                     .Delete(deleteTownModel.Id);
+
+                //remove cache 
 
                 this.memoryCache.Remove(CountryCacheKey);
 

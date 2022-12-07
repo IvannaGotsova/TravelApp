@@ -8,6 +8,9 @@ using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Controllers
 {
+    /// <summary>
+    /// Shows all countries and details about them.
+    /// </summary>
     [Authorize]
     public class CountriesController : Controller
     {
@@ -19,7 +22,10 @@ namespace TravelApp.Controllers
             this.countryService = countryService;
             this.memoryCache = memoryCache;
         }
-
+        /// <summary>
+        /// This method returns all the available countries.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
@@ -28,9 +34,10 @@ namespace TravelApp.Controllers
                 // var countries = await countryService
                 //.GetAllCountries();
 
+                //creates cache
                 var countries = this.memoryCache
                     .Get<IEnumerable<AllCountriesModel>>(CountryCacheKey);
-
+                
                 if (countries == null)
                 {
                     countries = await countryService
@@ -49,9 +56,14 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method returns a details about country with given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int id)
         {
+            //check if the country is null
             if (await countryService
                 .GetCountryDetailsById(id) == null)
             {
@@ -63,6 +75,7 @@ namespace TravelApp.Controllers
                 var countryModel = await countryService
                 .GetCountryDetailsById(id);
 
+                //remove cache
                 this.memoryCache.Remove(CountryCacheKey);
 
                 return View(countryModel);

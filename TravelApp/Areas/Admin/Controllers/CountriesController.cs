@@ -57,6 +57,8 @@ namespace TravelApp.Areas.Admin.Controllers
 
                 await countryService.Add(modelCountry);
 
+                //remove cache 
+
                 this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Countries", new { area = "" });
@@ -118,7 +120,9 @@ namespace TravelApp.Areas.Admin.Controllers
                 TempData["message"] = $"You have successfully edited a country!";
 
                 await countryService
-                    .Edit(id, editCountryModel);             
+                    .Edit(id, editCountryModel);
+
+                //remove cache 
 
                 this.memoryCache.Remove(CountryCacheKey);
 
@@ -179,6 +183,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 TempData["message"] = $"You have successfully deleted a country!";
 
                 await countryService.Delete(deleteCountryModel.Id);
+
+                //remove cache 
 
                 this.memoryCache.Remove(CountryCacheKey);
 

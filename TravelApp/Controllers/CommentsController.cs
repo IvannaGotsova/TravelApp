@@ -9,6 +9,10 @@ using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
 
 namespace TravelApp.Controllers
 {
+    /// <summary>
+    /// Controls adding, editing and deleting comments.
+    /// Shows all comments and details about them.
+    /// </summary>
     [Authorize]
     public class CommentsController : Controller
     {
@@ -20,7 +24,10 @@ namespace TravelApp.Controllers
             this.commentService = commentService;
             this.postService = postService;
         }
-
+        /// <summary>
+        /// This method returns all available comments.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> All()
         {
             try
@@ -36,7 +43,10 @@ namespace TravelApp.Controllers
 
                 return RedirectToAction("Error", "Home", new { area = "" });            }
         }
-
+        /// <summary>
+        /// This method creates a form for adding a comment.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -48,10 +58,15 @@ namespace TravelApp.Controllers
 
             return View(modelComment);
         }
-
+        /// <summary>
+        /// This method is used to add a comment.
+        /// </summary>
+        /// <param name="addCommentModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddCommentModel addCommentModel)
         {
+            //check if the model state is valid
             if (!ModelState.IsValid)
             {
                 addCommentModel.Posts = await 
@@ -82,9 +97,14 @@ namespace TravelApp.Controllers
             }
 
         }
-
+        /// <summary>
+        /// This method returns a details about comment with given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int id)
         {
+            //check if the comment is null
             if (await commentService
                 .GetCommentDetailsById(id) == null)
             {
@@ -106,11 +126,17 @@ namespace TravelApp.Controllers
             }
             
         }
-
+        /// <summary>
+        /// This metod creates a form for editing a particular comment.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if (await commentService.GetCommentDetailsById(id) == null)
+            //check if the comment is null
+            if (await commentService
+                .GetCommentDetailsById(id) == null)
             {
                 return BadRequest();
             }
@@ -131,10 +157,16 @@ namespace TravelApp.Controllers
 
             
         }
-
+        /// <summary>
+        /// This method is used to edit a particular comment.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="editCommentModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditCommentModel editCommentModel)
         {
+            //check if the comment is null
             if (await commentService
                 .GetCommentById(id) == null)
             {
@@ -157,10 +189,15 @@ namespace TravelApp.Controllers
                 return View(editCommentModel);
             }
         }
-
+        /// <summary>
+        /// This metod creates a form for deleting a particular comment.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            //check if the comment is null
             if (await commentService
                 .GetCommentDetailsById(id) == null)
             {
@@ -181,10 +218,15 @@ namespace TravelApp.Controllers
             }
            
         }
-
+        /// <summary>
+        /// This method is used to delete a particular comment.
+        /// </summary>
+        /// <param name="deleteCommentModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Delete(DeleteCommentModel deleteCommentModel)
         {
+            //check if the comment is null
             if (await commentService
                 .GetCommentById(deleteCommentModel.Id) == null)
             {

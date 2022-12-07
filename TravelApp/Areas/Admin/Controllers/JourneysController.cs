@@ -124,6 +124,8 @@ namespace TravelApp.Areas.Admin.Controllers
 
                 await journeyService.Add(addJourneyModel, currentUserId);
 
+                //remove cache 
+
                 this.memoryCache.Remove(JourneyCacheKey);
 
                 return RedirectToAction("All", "Journeys", new { area = "" });
@@ -217,6 +219,8 @@ namespace TravelApp.Areas.Admin.Controllers
                 await journeyService
                     .Edit(id, editJourneyModel);
 
+                //remove cache 
+
                 this.memoryCache.Remove(CountryCacheKey);
 
                 return RedirectToAction("All", "Journeys", new { area = "" });
@@ -283,6 +287,8 @@ namespace TravelApp.Areas.Admin.Controllers
 
                 await journeyService
                     .Delete(deleteJourneyModel.Id, currentUserId);
+
+                //remove cache 
 
                 this.memoryCache.Remove(CountryCacheKey);
 

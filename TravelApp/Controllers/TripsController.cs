@@ -11,6 +11,10 @@ using static TravelApp.Common.GetCurrentUser;
 
 namespace TravelApp.Controllers
 {
+    /// <summary>
+    /// Controls adding, editing and deleting trips.
+    /// Shows all trips of the login user.
+    /// </summary>
     [Authorize]
     public class TripsController : Controller
     {
@@ -26,9 +30,13 @@ namespace TravelApp.Controllers
             this.journeyService = journeyService;
             this.postService = postService;
         }
-
+        /// <summary>
+        /// This method returns all trips of the login user.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> All()
         {
+            //returns id of the login user
             string currentUserId = this.User
                 .GetCurrentUserId();
 
@@ -45,7 +53,10 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method is used to create form for adding a trip.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -57,13 +68,18 @@ namespace TravelApp.Controllers
 
             return View(modelTrip);
         }
-
+        /// <summary>
+        /// This method is used to add a trip to the trips of the current user.
+        /// </summary>
+        /// <param name="addTripModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddTripModel addTripModel)
         {
+            //returns id of the login user
             string currentUserId = this.User
                 .GetCurrentUserId();
-
+            //check if the model state is valid
             if (!ModelState.IsValid)
             {
                 addTripModel.Journeys = await 
@@ -92,16 +108,24 @@ namespace TravelApp.Controllers
                 return View(addTripModel);
             }
         }
-
+        /// <summary>
+        /// This method creates form for deleting a particular trip.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int id)
         {
-            if (await tripService.GetTripDetailsById(id) == null)
+            //check if the trip is null
+            if (await tripService
+                .GetTripDetailsById(id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
 
-            var tripOwner = await tripService.GetTripDetailsById(id);
+            var tripOwner = await 
+                tripService.GetTripDetailsById(id);
            
+            //check if the login user is the owner of the trip
             if (tripOwner.ApplicationUser != 
                 this.User.GetCurrentUserId())
             {
@@ -125,10 +149,15 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method creates a form for editing a town.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            //check if the trip is null
             if (await tripService
                 .GetTripDetailsById(id) == null)
             {
@@ -141,8 +170,10 @@ namespace TravelApp.Controllers
                 tripService
                 .EditCreateForm(id);
 
+                //gets journeys for select
                 editFormModel.Journeys = await 
-                    journeyService.GetJourneysForSelect();
+                    journeyService
+                    .GetJourneysForSelect();
 
                 return View(editFormModel);
             }
@@ -152,10 +183,16 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method is used to edit a trip with particular id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="editTripModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditTripModel editTripModel)
         {
+            //check if the trip is null
             if (await tripService
                 .GetTripById(id) == null)
             {
@@ -181,10 +218,15 @@ namespace TravelApp.Controllers
                 return View(editTripModel);
             }
         }
-
+        /// <summary>
+        /// This method is used to create a form for deleting a trip with particular id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            //check if the trip is null
             if (await tripService
                 .GetTripDetailsById(id) == null)
             {
@@ -205,10 +247,15 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method is used to delete a trip with particular id.
+        /// </summary>
+        /// <param name="deleteCommentModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Delete(DeleteCommentModel deleteCommentModel)
         {
+            //check if the trip is null
             if (await tripService
                 .GetTripById(deleteCommentModel.Id) == null)
             {

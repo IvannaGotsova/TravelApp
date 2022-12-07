@@ -9,6 +9,9 @@ using static TravelApp.Constants.CacheConstants;
 
 namespace TravelApp.Controllers
 {
+    /// <summary>
+    /// Shows all journeys and details about them.
+    /// </summary>
     [Authorize]
     public class JourneysController : Controller
     {
@@ -20,7 +23,10 @@ namespace TravelApp.Controllers
             this.journeyService = journeyService;
             this.memoryCache = memoryCache;
         }
-
+        /// <summary>
+        /// This method returns all the available journeys.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
@@ -29,6 +35,7 @@ namespace TravelApp.Controllers
                 //var journeys = await journeyService
                 //.GetAllJourneys();
 
+                //creates cache
                 var journeys = this.memoryCache
                    .Get<IEnumerable<AllJourneysModel>>(JourneyCacheKey);
 
@@ -51,9 +58,14 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This method returns a details about journey with given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int id)
         {
+            //check if the journey is null
             if (await journeyService
                 .GetJourneyDetailsById(id) == null)
             {

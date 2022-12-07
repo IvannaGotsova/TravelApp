@@ -11,6 +11,10 @@ using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
 
 namespace TravelApp.Controllers
 {
+    /// <summary>
+    /// Controls adding, editing and deleting posts.
+    /// Shows all posts and details about them.
+    /// </summary>
     [Authorize]
     public class PostsController : Controller
     {
@@ -27,7 +31,10 @@ namespace TravelApp.Controllers
             this.tripService = tripService;
             this.commentService = commentService;
         }
-
+        /// <summary>
+        /// This method returns all the available posts.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> All()
         {
             var posts = await postService
@@ -35,7 +42,10 @@ namespace TravelApp.Controllers
 
             return View(posts);
         }
-
+        /// <summary>
+        /// This method creates a form for adding a post.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -48,10 +58,15 @@ namespace TravelApp.Controllers
 
             return View(modelPost);
         }
-
+        /// <summary>
+        /// This method is used to add a post.
+        /// </summary>
+        /// <param name="addPostModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddPostModel addPostModel)
         {
+            //check if the model state is valid
             if (!ModelState.IsValid)
             {
                 addPostModel.Trips = await 
@@ -79,9 +94,14 @@ namespace TravelApp.Controllers
                 return View(addPostModel);
             }
         }
-
+        /// <summary>
+        /// This method returns a details about post with given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int id)
         {
+            //check ifthe post is null
             if (await postService.GetPostDetailsById(id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
@@ -92,6 +112,7 @@ namespace TravelApp.Controllers
                 var postModel = await postService
                .GetPostDetailsById(id);
 
+                //add all comments about this post
                 postModel.CommentsAboutPost = await
                    commentService
                    .GetAllCommentsByPost(id);
@@ -104,11 +125,17 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
         }
-
+        /// <summary>
+        /// This metod creates a form for editing a particular post.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if (await postService.GetPostDetailsById(id) == null)
+            //check if the post is null
+            if (await postService
+                .GetPostDetailsById(id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
@@ -118,7 +145,7 @@ namespace TravelApp.Controllers
                 var editFormModel = await
                      postService
                     .EditCreateForm(id);
-
+                //get trips for the select 
                 editFormModel.Trips = await 
                     tripService.GetTripsForSelect();
 
@@ -131,11 +158,18 @@ namespace TravelApp.Controllers
             }
             
         }
-
+        /// <summary>
+        /// This method is used to edit a particular post.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="editPostModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditPostModel editPostModel)
         {
-            if (await postService.GetPostById(id) == null)
+            //check if the post is null
+            if (await postService
+                .GetPostById(id) == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
@@ -159,10 +193,15 @@ namespace TravelApp.Controllers
                 return View(editPostModel);
             }
         }
-
+        /// <summary>
+        /// This metod creates a form for deleting a particular post.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            //check if the post is null
             if (await postService
                 .GetPostDetailsById(id) == null)
             {
@@ -183,10 +222,15 @@ namespace TravelApp.Controllers
             }
             
         }
-
+        /// <summary>
+        /// This method is used to delete a particular post.
+        /// </summary>
+        /// <param name="deletePostModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Delete(DeletePostModel deletePostModel)
         {
+            //check if the post is null
             if (await postService
                 .GetPostById(deletePostModel.Id) == null)
             {

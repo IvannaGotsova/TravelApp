@@ -11,6 +11,10 @@ using static TravelApp.ErrorConstants.ErrorConstants.RequestErrorConstants;
 
 namespace TravelApp.Controllers
 {
+    /// <summary>
+    /// Controls adding a request.
+    /// Shows all requests of the login user.
+    /// </summary>
     [Authorize]
     public class RequestsController : Controller
     {
@@ -24,9 +28,13 @@ namespace TravelApp.Controllers
             this.requestService = requestService;
             this.journeyService = journeyService;
         }
-
+        /// <summary>
+        /// This method returns all the requests of the login user.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Mine()
         {
+            //returns id of the login user
             string currentUserId = 
                 this.User.GetCurrentUserId();
 
@@ -43,7 +51,11 @@ namespace TravelApp.Controllers
             }
         }
 
-        
+        /// <summary>
+        /// This method creates form for adding a request.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Add(int id)
         {
@@ -55,13 +67,20 @@ namespace TravelApp.Controllers
 
             return View(modelRequest);
         }
-
+        /// <summary>
+        /// This method is used to add a request.
+        /// </summary>
+        /// <param name="addRequestModel"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add(AddRequestModel addRequestModel, int id)
         {
+            //returns id of login user
              addRequestModel.ApplicationUserId = 
                 this.User.GetCurrentUserId();
 
+            //check if the model state is valid
             if (!ModelState.IsValid)
             {
                 addRequestModel.JourneyId = id;
@@ -72,11 +91,12 @@ namespace TravelApp.Controllers
             var journey = await journeyService
                 .GetJourneyDetailsById(id);
 
+            //check if the journey is null
             if (journey == null)
             {
                 return RedirectToAction("Error", "Home", new { area = "" });
             }
-
+            //check if the number of people requested of the user is greater or equal to the available 
             if (addRequestModel.NumberOfPeople > journey.NumberOfPeople)
             {
                 ModelState.AddModelError("", wrongNumberOfPeople);
