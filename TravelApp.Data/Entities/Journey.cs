@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// Holds properties of Journey
+    /// </summary>
     public class Journey
     {
         [Key]

@@ -10,6 +10,9 @@ using TravelApp.Data.Entities;
 
 namespace TravelApp.Data.Seeds
 {
+    /// <summary>
+    /// This class holds Post Configuration.
+    /// </summary>
     internal class PostConfiguration : IEntityTypeConfiguration<Post>
     {
         public void Configure(EntityTypeBuilder<Post> builder)

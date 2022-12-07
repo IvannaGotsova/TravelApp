@@ -10,6 +10,9 @@ using TravelApp.Data.Entities;
 
 namespace TravelApp.Data.Seeds
 {
+    /// <summary>
+    /// This class holds Application User - Journey Configuration.
+    /// </summary>
     internal class ApplicationUserJourneyConfiguration : IEntityTypeConfiguration<ApplicationUserJourney>
     {
         public void Configure(EntityTypeBuilder<ApplicationUserJourney> builder)

@@ -16,6 +16,9 @@ using TravelApp.Data.Repositories;
 
 namespace TravelApp.Core.Services
 {
+    /// <summary>
+    /// Holds Town functionality.
+    /// </summary>
     public class TownService : ITownService
     {
         private readonly IRepository data;
@@ -24,7 +27,11 @@ namespace TravelApp.Core.Services
         {
             this.data = data;
         }
-
+        /// <summary>
+        /// This method is used to add a town.
+        /// </summary>
+        /// <param name="addTownModel"></param>
+        /// <returns></returns>
         public async Task Add(AddTownModel addTownModel)
         {
             var townToBeAdded = new Town()
@@ -40,13 +47,21 @@ namespace TravelApp.Core.Services
             await this.data.AddAsync(townToBeAdded);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method deletes a particular town with given id.
+        /// </summary>
+        /// <param name="townId"></param>
+        /// <returns></returns>
         public async Task Delete(int townId)
         {
             await this.data.DeleteAsync<Town>(townId);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for deleting a town.
+        /// </summary>
+        /// <param name="townId"></param>
+        /// <returns></returns>
         public async Task<DeleteTownModel> DeleteCreateForm(int townId)
         {
             var townToBeDeleted = await
@@ -61,7 +76,12 @@ namespace TravelApp.Core.Services
 
             return deleteTownModel;
         }
-
+        /// <summary>
+        /// This method is used to edit a particular town with given id.
+        /// </summary>
+        /// <param name="townId"></param>
+        /// <param name="editTownModel"></param>
+        /// <returns></returns>
         public async Task Edit(int townId, EditTownModel editTownModel)
         {
             var townToBeEdited = await
@@ -76,7 +96,11 @@ namespace TravelApp.Core.Services
             this.data.Update(townToBeEdited);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for editing a town.
+        /// </summary>
+        /// <param name="townId"></param>
+        /// <returns></returns>
         public async Task<EditTownModel> EditCreateForm(int townId)
         {
             var townToBeEdited = await
@@ -96,7 +120,10 @@ namespace TravelApp.Core.Services
 
             return editJourneyModel;
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all towns.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllTownsModel>> GetAllTowns()
         {
             var towns = await data
@@ -118,7 +145,11 @@ namespace TravelApp.Core.Services
                 })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method returns a particular town with given id.
+        /// </summary>
+        /// <param name="townId"></param>
+        /// <returns></returns>
         public async Task<Town> GetTownById(int townId)
         {
             var town = await
@@ -126,7 +157,7 @@ namespace TravelApp.Core.Services
               .AllReadonly<Town>()
               .Where(t => t.Id == townId)
               .FirstOrDefaultAsync();
-
+            //check if town is null
             if (town == null)
             {
                 throw new ArgumentNullException();
@@ -134,7 +165,11 @@ namespace TravelApp.Core.Services
 
             return town;
         }
-
+        /// <summary>
+        /// This method returns Details of particular town with given id.
+        /// </summary>
+        /// <param name="townId"></param>
+        /// <returns></returns>
         public async Task<DetailsTownModel> GetTownDetailsById(int townId)
         {
 
@@ -159,7 +194,7 @@ namespace TravelApp.Core.Services
                                                                Days = tj.Journey.Days
                                                            }).ToList()
               }).FirstOrDefaultAsync();
-
+            //check if town is null
             if (town == null)
             {
                 throw new ArgumentNullException();
@@ -167,7 +202,10 @@ namespace TravelApp.Core.Services
 
             return town;
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all Towns used for Select.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Town>> GetTownsForSelect()
         {
             return await

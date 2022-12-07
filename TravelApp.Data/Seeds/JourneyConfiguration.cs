@@ -10,6 +10,9 @@ using System.Globalization;
 
 namespace TravelApp.Data.Seeds
 {
+    /// <summary>
+    /// This class holds Journey Configuration.
+    /// </summary>
     internal class JourneyConfiguration : IEntityTypeConfiguration<Journey>
     {
         public void Configure(EntityTypeBuilder<Journey> builder)

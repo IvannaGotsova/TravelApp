@@ -10,6 +10,9 @@ using TravelApp.Data.Entities;
 
 namespace TravelApp.Data.Seeds
 {
+    /// <summary>
+    /// This class holds Country Configuration.
+    /// </summary>
     internal class CountryConfiguration : IEntityTypeConfiguration<Country>
     {
         public void Configure(EntityTypeBuilder<Country> builder)

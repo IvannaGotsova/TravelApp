@@ -10,6 +10,9 @@ using static TravelApp.Data.DataConstants.DataConstants.CountryConstants;
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// Holds properties of Country.
+    /// </summary>
     public class Country
     {
         [Key]

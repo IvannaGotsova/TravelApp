@@ -9,6 +9,9 @@ using static TravelApp.Data.DataConstants.DataConstants.PostConstants;
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// Holds properties of Post.
+    /// </summary>
     public class Post
     {
         [Key]

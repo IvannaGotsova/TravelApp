@@ -10,6 +10,9 @@ using static TravelApp.Data.DataConstants.DataConstants.ApplicationUserConstants
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// Holds properties of Application User.
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         [Required]

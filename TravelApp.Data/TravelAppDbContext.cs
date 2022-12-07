@@ -5,6 +5,9 @@ using TravelApp.Data.Seeds;
 
 namespace TravelApp.Data
 {
+    /// <summary>
+    /// This class holds TravelAppDbContext
+    /// </summary>
     public class TravelAppDbContext : IdentityDbContext<ApplicationUser>
     {
         public TravelAppDbContext(DbContextOptions<TravelAppDbContext> options)

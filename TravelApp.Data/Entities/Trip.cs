@@ -10,6 +10,9 @@ using static TravelApp.Data.DataConstants.DataConstants.TripConstants;
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// Holds properties of Trip.
+    /// </summary>
     public class Trip
     {
         [Key]

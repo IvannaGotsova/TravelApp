@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// Holds Application Role.
+    /// </summary>
     public class ApplicationRole : IdentityRole
     {
 

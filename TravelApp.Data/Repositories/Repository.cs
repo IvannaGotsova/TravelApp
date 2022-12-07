@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace TravelApp.Data.Repositories
 {
+    /// <summary>
+    /// This holds Repository.
+    /// </summary>
     public class Repository : IRepository
     {
         

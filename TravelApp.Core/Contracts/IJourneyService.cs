@@ -45,7 +45,7 @@ namespace TravelApp.Core.Contracts
         /// <returns></returns>
         Task<EditJourneyModel> EditCreateForm(int journeyId);
         /// <summary>
-        ///  This method is used to edit a particular journey with given id.
+        /// This method is used to edit a particular journey with given id.
         /// </summary>
         /// <param name="journeyId"></param>
         /// <param name="editJourneyModel"></param>
@@ -58,7 +58,7 @@ namespace TravelApp.Core.Contracts
         /// <returns></returns>
         Task<Journey> GetJourneyById(int journeyId);
         /// <summary>
-        ///  This method creates form for deleting a journey.
+        /// This method creates form for deleting a journey.
         /// </summary>
         /// <param name="journeyId"></param>
         /// <returns></returns>

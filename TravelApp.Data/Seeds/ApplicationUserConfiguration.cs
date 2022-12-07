@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace TravelApp.Data.Seeds
 {
+    /// <summary>
+    /// This class holds Application User Configuration.
+    /// </summary>
     internal class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)

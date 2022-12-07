@@ -9,6 +9,9 @@ using static TravelApp.Data.DataConstants.DataConstants.CommentConstants;
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// Holds properties of Comment.
+    /// </summary>
     public class Comment
     {
         [Key]

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TravelApp.Data.Repositories
 {
+    /// <summary>
+    /// This interface holds interface for IRepository.
+    /// </summary>
     public interface IRepository : IDisposable
     {
         IQueryable<T> All<T>() where T : class;

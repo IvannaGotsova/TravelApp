@@ -4,6 +4,9 @@ using static TravelApp.Data.DataConstants.DataConstants.TownConstants;
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// Holds properties of Town.
+    /// </summary>
     public class Town
     {
         [Key]

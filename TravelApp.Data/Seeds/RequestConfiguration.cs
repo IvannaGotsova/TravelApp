@@ -9,6 +9,9 @@ using TravelApp.Data.Entities;
 
 namespace TravelApp.Data.Seeds
 {
+    /// <summary>
+    /// This class holds Request Configuration.
+    /// </summary>
     internal class RequestConfiguration : IEntityTypeConfiguration<Request>
     {
         public void Configure(EntityTypeBuilder<Request> builder)

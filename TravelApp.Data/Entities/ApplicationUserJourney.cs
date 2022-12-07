@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace TravelApp.Data.Entities
 {
+    /// <summary>
+    /// This is mapping class.
+    /// </summary>
     public class ApplicationUserJourney
     {
         [Required]

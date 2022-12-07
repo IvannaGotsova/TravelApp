@@ -9,6 +9,9 @@ using TravelApp.Data.Models.CommentModels;
 
 namespace TravelApp.Core.Services
 {
+    /// <summary>
+    /// Holds Trip functionality.
+    /// </summary>
     public class TripService : ITripService
     {
         private readonly IRepository data;
@@ -17,7 +20,12 @@ namespace TravelApp.Core.Services
         {
             this.data = data;
         }
-
+        /// <summary>
+        /// This method is used to add a trip.
+        /// </summary>
+        /// <param name="addTripModel"></param>
+        /// <param name="currentUserId"></param>
+        /// <returns></returns>
         public async Task Add(AddTripModel addTripModel, string currentUserId)
         {
             var tripToBeAdded = new Trip()
@@ -31,13 +39,21 @@ namespace TravelApp.Core.Services
             await this.data.AddAsync(tripToBeAdded);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method deletes a particular trip with given id. 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
         public async Task Delete(int tripId)
         {
             await this.data.DeleteAsync<Trip>(tripId);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for deleting a trip.
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
         public async Task<DeleteTripModel> DeleteCreateForm(int tripId)
         {
             var tripToBeDeleted = await
@@ -52,7 +68,12 @@ namespace TravelApp.Core.Services
 
             return deleteTripModel;
         }
-
+        /// <summary>
+        /// This method is used to edit a particular trip with given id. 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <param name="editTripModel"></param>
+        /// <returns></returns>
         public async Task Edit(int tripId, EditTripModel editTripModel)
         {
             var tripToBeEdited = await
@@ -65,7 +86,11 @@ namespace TravelApp.Core.Services
             this.data.Update(tripToBeEdited);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for editing a trip.
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
         public async Task<EditTripModel> EditCreateForm(int tripId)
         {
             var tripToBeEdited = await
@@ -82,6 +107,10 @@ namespace TravelApp.Core.Services
 
             return editTripModel;
         }
+        /// <summary>
+        /// This method returns IEnumerable of all trips of login user.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllTripsModel>> GetAllTrips(string currentUserId)
         {
             var trips = await data
@@ -100,7 +129,11 @@ namespace TravelApp.Core.Services
                 })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method returns a particular trip with given id. 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
         public async Task<Trip> GetTripById(int tripId)
         {
             var trip = await
@@ -108,7 +141,7 @@ namespace TravelApp.Core.Services
               .AllReadonly<Trip>()
               .Where(t => t.Id == tripId)
               .FirstOrDefaultAsync();
-
+            //check if trip is null
             if (trip == null)
             {
                 throw new ArgumentNullException();
@@ -116,7 +149,11 @@ namespace TravelApp.Core.Services
 
             return trip;
         }
-
+        /// <summary>
+        /// This method returns Details of particular trip with given id.
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
         public async Task<DetailsTripModel> GetTripDetailsById(int tripId)
         {
             var trip = await
@@ -132,7 +169,7 @@ namespace TravelApp.Core.Services
                  ApplicationUser = t.ApplicationUser!.Id,
              })
              .FirstOrDefaultAsync();
-
+            //check if trip is null
             if (trip == null)
             {
                 throw new ArgumentNullException();
@@ -140,7 +177,10 @@ namespace TravelApp.Core.Services
 
             return trip;
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all Trips used for Select.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Trip>> GetTripsForSelect()
         {
             return await

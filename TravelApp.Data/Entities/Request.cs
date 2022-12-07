@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 using static TravelApp.Data.DataConstants.DataConstants.RequestConstants;
 
 namespace TravelApp.Data.Entities
-{ 
+{
+    /// <summary>
+    /// Holds properties of Request.
+    /// </summary>
     public class Request
     {
         [Key]

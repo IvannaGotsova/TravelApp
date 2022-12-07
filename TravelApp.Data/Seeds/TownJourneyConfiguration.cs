@@ -9,6 +9,9 @@ using TravelApp.Data.Entities;
 
 namespace TravelApp.Data.Seeds
 {
+    /// <summary>
+    /// This class holds Town - Journey Configuration.
+    /// </summary>
     internal class TownJourneyConfiguration : IEntityTypeConfiguration<TownJourney>
     {
         public void Configure(EntityTypeBuilder<TownJourney> builder)
