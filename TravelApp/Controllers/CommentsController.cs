@@ -98,7 +98,7 @@ namespace TravelApp.Controllers
 
         }
         /// <summary>
-        /// This method returns a details about comment with given id.
+        /// This method returns a details about particular comment with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -127,7 +127,7 @@ namespace TravelApp.Controllers
             
         }
         /// <summary>
-        /// This metod creates a form for editing a particular comment.
+        /// This metod creates a form for editing a particular comment with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -158,7 +158,7 @@ namespace TravelApp.Controllers
             
         }
         /// <summary>
-        /// This method is used to edit a particular comment.
+        /// This method is used to edit a particular comment with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="editCommentModel"></param>
@@ -190,7 +190,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This metod creates a form for deleting a particular comment.
+        /// This metod creates a form for deleting a particular comment with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

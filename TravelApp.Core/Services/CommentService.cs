@@ -14,6 +14,9 @@ using TravelApp.Data.Repositories;
 
 namespace TravelApp.Core.Services
 {
+    /// <summary>
+    /// Holds Comments functionality.
+    /// </summary>
     public class CommentService : ICommentService
     {
         private readonly IRepository data;
@@ -21,7 +24,11 @@ namespace TravelApp.Core.Services
         {
             this.data = data;
         }
-
+        /// <summary>
+        /// This method is used to add a comment.
+        /// </summary>
+        /// <param name="addCommentModel"></param>
+        /// <returns></returns>
         public async Task Add(AddCommentModel addCommentModel)
         {
             var commentToBeAdded = new Comment()
@@ -35,7 +42,11 @@ namespace TravelApp.Core.Services
             await this.data.AddAsync(commentToBeAdded);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for editing a comment.
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns></returns>
         public async Task<EditCommentModel> EditCreateForm(int commentId)
         {
             var commentToBeEdited = await
@@ -49,7 +60,12 @@ namespace TravelApp.Core.Services
 
             return editCommentModel;
         }
-
+        /// <summary>
+        /// This method is used to edit a particular comment with given id.
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <param name="editCommentModel"></param>
+        /// <returns></returns>
         public async Task Edit(int commentId, EditCommentModel editCommentModel)
         {
             var commentToBeEdited = await 
@@ -62,7 +78,10 @@ namespace TravelApp.Core.Services
             await this.data.SaveChangesAsync();
 
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all comments.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllCommentsModel>> GetAllComments()
         {
             var comments = await data
@@ -82,7 +101,11 @@ namespace TravelApp.Core.Services
                 })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method returns Details of particular comment with given id..
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns></returns>
         public async Task<DetailsCommentModel> GetCommentDetailsById(int commentId)
         {
             return await
@@ -100,7 +123,11 @@ namespace TravelApp.Core.Services
                    PostId = c.PostId
                }).FirstAsync();
         }
-
+        /// <summary>
+        /// This method returns a particular comment with given id.
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns></returns>
         public async Task<Comment> GetCommentById(int commentId)
         {
             return await
@@ -110,13 +137,21 @@ namespace TravelApp.Core.Services
                .Where(c => c.Id == commentId)
                .FirstAsync();
         }
-
+        /// <summary>
+        /// This method deletes a particular comment with given id.
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns></returns>
         public async Task Delete(int commentId)
         {
             await this.data.DeleteAsync<Comment>(commentId);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for deleting a comment.
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns></returns>
         public async Task<DeleteCommentModel> DeleteCreateForm(int commentId)
         {
             var commentToBeDeleted = await
@@ -131,7 +166,11 @@ namespace TravelApp.Core.Services
 
             return deleteCommentModel;
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all comments made about particular post.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Comment>> GetAllCommentsByPost(int postId)
         { 
             return await

@@ -51,7 +51,7 @@ namespace TravelApp.Areas.Admin.Controllers
             return View(modelJourney);
         }
         /// <summary>
-        /// This method adds a journey to the database.
+        /// This method is used to add a particular journey with given id.
         /// </summary>
         /// <param name="addJourneyModel"></param>
         /// <returns></returns>
@@ -176,7 +176,7 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method edits a journey with given id.
+        /// This method is used to edit a particular journey with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="editJourneyModel"></param>
@@ -264,7 +264,7 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method deletes a journey from the database.
+        /// This method is use to delete a particular journey.
         /// </summary>
         /// <param name="deleteJourneyModel"></param>
         /// <returns></returns>

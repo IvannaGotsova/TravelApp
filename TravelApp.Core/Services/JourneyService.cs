@@ -17,6 +17,9 @@ using TravelApp.Data.Repositories;
 
 namespace TravelApp.Core.Services
 {
+    /// <summary>
+    /// Holds Journey functionality.
+    /// </summary>
     public class JourneyService : IJourneyService
     {
         private readonly IRepository data;
@@ -26,7 +29,12 @@ namespace TravelApp.Core.Services
         {
             this.data = data;         
         }
-
+        /// <summary>
+        /// This method is used to add a journey.
+        /// </summary>
+        /// <param name="addJourneyModel"></param>
+        /// <param name="currentUserId"></param>
+        /// <returns></returns>
         public async Task Add(AddJourneyModel addJourneyModel, string currentUserId)
         {
             var journeyToBeAdded = new Journey()
@@ -47,6 +55,7 @@ namespace TravelApp.Core.Services
 
             await this.data.AddAsync(journeyToBeAdded);
 
+            //for mapping class
             foreach (var country in addJourneyModel.CountryIds)
             {
                 var journeyCountryToAdded = new CountryJourney()
@@ -58,7 +67,7 @@ namespace TravelApp.Core.Services
 
                 await this.data.AddAsync(journeyCountryToAdded);
             }
-
+            //for mapping class
             foreach (var town in addJourneyModel.TownIds)
             {
                 var journeyTownToAdded = new TownJourney()
@@ -70,7 +79,7 @@ namespace TravelApp.Core.Services
 
                 await this.data.AddAsync(journeyTownToAdded);
             }
-
+            //for mapping class
             var journeyUserToBeAdded = new ApplicationUserJourney()
             {
                 ApplicationUserId = currentUserId,
@@ -81,7 +90,12 @@ namespace TravelApp.Core.Services
             await this.data.AddAsync(journeyUserToBeAdded);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method deletes a particular journey with given id.
+        /// </summary>
+        /// <param name="journeyId"></param>
+        /// <param name="currentUserId"></param>
+        /// <returns></returns>
         public async Task Delete(int journeyId, string currentUserId)
         {
             //var countriesJourneys = await
@@ -119,7 +133,11 @@ namespace TravelApp.Core.Services
             await this.data.DeleteAsync<Journey>(journeyId);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        ///  This method creates form for deleting a journey.
+        /// </summary>
+        /// <param name="journeyId"></param>
+        /// <returns></returns>
         public async Task<DeleteJourneyModel> DeleteCreateForm(int journeyId)
         {
             var journeyToBeDeleted = await
@@ -134,7 +152,12 @@ namespace TravelApp.Core.Services
 
             return deleteJourneyModel;
         }
-
+        /// <summary>
+        ///  This method is used to edit a particular journey with given id.
+        /// </summary>
+        /// <param name="journeyId"></param>
+        /// <param name="editJourneyModel"></param>
+        /// <returns></returns>
         public async Task Edit(int journeyId, EditJourneyModel editJourneyModel)
         {
             var journeyToBeEdited = await
@@ -159,6 +182,7 @@ namespace TravelApp.Core.Services
 
             this.data.DeleteRange<CountryJourney>(countryJourneysToDlete);
 
+            //for mapping class
             foreach(var countryJourney in editJourneyModel.CountryIds)
             {
                 var journeyCountryToAdded = new CountryJourney()
@@ -170,7 +194,7 @@ namespace TravelApp.Core.Services
 
                 await this.data.AddAsync(journeyCountryToAdded);
             }
-
+            //for mapping class
             var townsJourneysToDelete = await
                 this.data
                 .AllReadonly<TownJourney>()
@@ -192,7 +216,11 @@ namespace TravelApp.Core.Services
             }
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for editing a journey.
+        /// </summary>
+        /// <param name="journeyId"></param>
+        /// <returns></returns>
         public async Task<EditJourneyModel> EditCreateForm(int journeyId)
         {
             var journeyToBeEdited = await
@@ -214,7 +242,10 @@ namespace TravelApp.Core.Services
 
             return editJourneyModel;
         }
-
+        /// <summary>
+        ///  This method returns IEnumerable of all journeys.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllJourneysModel>> GetAllJourneys()
         {
             var journeys = await 
@@ -238,7 +269,11 @@ namespace TravelApp.Core.Services
                  })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method returns a particular journey with given id.
+        /// </summary>
+        /// <param name="journeyId"></param>
+        /// <returns></returns>
         public async Task<Journey> GetJourneyById(int journeyId)
         {
             var journey = await
@@ -246,7 +281,7 @@ namespace TravelApp.Core.Services
               .AllReadonly<Journey>()
               .Where(j => j.Id == journeyId)
               .FirstOrDefaultAsync();
-
+            //check if journey is null
             if (journey == null)
             {
                 throw new ArgumentNullException();
@@ -254,7 +289,11 @@ namespace TravelApp.Core.Services
 
             return journey;
         }
-
+        /// <summary>
+        /// This method returns Details of particular journey with given id.
+        /// </summary>
+        /// <param name="journeyId"></param>
+        /// <returns></returns>
         public async Task<DetailsJourneyModel> GetJourneyDetailsById(int journeyId)
         {         
             var journey = await
@@ -276,7 +315,7 @@ namespace TravelApp.Core.Services
                     Towns = string.Join(", ", j.TownsJourneys.Select(tj => tj.Town!.Name))
                 }).FirstOrDefaultAsync();           
 
-
+            //check if journey is null
             if (journey == null)
             {
                 throw new ArgumentNullException();
@@ -284,8 +323,10 @@ namespace TravelApp.Core.Services
 
             return journey;
         }
-
-       
+        /// <summary>
+        /// This method returns IEnumerable of all journeys used for Select.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Journey>> GetJourneysForSelect()
         {
             return await

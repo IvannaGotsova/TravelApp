@@ -15,6 +15,9 @@ using TravelApp.Data.Repositories;
 
 namespace TravelApp.Core.Services
 {
+    /// <summary>
+    /// Holds Request functionality.
+    /// </summary>
     public class RequestService : IRequestService
     {
         private readonly IRepository data;
@@ -23,7 +26,13 @@ namespace TravelApp.Core.Services
         {
             this.data = data;
         }
-
+        /// <summary>
+        /// This method is used to add a request.
+        /// </summary>
+        /// <param name="addRequestModel"></param>
+        /// <param name="currentUserId"></param>
+        /// <param name="journeyId"></param>
+        /// <returns></returns>
         public async Task Add(AddRequestModel addRequestModel, string currentUserId, int journeyId)
         {
             var currentUser = await
@@ -37,7 +46,7 @@ namespace TravelApp.Core.Services
                 .AllReadonly<Journey>()
                 .Where(j => j.Id == journeyId)
                 .FirstOrDefaultAsync();
-
+            //check if login user or journey is null
             if (currentUser == null || journey == null)
             {
                 throw new ArgumentNullException();
@@ -55,7 +64,11 @@ namespace TravelApp.Core.Services
             await this.data.AddAsync(requestToBeAdded);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method approves a request.
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns></returns>
         public async Task Approve(int requestId)
         {
             var request = await
@@ -64,17 +77,17 @@ namespace TravelApp.Core.Services
                 .Include(r => r.Journey)
                 .Where(r => r.Id == requestId)
                 .FirstOrDefaultAsync();
-
+            //check if request is null;
             if (request == null)
             {
                 throw new ArgumentNullException();
             }
-
+            //check if request is managed
             if (request.IsManaged == true)
             {
                 await this.Decline(requestId);
             }
-
+            //check if request number of people is less or equal to number of people of the journey
             if (request.NumberOfPeople <= request.Journey!.NumberOfPeople)
             {
                 request.IsApproved = true;
@@ -90,7 +103,11 @@ namespace TravelApp.Core.Services
             }
 
         }
-
+        /// <summary>
+        /// This method declines a request.
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns></returns>
         public async Task Decline(int requestId)
         {
             var request = await
@@ -98,7 +115,7 @@ namespace TravelApp.Core.Services
                 .AllReadonly<Request>()
                 .Where(r => r.Id == requestId)
                 .FirstOrDefaultAsync();
-
+            //check if the request is null
             if (request == null)
             {
                 throw new ArgumentNullException();
@@ -109,7 +126,10 @@ namespace TravelApp.Core.Services
             this.data.Update<Request>(request);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all requests.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllRequestsModel>> GetAllRequests()
         {
             var requests = await data
@@ -131,7 +151,11 @@ namespace TravelApp.Core.Services
                 })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all requests made by login user.
+        /// </summary>
+        /// <param name="currentUserId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<AllRequestsModel>> GetMyRequests(string currentUserId)
         {
             var requests = await 
@@ -154,7 +178,11 @@ namespace TravelApp.Core.Services
                 })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method returns a particular request with given id.
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns></returns>
         public async Task<Request> GetRequestById(int requestId)
         {
             var request = await
@@ -162,7 +190,7 @@ namespace TravelApp.Core.Services
                 .AllReadonly<Request>()
                 .Where(r => r.Id == requestId)
                 .FirstOrDefaultAsync();
-
+            //check if request is null
             if (request == null)
             {
                 throw new ArgumentNullException();

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TravelApp.Data.DataConstants
+﻿namespace TravelApp.Data.DataConstants
 {
+    /// <summary>
+    /// This class holds constants for the database entities.
+    /// </summary>
     public class DataConstants
-    {
+    {    
         public class CountryConstants
         {
             public const int CountryMinLengthName = 3;
@@ -82,7 +79,7 @@ namespace TravelApp.Data.DataConstants
             public const int JourneyMaxDays = 365;
         }
 
-       
+
         public class ApplicationUserConstants
         {
             public const int UserMinLengthUsername = 5;

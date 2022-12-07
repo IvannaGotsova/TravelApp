@@ -16,6 +16,9 @@ using TravelApp.Data.Repositories;
 
 namespace TravelApp.Core.Services
 {
+    /// <summary>
+    /// Holds Post functionality.
+    /// </summary>
     public class PostService : IPostService
     {
         private readonly IRepository data;
@@ -24,7 +27,11 @@ namespace TravelApp.Core.Services
         {
             this.data = data;
         }
-
+        /// <summary>
+        /// This method is used to add a post.
+        /// </summary>
+        /// <param name="addPostModel"></param>
+        /// <returns></returns>
         public async Task Add(AddPostModel addPostModel)
         {
             var postToBeAdded = new Post()
@@ -38,13 +45,21 @@ namespace TravelApp.Core.Services
             await this.data.AddAsync(postToBeAdded);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method deletes a particular post with given id.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public async Task Delete(int postId)
         {
             await this.data.DeleteAsync<Post>(postId);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for deleting a post.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public async Task<DeletePostModel> DeleteCreateForm(int postId)
         {
             var postToBeDeleted = await
@@ -59,7 +74,12 @@ namespace TravelApp.Core.Services
 
             return deletePostModel;
         }
-
+        /// <summary>
+        /// This method is used to edit a particular post with given id.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <param name="editPostModel"></param>
+        /// <returns></returns>
         public async Task Edit(int postId, EditPostModel editPostModel)
         {
             var postToBeEdited = await
@@ -72,7 +92,11 @@ namespace TravelApp.Core.Services
             this.data.Update(postToBeEdited);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for editing a post.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public async Task<EditPostModel> EditCreateForm(int postId)
         {
             var postToBeEdited = await
@@ -90,7 +114,10 @@ namespace TravelApp.Core.Services
 
             return editPostModel;
         }
-
+        /// <summary>
+        ///  This method returns IEnumerable of all posts.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllPostsModel>> GetAllPosts()
         {
             var posts = await data
@@ -110,7 +137,11 @@ namespace TravelApp.Core.Services
                 })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all posts made about particular trip.
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Post>> GetAllPostsByTrip(int tripId)
         {
             return await
@@ -121,7 +152,11 @@ namespace TravelApp.Core.Services
                      .ToListAsync();
 
         }
-
+        /// <summary>
+        /// This method returns a particular post with given id.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public async Task<Post> GetPostById(int postId)
         {
             var post = await
@@ -137,7 +172,11 @@ namespace TravelApp.Core.Services
 
             return post;
         }
-
+        /// <summary>
+        /// This method returns Details of particular post with given id.
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public async Task<DetailsPostModel> GetPostDetailsById(int postId)
         {
            var post = await
@@ -164,7 +203,10 @@ namespace TravelApp.Core.Services
 
             return post;
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all Posts used for Select.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Post>> GetPostsForSelect()
         {
             return await

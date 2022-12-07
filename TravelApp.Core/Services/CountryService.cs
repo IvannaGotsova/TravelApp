@@ -17,6 +17,9 @@ using TravelApp.Data.Repositories;
 
 namespace TravelApp.Core.Services
 {
+    /// <summary>
+    /// Holds Country functionality.
+    /// </summary>
     public class CountryService : ICountryService
     {
         private readonly IRepository data;
@@ -28,7 +31,11 @@ namespace TravelApp.Core.Services
             this.data = data;
             this.journeyService = journeyService;
         }
-
+        /// <summary>
+        /// This method is used to add a country.
+        /// </summary>
+        /// <param name="addCountryModel"></param>
+        /// <returns></returns>
         public async Task Add(AddCountryModel addCountryModel)
         {          
             var countryToBeAddes = new Country()
@@ -43,13 +50,21 @@ namespace TravelApp.Core.Services
             await this.data.AddAsync(countryToBeAddes);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method deletes a particular country with given id.
+        /// </summary>
+        /// <param name="countryId"></param>
+        /// <returns></returns>
         public async Task Delete(int countryId)
         {
             await this.data.DeleteAsync<Country>(countryId);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for deleting a country.
+        /// </summary>
+        /// <param name="countryId"></param>
+        /// <returns></returns>
         public async Task<DeleteCountryModel> DeleteCreateForm(int countryId)
         {
             var countryToBeDeleted = await
@@ -64,7 +79,12 @@ namespace TravelApp.Core.Services
 
             return deleteCountryModel;
         }
-
+        /// <summary>
+        /// This method is used to edit a particular country with given id.
+        /// </summary>
+        /// <param name="countryId"></param>
+        /// <param name="editCountryModel"></param>
+        /// <returns></returns>
         public async Task Edit(int countryId, EditCountryModel editCountryModel)
         {
             var countryToBeEdited = await
@@ -79,7 +99,11 @@ namespace TravelApp.Core.Services
             this.data.Update(countryToBeEdited);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for editing a country.
+        /// </summary>
+        /// <param name="countryId"></param>
+        /// <returns></returns>
         public async Task<EditCountryModel> EditCreateForm(int countryId)
         {
             var countryToBeEdited = await
@@ -96,7 +120,10 @@ namespace TravelApp.Core.Services
 
             return editCountryModel;
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all countries.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllCountriesModel>> GetAllCountries()
         {
             var countries = await data
@@ -115,7 +142,10 @@ namespace TravelApp.Core.Services
                 })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all countries used for Select.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Country>> GetCountriesForSelect()
         {
             return await
@@ -124,7 +154,11 @@ namespace TravelApp.Core.Services
                 .ToListAsync();
 
         }
-
+        /// <summary>
+        /// This method returns a particular country with given id.
+        /// </summary>
+        /// <param name="countryId"></param>
+        /// <returns></returns>
         public async Task<Country> GetCountryById(int countryId)
         {
             var country = await
@@ -132,7 +166,7 @@ namespace TravelApp.Core.Services
                      .AllReadonly<Country>()
                      .Where(c => c.Id == countryId)
                      .FirstOrDefaultAsync();
-
+            //check if country is null
             if (country == null)
             {
                 throw new ArgumentNullException();
@@ -140,7 +174,11 @@ namespace TravelApp.Core.Services
 
             return country;
         }
-
+        /// <summary>
+        /// This method returns Details of particular country with given id.
+        /// </summary>
+        /// <param name="countryId"></param>
+        /// <returns></returns>
         public async Task<DetailsCountryModel> GetCountryDetailsById(int countryId)
         {
            var country = await
@@ -165,7 +203,7 @@ namespace TravelApp.Core.Services
                                                            }).ToList()
                }).FirstOrDefaultAsync();
 
-
+            //check if country is null
             if (country == null)
             {
                 throw new ArgumentNullException();

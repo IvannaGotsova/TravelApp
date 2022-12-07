@@ -109,7 +109,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This method creates form for deleting a particular trip.
+        /// This method creates form for deleting a particular trip with given trip.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -150,7 +150,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This method creates a form for editing a town.
+        /// This method creates a form for editing a particular town with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -184,7 +184,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This method is used to edit a trip with particular id.
+        /// This method is used to edit a particular trip with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="editTripModel"></param>
@@ -219,7 +219,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This method is used to create a form for deleting a trip with particular id.
+        /// This method is used to create a form for deleting a particular trip with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -248,7 +248,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This method is used to delete a trip with particular id.
+        /// This method is used to delete a particular trip with given id.
         /// </summary>
         /// <param name="deleteCommentModel"></param>
         /// <returns></returns>

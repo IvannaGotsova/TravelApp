@@ -122,7 +122,7 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method edits a town with given id.
+        /// This method is used to edit a particular town with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="editTownModel"></param>
@@ -190,7 +190,7 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method deletes a town from the database.
+        /// This method is used to delete a particular town..
         /// </summary>
         /// <param name="deleteTownModel"></param>
         /// <returns></returns>

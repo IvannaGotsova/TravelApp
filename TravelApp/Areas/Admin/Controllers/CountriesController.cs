@@ -38,7 +38,7 @@ namespace TravelApp.Areas.Admin.Controllers
             return View(modelCountry);
         }
         /// <summary>
-        /// This method adds a country to the database.
+        /// This method is used to add a country.
         /// </summary>
         /// <param name="modelCountry"></param>
         /// <returns></returns>
@@ -71,7 +71,7 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method adds a country to the database.
+        /// This method creates a form for editing a particular country with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -100,7 +100,7 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method edits a country with given id.
+        /// This method edits a particular country with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="editCountryModel"></param>
@@ -136,7 +136,7 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method creates form for deleting a country.
+        /// This method creates form for deleting a particular country with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -165,7 +165,7 @@ namespace TravelApp.Areas.Admin.Controllers
             }
         }
         /// <summary>
-        /// This method deletes a country from the database.
+        /// This method is used to delete a particular country with given id.
         /// </summary>
         /// <param name="deleteCountryModel"></param>
         /// <returns></returns>

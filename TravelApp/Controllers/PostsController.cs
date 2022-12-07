@@ -95,7 +95,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This method returns a details about post with given id.
+        /// This method returns a details about particular post with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -126,7 +126,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This metod creates a form for editing a particular post.
+        /// This metod creates a form for editing a particular post with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -159,7 +159,7 @@ namespace TravelApp.Controllers
             
         }
         /// <summary>
-        /// This method is used to edit a particular post.
+        /// This method is used to edit a particular post with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="editPostModel"></param>
@@ -194,7 +194,7 @@ namespace TravelApp.Controllers
             }
         }
         /// <summary>
-        /// This metod creates a form for deleting a particular post.
+        /// This metod creates a form for deleting a particular post with given id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -223,7 +223,7 @@ namespace TravelApp.Controllers
             
         }
         /// <summary>
-        /// This method is used to delete a particular post.
+        /// This method is used to delete a particular post with given id.
         /// </summary>
         /// <param name="deletePostModel"></param>
         /// <returns></returns>

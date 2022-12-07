@@ -15,6 +15,9 @@ using TravelApp.Data.Repositories;
 
 namespace TravelApp.Core.Services
 {
+    /// <summary>
+    /// Holds Application user functionality.
+    /// </summary>
     public class ApplicationUserService : IApplicationUserService
     {
         private readonly IRepository data;
@@ -23,7 +26,11 @@ namespace TravelApp.Core.Services
         {
             this.data = data;
         }
-
+        /// <summary>
+        /// This method deletes a particular user with given id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task Delete(string userId)
         {
             await this.data
@@ -31,7 +38,11 @@ namespace TravelApp.Core.Services
             await this.data
                 .SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method creates form for deleting a particular user with given id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<AllUsersModelView> DeleteCreateForm(string userId)
         {
             var userToBeDeleted = await
@@ -47,9 +58,14 @@ namespace TravelApp.Core.Services
 
             return deleteApplicationUserModel;
         }
-
+        /// <summary>
+        /// This method returns particular user with given id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<ApplicationUser> GetApplicaionUserById(string userId)
         {
+            //check if user is null
             if (await this.data
                 .GetByIdAsync<ApplicationUser>(userId) == null)
             {
@@ -62,7 +78,10 @@ namespace TravelApp.Core.Services
                .Where(au => au.Id == userId)
                .FirstAsync();
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all users.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllUsersModelView>> GetApplicationUsers()
         {
             var allUsers = await
@@ -85,7 +104,10 @@ namespace TravelApp.Core.Services
                 .ToList();
 
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all VIP users.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<AllUsersModelView>> GetApplicationVIPUsers()
         {
             var vipUsers = await
@@ -108,7 +130,11 @@ namespace TravelApp.Core.Services
                 })
                 .ToList();
         }
-
+        /// <summary>
+        /// This method gives a particular user with given id VIP Status.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task MakeVIP(string userId)
         {
            
@@ -117,7 +143,7 @@ namespace TravelApp.Core.Services
                 .AllReadonly<ApplicationUser>()
                 .Where(au => au.Id == userId)
                 .FirstOrDefaultAsync();
-
+            //check if user is null
             if (user == null)
             {
                 throw new ArgumentNullException();
@@ -128,7 +154,11 @@ namespace TravelApp.Core.Services
             this.data.Update<ApplicationUser>(user);
             await this.data.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// This method removes VIP Status from a particular user with given id .
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task RemoveVIP(string userId)
         {          
             var user = await
@@ -136,7 +166,7 @@ namespace TravelApp.Core.Services
                 .AllReadonly<ApplicationUser>()
                 .Where(au => au.Id == userId)
                 .FirstOrDefaultAsync();
-
+            //check if user is null
             if (user == null)
             {
                 throw new ArgumentNullException();
