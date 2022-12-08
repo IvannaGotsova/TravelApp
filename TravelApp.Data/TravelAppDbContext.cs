@@ -10,9 +10,19 @@ namespace TravelApp.Data
     /// </summary>
     public class TravelAppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public TravelAppDbContext(DbContextOptions<TravelAppDbContext> options)
+        private bool seedDb;
+        public TravelAppDbContext(DbContextOptions<TravelAppDbContext> options, bool seed = true)
             : base(options)
         {
+            if (this.Database.IsRelational())
+            {
+                this.Database.Migrate();
+            }
+            else
+            {
+                this.Database.EnsureCreated();
+                this.seedDb = seed;
+            }
         }
 
         public DbSet<Comment> Comments { get; set; } = null!;
@@ -68,17 +78,20 @@ namespace TravelApp.Data
                 .Entity<TownJourney>()
                 .HasKey(cj => new { cj.JourneyId, cj.TownId });
 
-            builder.ApplyConfiguration(new ApplicationUserConfiguration());
-            builder.ApplyConfiguration(new CommentConfiguration());
-            builder.ApplyConfiguration(new CountryConfiguration());
-            builder.ApplyConfiguration(new JourneyConfiguration());
-            builder.ApplyConfiguration(new PostConfiguration());
-            builder.ApplyConfiguration(new TownConfiguration());
-            builder.ApplyConfiguration(new TripConfiguration());
-            builder.ApplyConfiguration(new ApplicationUserJourneyConfiguration());
-            builder.ApplyConfiguration(new CountryJourneyConfiguration());
-            builder.ApplyConfiguration(new RequestConfiguration());
-            builder.ApplyConfiguration(new TownJourneyConfiguration());
+            if (this.seedDb)
+            {
+                builder.ApplyConfiguration(new ApplicationUserConfiguration());
+                builder.ApplyConfiguration(new CommentConfiguration());
+                builder.ApplyConfiguration(new CountryConfiguration());
+                builder.ApplyConfiguration(new JourneyConfiguration());
+                builder.ApplyConfiguration(new PostConfiguration());
+                builder.ApplyConfiguration(new TownConfiguration());
+                builder.ApplyConfiguration(new TripConfiguration());
+                builder.ApplyConfiguration(new ApplicationUserJourneyConfiguration());
+                builder.ApplyConfiguration(new CountryJourneyConfiguration());
+                builder.ApplyConfiguration(new RequestConfiguration());
+                builder.ApplyConfiguration(new TownJourneyConfiguration());
+            }
 
 
             base.OnModelCreating(builder);
