@@ -8,7 +8,7 @@ using TravelApp.Data;
 
 namespace TravelApp.Tests.Mocks
 {
-    public class DatabaseMock
+    public static class DatabaseMock
     {
         public static TravelAppDbContext Instance
         {

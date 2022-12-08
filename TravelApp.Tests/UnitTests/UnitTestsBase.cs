@@ -52,6 +52,7 @@ namespace TravelApp.Tests.UnitTests
                 Name = "Test Country Name",
                 Description = "Test Country Description",
                 Population = 6823493,
+                Image = "/Photos/Test",
                 Area = 110994,              
             };
 
@@ -64,7 +65,8 @@ namespace TravelApp.Tests.UnitTests
                 Population = 8930002,
                 Area = 77818,
                 Description = "Test Town Description",
-                CountryId = 1
+                CountryId = 1,
+                Image = "/Photos/Test"
             };
 
             this.data.Add(Town);
@@ -78,7 +80,8 @@ namespace TravelApp.Tests.UnitTests
                 EndDate = DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 Price = 1000,
                 NumberOfPeople = 3,
-                Days = 5,               
+                Days = 5,
+                Image = "/Photos/Test"
             };
 
             this.data.Journeys.Add(Journey);
@@ -100,6 +103,7 @@ namespace TravelApp.Tests.UnitTests
                 Title = "Test Post Title",
                 Description = "Test Post Description",
                 TripId = 1,
+                Image = "/Photos/Test"
             };
             this.data.Posts.Add(Post);
 
@@ -110,7 +114,7 @@ namespace TravelApp.Tests.UnitTests
                 Title = "Test Comment Title",
                 Description = "Test Comment Description",
                 PostId = 1,
-                Author = "test@test.com"
+                Author = "test@test.com",               
             };
 
             this.data.Comments.Add(Comment);
@@ -129,6 +133,8 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.SaveChanges();
         }
+
+
 
         [OneTimeTearDown]
 
