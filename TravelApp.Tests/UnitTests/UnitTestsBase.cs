@@ -22,6 +22,9 @@ namespace TravelApp.Tests.UnitTests
             this.SeedDatabase();
         }
         public ApplicationUser ApplicationUser { get; private set; } = null!;
+        public ApplicationUser ApplicationUserDelete { get; private set; } = null!;
+        public ApplicationUser ApplicationUserVip { get; private set; } = null!;
+        public ApplicationUser ApplicationUserNonVip { get; private set; } = null!;
         public Comment Comment { get; private set; } = null!;
         public Country Country { get; private set; } = null!;
         public Journey Journey { get; private set; } = null!;
@@ -39,12 +42,47 @@ namespace TravelApp.Tests.UnitTests
             {
                 Id = "TestuserId",
                 Email = "test@test.com",
-                UserName = "test@test.com",              
+                UserName = "test@test.com",
                 FirstName = "TestUserFirstName",
-                LastName = "TestUserLastName"
+                LastName = "TestUserLastName",
+                IsVIP = true
             };
 
-            this.data.Users.Add(ApplicationUser);
+            this.data.Add(ApplicationUser);
+
+            this.ApplicationUserDelete = new ApplicationUser()
+            {
+                Id = "ApplicationUserDelete",
+                Email = "test2@test.com",
+                UserName = "test2@test.com",
+                FirstName = "TestUserFirstName",
+                LastName = "TestUserLastName",
+                IsVIP = true
+            };
+
+            this.data.Add(ApplicationUserDelete);
+
+            this.ApplicationUserVip = new ApplicationUser()
+            {
+                Id = "TestuserIdVip",
+                Email = "test3@test.com",
+                UserName = "test3@test.com",
+                FirstName = "TestUserFirstName",
+                LastName = "TestUserLastName",
+                IsVIP = true
+            };
+            this.data.Users.Add(ApplicationUserVip);
+
+            this.ApplicationUserNonVip = new ApplicationUser()
+            {
+                Id = "TestuserIdNonVip",
+                Email = "test4@test.com",
+                UserName = "test4@test.com",
+                FirstName = "TestUserFirstName",
+                LastName = "TestUserLastName",
+                IsVIP = false
+            };
+            this.data.Users.Add(ApplicationUserNonVip);
 
             this.Country = new Country()
             {
