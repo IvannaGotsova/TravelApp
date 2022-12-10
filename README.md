@@ -1,11 +1,11 @@
 # TravelApp
 Brief summary of the TravelApp
 There are three levels of access to the information:
-Guest - has the right to access the following information:
+### Guest - has the right to access the following information:
 * sees all journeys with brief information about them;
 * sees all countries with brief information about them;
 * sees all towns with brief information about them;
-Registered User - has the right to access the following information (everything guest can do and additional rights):
+### Registered User - has the right to access the following information (everything guest can do and additional rights):
 * sees all journeys with brief information about them:
    - can see details about them;
    - can make requests about particular journey;
@@ -34,7 +34,7 @@ Registered User - has the right to access the following information (everything 
    - can see all the comments about this post;
    - can access the particular journey;
 * sees all comments with brief information about them and can access details of every comment;
-Admin - has the right to access the following information (everything guest and user can do, and additional rights):
+### Admin - has the right to access the following information (everything guest and user can do, and additional rights):
 * Become User - the rights user have;
 * Become Admin – additional rights:
    - can add, edit and delete Journeys;
