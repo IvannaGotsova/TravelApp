@@ -29,6 +29,8 @@ namespace TravelApp.Tests.UnitTests
         public Comment CommentDelete { get; private set; } = null!;
         public Comment CommentEdit { get; private set; } = null!;      
         public Country Country { get; private set; } = null!;
+        public Country CountryDelete { get; private set; } = null!;
+        public Country CountryEdit { get; private set; } = null!;
         public Journey Journey { get; private set; } = null!;
         public Post  Post { get; private set; } = null!;
         public Town Town { get; private set; } = null!;
@@ -97,6 +99,31 @@ namespace TravelApp.Tests.UnitTests
             };
 
             this.data.Countries.Add(Country);
+
+
+            this.CountryEdit = new Country()
+            {
+                Id = 2,
+                Name = "Test Country Name",
+                Description = "Test Country Description",
+                Population = 6823493,
+                Image = "/Photos/Test",
+                Area = 110994,
+            };
+
+            this.data.Countries.Add(CountryEdit);
+
+            this.CountryDelete = new Country()
+            {
+                Id = 3,
+                Name = "Test Country Name",
+                Description = "Test Country Description",
+                Population = 6823493,
+                Image = "/Photos/Test",
+                Area = 110994,
+            };
+
+            this.data.Countries.Add(CountryDelete);
 
             this.Town = new Town()
             {

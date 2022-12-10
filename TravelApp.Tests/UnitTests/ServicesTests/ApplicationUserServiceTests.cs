@@ -64,8 +64,8 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Arrange 
             var idExpected = "TestuserIdNull";
 
-            //Act : get a particular user with given id
-            //Assert : id of found user is equal to expected one
+            //Act 
+            //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.GetApplicaionUserById(idExpected));
         }
 
@@ -118,8 +118,8 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Arange
             string userId = "TestuserId1Null";
 
-            //Act
-            //Assert : throws Argument Null Exception
+            //Act 
+            //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.MakeVIP(userId));
         }
 
@@ -143,8 +143,8 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Arange
             string userId = "TestuserId1Null";
 
-            //Act
-            //Assert : throws Argument Null Exception
+            //Act 
+            //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.RemoveVIP(userId));
         }
 

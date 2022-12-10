@@ -97,6 +97,17 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(comment.Author == "test@test.com");
         }
 
+
+        [Test]
+        public void Test_ApplicationUserService_GetCommentDetailsByIdNull()
+        {
+            //Arange
+            int commentId = 10001;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await commentService.GetCommentDetailsById(commentId));
+        }
         [Test]
         public void Test_ApplicationUserService_GetCommentById()
         {
@@ -106,11 +117,22 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get comment
             var comment = commentService.GetCommentById(commentId).Result;
 
-            //Assert : number of comments is correct
+            //Assert : comment properties are correct
             Assert.That(comment.Title == "Test Comment Title");
             Assert.That(comment.Description == "Test Comment Description");
             Assert.That(comment.PostId == 1);
             Assert.That(comment.Author == "test@test.com");
+        }
+
+        [Test]
+        public void Test_ApplicationUserService_GetCommentByIdNull()
+        {
+            //Arange
+            int commentId = 10001;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await commentService.GetCommentById(commentId));
         }
 
         [Test]

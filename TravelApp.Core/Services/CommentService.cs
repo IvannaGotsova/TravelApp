@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -108,7 +109,7 @@ namespace TravelApp.Core.Services
         /// <returns></returns>
         public async Task<DetailsCommentModel> GetCommentDetailsById(int commentId)
         {
-            return await
+           var comment = await
                this.data
                .AllReadonly<Comment>()
                .Include(c => c.Post)
@@ -121,7 +122,15 @@ namespace TravelApp.Core.Services
                    Description = c.Description,
                    Author = c.Author,
                    PostId = c.PostId
-               }).FirstAsync();
+               }).FirstOrDefaultAsync();
+
+            //check if comment is null
+            if (comment == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return comment;
         }
         /// <summary>
         /// This method returns a particular comment with given id.
@@ -130,12 +139,20 @@ namespace TravelApp.Core.Services
         /// <returns></returns>
         public async Task<Comment> GetCommentById(int commentId)
         {
-            return await
+            var comment = await
                this.data
                .AllReadonly<Comment>()
                .Include(c => c.Post)
                .Where(c => c.Id == commentId)
-               .FirstAsync();
+               .FirstOrDefaultAsync();
+
+            //check if comment is null
+            if (comment == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return comment;
         }
         /// <summary>
         /// This method deletes a particular comment with given id.
