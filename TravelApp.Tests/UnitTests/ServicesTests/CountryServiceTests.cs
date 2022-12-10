@@ -53,7 +53,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_CountryService_Edit()
         {
             //Arrange
-            int countryId = 3;
+            int countryId = 2;
             var country = this.data.Countries.Where(c => c.Id == countryId).First();
 
             //Act : edit a country
@@ -133,7 +133,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
         }
         [Test]
-        public void Test_CountryService_GetCommentByIdNull()
+        public void Test_CountryService_GetCountryByIdNull()
         {
             //Arange
             int countryId = 10001;
@@ -161,7 +161,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
         }
         [Test]
-        public void Test_CountryService_GetCommentDetailsByIdNull()
+        public void Test_CountryService_GetCountryDetailsByIdNull()
         {
 
             //Arange

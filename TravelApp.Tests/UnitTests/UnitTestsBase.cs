@@ -38,6 +38,8 @@ namespace TravelApp.Tests.UnitTests
         public Post PostEdit { get; private set; } = null!;
         public Post PostDelete { get; private set; } = null!;
         public Town Town { get; private set; } = null!;
+        public Town TownEdit { get; private set; } = null!;
+        public Town TownDelete { get; private set; } = null!;
         public Trip Trip { get; private set; } = null!;
         public Request Request { get; private set; } = null!;
         public ApplicationUserJourney ApplicationUserJourney { get; private set; } = null!;
@@ -104,7 +106,6 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.Countries.Add(Country);
 
-
             this.CountryEdit = new Country()
             {
                 Id = 2,
@@ -141,6 +142,32 @@ namespace TravelApp.Tests.UnitTests
             };
 
             this.data.Add(Town);
+
+            this.TownEdit = new Town()
+            {
+                Id = 2,
+                Name = "Test Town Name",
+                Population = 8930002,
+                Area = 77818,
+                Description = "Test Town Description",
+                CountryId = 1,
+                Image = "/Photos/Test"
+            };
+
+            this.data.Add(TownEdit);
+
+            this.TownDelete = new Town()
+            {
+                Id = 3,
+                Name = "Test Town Name",
+                Population = 8930002,
+                Area = 77818,
+                Description = "Test Town Description",
+                CountryId = 1,
+                Image = "/Photos/Test"
+            };
+
+            this.data.Add(TownDelete);
 
             this.Journey = new Journey()
             {

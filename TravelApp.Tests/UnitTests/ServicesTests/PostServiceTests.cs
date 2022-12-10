@@ -165,6 +165,17 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.ThrowsAsync<ArgumentNullException>(async () => await postService.GetPostById(postId));
         }
 
-     
+        [Test]
+        public void Test_PostService_GetPostsForSelect()
+        {
+            //Arange
+            int postsCount = data.Posts.Count();
+
+            //Act : get all posts
+            var posts = postService.GetPostsForSelect().Result;
+
+            //Assert : number of countries is correct
+            Assert.That(posts.Count() == postsCount);
+        }
     }
 }
