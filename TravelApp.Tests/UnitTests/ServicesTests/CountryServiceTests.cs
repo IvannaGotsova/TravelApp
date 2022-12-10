@@ -54,7 +54,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         {
             //Arrange
             int countryId = 3;
-            var country = this.data.Countries.Where(c => c.Id == 2).First();
+            var country = this.data.Countries.Where(c => c.Id == countryId).First();
 
             //Act : edit a country
             var countryToEdit = new EditCountryModel()
@@ -87,7 +87,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         }
 
         [Test]
-        public void Test_ApplicationUserService_GetAllCountries()
+        public void Test_CountryService_GetAllCountries()
         {
             //Arange
             int countriesCount = data.Countries.Count();
@@ -102,7 +102,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
 
         [Test]
-        public void Test_CommentService_GetCountriesForSelectt()
+        public void Test_CountryService_GetCountriesForSelect()
         {
             //Arange
             int countriesCount = data.Countries.Count();
@@ -116,7 +116,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
 
         [Test]
-        public void Test_ApplicationUserService_GetCountryById()
+        public void Test_CountryService_GetCountryById()
         {
             //Arange
             int countryId = 1;
@@ -133,7 +133,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
         }
         [Test]
-        public void Test_ApplicationUserService_GetCommentByIdNull()
+        public void Test_CountryService_GetCommentByIdNull()
         {
             //Arange
             int countryId = 10001;
@@ -144,7 +144,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         }
 
         [Test]
-        public void Test_ApplicationUserService_GetCountryDetailsById()
+        public void Test_CountryService_GetCountryDetailsById()
         {
             //Arange
             int countryId = 1;
@@ -161,7 +161,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
         }
         [Test]
-        public void Test_ApplicationUserService_GetCommentDetailsByIdNull()
+        public void Test_CountryService_GetCommentDetailsByIdNull()
         {
 
             //Arange

@@ -32,6 +32,8 @@ namespace TravelApp.Tests.UnitTests
         public Country CountryDelete { get; private set; } = null!;
         public Country CountryEdit { get; private set; } = null!;
         public Journey Journey { get; private set; } = null!;
+        public Journey JourneyDelete { get; private set; } = null!;
+        public Journey JourneyEdit { get; private set; } = null!;
         public Post  Post { get; private set; } = null!;
         public Town Town { get; private set; } = null!;
         public Trip Trip { get; private set; } = null!;
@@ -152,6 +154,37 @@ namespace TravelApp.Tests.UnitTests
             };
 
             this.data.Journeys.Add(Journey);
+
+            this.JourneyEdit = new Journey()
+            {
+                Id = 2,
+                Title = "Test Journey Title",
+                Description = "Test Journey Description",
+                StartDate = DateTime.ParseExact("01/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Price = 1000,
+                NumberOfPeople = 3,
+                Days = 5,
+                Image = "/Photos/Test"
+            };
+
+            this.data.Journeys.Add(JourneyEdit);
+
+            this.JourneyDelete = new Journey()
+            {
+                Id = 3,
+                Title = "Test Journey Title",
+                Description = "Test Journey Description",
+                StartDate = DateTime.ParseExact("01/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Price = 1000,
+                NumberOfPeople = 3,
+                Days = 5,
+                Image = "/Photos/Test"
+            };
+
+            this.data.Journeys.Add(JourneyDelete);
+
 
             this.Trip = new Trip()
             {

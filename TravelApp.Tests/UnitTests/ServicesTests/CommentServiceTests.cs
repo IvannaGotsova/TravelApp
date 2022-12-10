@@ -51,8 +51,8 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_CommentService_Edit()
         {
             //Arrange
-            int commetId = 3;
-            var comment = this.data.Comments.Where(c => c.Id == 3).First();
+            int commentId = 3;
+            var comment = this.data.Comments.Where(c => c.Id == commentId).First();
 
             //Act : edit a comment
             var commentToEdit = new EditCommentModel()
@@ -62,14 +62,14 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
                 PostId = 1,
             };
 
-            commentService.Edit(commetId, commentToEdit);
+            commentService.Edit(commentId, commentToEdit);
             
             //Assert : description of comment is changed
             Assert.That(comment.Description, Is.EqualTo("Changed Test Comment Description"));
         }
 
         [Test]
-        public void Test_ApplicationUserService_GetAllComments()
+        public void Test_CommentService_GetAllComments()
         {
             //Arange
             int commentsCount = data.Comments.Count();
@@ -82,7 +82,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         }
 
         [Test]
-        public void Test_ApplicationUserService_GetCommentDetailsById()
+        public void Test_CommentService_GetCommentDetailsById()
         {
             //Arange
             int commentId = 1;
@@ -99,7 +99,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
 
         [Test]
-        public void Test_ApplicationUserService_GetCommentDetailsByIdNull()
+        public void TestCommentService_GetCommentDetailsByIdNull()
         {
             //Arange
             int commentId = 10001;
@@ -109,7 +109,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.ThrowsAsync<ArgumentNullException>(async () => await commentService.GetCommentDetailsById(commentId));
         }
         [Test]
-        public void Test_ApplicationUserService_GetCommentById()
+        public void Test_CommentService_GetCommentById()
         {
             //Arange
             int commentId = 1;
@@ -125,7 +125,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         }
 
         [Test]
-        public void Test_ApplicationUserService_GetCommentByIdNull()
+        public void Test_CommentService_GetCommentByIdNull()
         {
             //Arange
             int commentId = 10001;
