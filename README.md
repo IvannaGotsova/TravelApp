@@ -43,8 +43,3 @@ Admin - has the right to access the following information (everything guest and 
    - can see and manage(approve and decline) all the requests made by users;  
    - can see and manage (add and delete VIP Status, status that gives them a 10% discount) all the users;
 
-The project consists of:
-TravelApp
-TravelApp.Core – Business logic;
-TravelApp.Data – Data;
-TravelApp.Tests – Tests;
