@@ -87,10 +87,10 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Arange
             int commentId = 1;
 
-            //Act : get all comments
+            //Act : get comment
             var comment = commentService.GetCommentDetailsById(commentId).Result;
 
-            //Assert : number of comments is correct
+            //Assert : comment properties are correct
             Assert.That(comment.Title == "Test Comment Title");
             Assert.That(comment.Description == "Test Comment Description");
             Assert.That(comment.PostId == 1);
@@ -157,10 +157,10 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             int commentsCount = data.Comments.Where(c => c.PostId == postId).Count();
 
             //Act : gets all comments from post with given id
-            int postsCommentsCount = commentService.GetAllCommentsByPost(postId).Result.Count();
+            int postCommentsCount = commentService.GetAllCommentsByPost(postId).Result.Count();
 
             //Assert : number of comments is correct
-            Assert.That(commentsCount == postsCommentsCount);
+            Assert.That(commentsCount == postCommentsCount);
         }
     }
 }

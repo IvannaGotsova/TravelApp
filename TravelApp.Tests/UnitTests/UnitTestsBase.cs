@@ -35,6 +35,8 @@ namespace TravelApp.Tests.UnitTests
         public Journey JourneyDelete { get; private set; } = null!;
         public Journey JourneyEdit { get; private set; } = null!;
         public Post  Post { get; private set; } = null!;
+        public Post PostEdit { get; private set; } = null!;
+        public Post PostDelete { get; private set; } = null!;
         public Town Town { get; private set; } = null!;
         public Trip Trip { get; private set; } = null!;
         public Request Request { get; private set; } = null!;
@@ -207,7 +209,26 @@ namespace TravelApp.Tests.UnitTests
             };
             this.data.Posts.Add(Post);
 
-            
+            this.PostEdit = new Post()
+            {
+                Id = 2,
+                Title = "Test Post Title",
+                Description = "Test Post Description",
+                TripId = 1,
+                Image = "/Photos/Test"
+            };
+            this.data.Posts.Add(PostEdit); 
+
+            this.PostDelete = new Post()
+            {
+                Id = 3,
+                Title = "Test Post Title",
+                Description = "Test Post Description",
+                TripId = 1,
+                Image = "/Photos/Test"
+            };
+            this.data.Posts.Add(PostDelete);
+
             this.Comment = new Comment()
             {
                 Id = 1,
