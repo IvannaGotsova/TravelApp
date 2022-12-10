@@ -217,13 +217,13 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_JourneyService_DeleteCreateForm()
         {
             //Arrange
-            int journeyId = 3;
+            int journeyId = 4;
             var journey = journeyService.GetJourneyById(journeyId).Result;
 
             //Act
             var journeyDeleteForm = journeyService.DeleteCreateForm(journeyId).Result;
 
-            //Assert
+            //Assertm
             Assert.That(journey.Title == journeyDeleteForm.Title);
             Assert.That(journey.Description == journeyDeleteForm.Description);
            

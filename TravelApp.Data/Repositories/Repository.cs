@@ -58,7 +58,12 @@ namespace TravelApp.Data.Repositories
                 .Where(search)
                 .AsNoTracking();
         }
+        public async Task UpdateAsync<T>(object id) where T : class
+        {
+            T entity = await GetByIdAsync<T>(id);
 
+            Update<T>(entity);
+        }
         public async Task DeleteAsync<T>(object id) where T : class
         {
             T entity = await GetByIdAsync<T>(id);
@@ -125,5 +130,7 @@ namespace TravelApp.Data.Repositories
             var entities = All<T>(deleteWhereClause);
             DeleteRange(entities);
         }
+
+       
     }
 }

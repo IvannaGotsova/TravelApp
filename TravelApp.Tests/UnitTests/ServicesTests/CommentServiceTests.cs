@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TravelApp.Core.Contracts;
 using TravelApp.Core.Services;
+using TravelApp.Data.Entities;
 using TravelApp.Data.Models.CommentModels;
 using TravelApp.Data.Repositories;
 
@@ -27,6 +29,26 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         }
 
         [Test]
+        public void Test_CommentService_Edit()
+        {
+            //Arrange
+            int commentId = 3;
+            var comment = commentService.GetCommentById(commentId).Result;
+
+            //Act : edit a comment
+            var commentToEdit = new EditCommentModel()
+            {
+
+                Title = "Test Comment Title",
+                Description = "Changed Test Comment Description",
+            };
+
+            commentService.Edit(commentId, commentToEdit);
+
+            //Assert : description of comment is changed
+            Assert.That(comment.Description, Is.EqualTo("Changed Test Comment Description"));
+        }
+        [Test]
         public void Test_CommentService_Add()
         {
             //Arrange
@@ -47,26 +69,6 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(this.data.Comments.Count() == commentsCount + 1);
         }
 
-        [Test]
-        public void Test_CommentService_Edit()
-        {
-            //Arrange
-            int commentId = 3;
-            var comment = this.data.Comments.Where(c => c.Id == commentId).First();
-
-            //Act : edit a comment
-            var commentToEdit = new EditCommentModel()
-            {
-                Title = "Test Comment Title",
-                Description = "Changed Test Comment Description",
-                PostId = 1,
-            };
-
-            commentService.Edit(commentId, commentToEdit);
-
-            //Assert : description of comment is changed
-            Assert.That(comment.Description, Is.EqualTo("Changed Test Comment Description"));
-        }
 
         [Test]
         public void Test_CommentService_GetAllComments()
@@ -182,7 +184,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_CommentService_DeleteCreateForm()
         {
             //Arrange
-            int commentId = 3;
+            int commentId = 4 ;
             var comment = commentService.GetCommentById(commentId).Result;
 
             //Act

@@ -196,13 +196,14 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_CountryService_DeleteCreateForm()
         {
             //Arrange
-            int countryId = 3;
+            int countryId = 4;
             var country = countryService.GetCountryById(countryId).Result;
 
             //Act
             var countryDeleteForm = countryService.DeleteCreateForm(countryId).Result;
 
-            //Assert      
+            //Assert
+            Assert.That(country.Id == countryDeleteForm.Id);
             Assert.That(country.Name == countryDeleteForm.Name);
             Assert.That(country.Description == countryDeleteForm.Description);
         }

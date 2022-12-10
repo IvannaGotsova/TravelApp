@@ -201,7 +201,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_PostService_DeleteCreateForm()
         {
             //Arrange
-            int postId = 3;
+            int postId = 4;
             var post = postService.GetPostById(postId).Result;
 
             //Act

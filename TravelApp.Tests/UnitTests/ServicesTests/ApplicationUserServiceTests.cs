@@ -106,9 +106,8 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : make user VIP
             applicationUserService.MakeVIP(userId);
             
-
             //Assert : user status is VIP
-            Assert.IsTrue(user.IsVIP == true);
+            Assert.IsTrue(user.IsVIP);
 
         }
 

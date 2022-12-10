@@ -21,6 +21,7 @@ namespace TravelApp.Data.Repositories
         Task AddAsync<T>(T entity) where T : class;
         Task AddRangeAsync<T>(IEnumerable<T> entities) where T : class;
         void Update<T>(T entity) where T : class;
+        Task UpdateAsync<T>(object id) where T : class;
         void UpdateRange<T>(IEnumerable<T> entities) where T : class;
         Task DeleteAsync<T>(object id) where T : class;
         void Delete<T>(T entity) where T : class;

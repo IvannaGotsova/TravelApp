@@ -75,7 +75,7 @@ namespace TravelApp.Core.Services
             commentToBeEdited!.Title = editCommentModel.Title;
             commentToBeEdited.Description = editCommentModel.Description;
 
-            this.data.Update(commentToBeEdited);
+            this.data.Update<Comment>(commentToBeEdited);
             await this.data.SaveChangesAsync();
 
         }

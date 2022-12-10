@@ -27,22 +27,28 @@ namespace TravelApp.Tests.UnitTests
         public ApplicationUser ApplicationUserNonVip { get; private set; } = null!;
         public Comment Comment { get; private set; } = null!;
         public Comment CommentDelete { get; private set; } = null!;
+        public Comment CommentDeleteForm { get; private set; } = null!;
         public Comment CommentEdit { get; private set; } = null!;      
         public Country Country { get; private set; } = null!;
         public Country CountryDelete { get; private set; } = null!;
+        public Country CountryDeleteForm { get; private set; } = null!;
         public Country CountryEdit { get; private set; } = null!;
         public Journey Journey { get; private set; } = null!;
         public Journey JourneyDelete { get; private set; } = null!;
+        public Journey JourneyDeleteForm { get; private set; } = null!;
         public Journey JourneyEdit { get; private set; } = null!;
         public Post  Post { get; private set; } = null!;
         public Post PostEdit { get; private set; } = null!;
         public Post PostDelete { get; private set; } = null!;
+        public Post PostDeleteForm { get; private set; } = null!;
         public Town Town { get; private set; } = null!;
         public Town TownEdit { get; private set; } = null!;
         public Town TownDelete { get; private set; } = null!;
+        public Town TownDeleteForm { get; private set; } = null!;
         public Trip Trip { get; private set; } = null!;
         public Trip TripEdit { get; private set; } = null!;
         public Trip TripDelete { get; private set; } = null!;
+        public Trip TripDeleteForm { get; private set; } = null!;
         public Request Request { get; private set; } = null!;
         public Request RequestApproved { get; private set; } = null!;
         public Request RequestDeclined { get; private set; } = null!;
@@ -135,6 +141,18 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.Countries.Add(CountryDelete);
 
+            this.CountryDeleteForm = new Country()
+            {
+                Id = 4 ,
+                Name = "Test Country Name",
+                Description = "Test Country Description",
+                Population = 6823493,
+                Image = "/Photos/Test",
+                Area = 110994,
+            };
+
+            this.data.Countries.Add(CountryDeleteForm);
+
             this.Town = new Town()
             {
                 Id = 1,
@@ -173,6 +191,19 @@ namespace TravelApp.Tests.UnitTests
             };
 
             this.data.Add(TownDelete);
+
+            this.TownDeleteForm = new Town()
+            {
+                Id = 4,
+                Name = "Test Town Name",
+                Population = 8930002,
+                Area = 77818,
+                Description = "Test Town Description",
+                CountryId = 1,
+                Image = "/Photos/Test"
+            };
+
+            this.data.Add(TownDeleteForm);
 
             this.Journey = new Journey()
             {
@@ -219,6 +250,20 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.Journeys.Add(JourneyDelete);
 
+            this.JourneyDeleteForm = new Journey()
+            {
+                Id = 4,
+                Title = "Test Journey Title",
+                Description = "Test Journey Description",
+                StartDate = DateTime.ParseExact("01/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Price = 1000,
+                NumberOfPeople = 3,
+                Days = 5,
+                Image = "/Photos/Test"
+            };
+
+            this.data.Journeys.Add(JourneyDeleteForm);
 
             this.Trip = new Trip()
             {
@@ -253,6 +298,17 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.Trips.Add(TripDelete);
 
+            this.TripDeleteForm = new Trip()
+            {
+                Id = 4,
+                Title = "Test Trip Title",
+                ApplicationUserId = "TestuserId",
+                Rating = 10,
+                JourneyId = 1
+            };
+
+            this.data.Trips.Add(TripDeleteForm);
+
             this.Post = new Post()
             {
                 Id = 1,
@@ -282,6 +338,16 @@ namespace TravelApp.Tests.UnitTests
                 Image = "/Photos/Test"
             };
             this.data.Posts.Add(PostDelete);
+
+            this.PostDeleteForm = new Post()
+            {
+                Id = 4,
+                Title = "Test Post Title",
+                Description = "Test Post Description",
+                TripId = 1,
+                Image = "/Photos/Test"
+            };
+            this.data.Posts.Add(PostDeleteForm);
 
             this.Comment = new Comment()
             {
@@ -315,6 +381,17 @@ namespace TravelApp.Tests.UnitTests
             };
 
             this.data.Comments.Add(CommentEdit);
+
+            this.CommentDeleteForm = new Comment()
+            {
+                Id = 4,
+                Title = "Test Comment Title",
+                Description = "Test Comment Description",
+                PostId = 1,
+                Author = "test@test.com",
+            };
+
+            this.data.Comments.Add(CommentDeleteForm);
 
             this.Request = new Request()
             {
@@ -364,7 +441,7 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.Requests.Add(RequestForeign);
 
-            this.data.SaveChangesAsync();
+            this.data.SaveChanges();
         }
 
 

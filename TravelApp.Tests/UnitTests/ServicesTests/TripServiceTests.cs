@@ -189,7 +189,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_TownService_DeleteCreateForm()
         {
             //Arrange
-            int tripId = 3;
+            int tripId = 4;
             var trip = tripService.GetTripById(tripId).Result;
 
             //Act
