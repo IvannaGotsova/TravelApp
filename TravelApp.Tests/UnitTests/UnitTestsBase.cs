@@ -41,7 +41,12 @@ namespace TravelApp.Tests.UnitTests
         public Town TownEdit { get; private set; } = null!;
         public Town TownDelete { get; private set; } = null!;
         public Trip Trip { get; private set; } = null!;
+        public Trip TripEdit { get; private set; } = null!;
+        public Trip TripDelete { get; private set; } = null!;
         public Request Request { get; private set; } = null!;
+        public Request RequestApproved { get; private set; } = null!;
+        public Request RequestDeclined { get; private set; } = null!;
+        public Request RequestForeign { get; private set; } = null!;
         public ApplicationUserJourney ApplicationUserJourney { get; private set; } = null!;
         public CountryJourney CountryJourney{ get; private set; } = null!;
         public TownJourney TownJourney { get; private set; } = null!;
@@ -226,6 +231,28 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.Trips.Add(Trip);
 
+            this.TripEdit = new Trip()
+            {
+                Id = 2,
+                Title = "Test Trip Title",
+                ApplicationUserId = "TestuserId",
+                Rating = 10,
+                JourneyId = 1
+            };
+
+            this.data.Trips.Add(TripEdit);
+
+            this.TripDelete = new Trip()
+            {
+                Id = 3,
+                Title = "Test Trip Title",
+                ApplicationUserId = "TestuserId",
+                Rating = 10,
+                JourneyId = 1
+            };
+
+            this.data.Trips.Add(TripDelete);
+
             this.Post = new Post()
             {
                 Id = 1,
@@ -300,6 +327,42 @@ namespace TravelApp.Tests.UnitTests
             };
 
             this.data.Requests.Add(Request);
+
+            this.RequestApproved = new Request()
+            {
+                Id = 2,
+                NumberOfPeople = 2,
+                JourneyId = 1,
+                ApplicationUserId = "TestuserId",
+                IsApproved = true,
+                IsManaged = false
+            };
+
+            this.data.Requests.Add(RequestApproved);
+
+            this.RequestDeclined = new Request()
+            {
+                Id = 3,
+                NumberOfPeople = 2,
+                JourneyId = 1,
+                ApplicationUserId = "TestuserId",
+                IsApproved = false,
+                IsManaged = false
+            };
+
+            this.data.Requests.Add(RequestDeclined);
+
+            this.RequestForeign = new Request()
+            {
+                Id = 4,
+                NumberOfPeople = 2,
+                JourneyId = 1,
+                ApplicationUserId = "TestuserId",
+                IsApproved = false,
+                IsManaged = false
+            };
+
+            this.data.Requests.Add(RequestForeign);
 
             this.data.SaveChangesAsync();
         }
