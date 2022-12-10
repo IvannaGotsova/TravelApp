@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TravelApp.Core.Contracts;
 using TravelApp.Core.Services;
+using TravelApp.Data;
 using TravelApp.Data.Entities;
 using TravelApp.Data.Repositories;
 using TravelApp.Tests.Mocks;
@@ -98,14 +100,15 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_ApplicationUserService_MakeVIP()
         {
             //Arange
-            string userId = "TestuserIdNonVip";
-            var user = applicationUserService.GetApplicaionUserById(userId).Result;
+            string userId = "TestuserIdNonVip";           
+            var user = this.data.Users.Where(u => u.Id == userId).First();
 
             //Act : make user VIP
-            applicationUserService.MakeVIP(user.Id);
+            applicationUserService.MakeVIP(userId);
+            
 
             //Assert : user status is VIP
-            Assert.IsTrue(user.IsVIP);
+            Assert.IsTrue(user.IsVIP == true);
 
         }
 
@@ -131,7 +134,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var user = applicationUserService.GetApplicaionUserById(userId).Result;
 
             //Assert : user status is not VIP
-            Assert.That(user.IsVIP == false);
+            Assert.That(user.IsVIP, Is.EqualTo(false));
         }
 
         [Test]

@@ -26,6 +26,8 @@ namespace TravelApp.Tests.UnitTests
         public ApplicationUser ApplicationUserVip { get; private set; } = null!;
         public ApplicationUser ApplicationUserNonVip { get; private set; } = null!;
         public Comment Comment { get; private set; } = null!;
+        public Comment CommentDelete { get; private set; } = null!;
+        public Comment CommentEdit { get; private set; } = null!;      
         public Country Country { get; private set; } = null!;
         public Journey Journey { get; private set; } = null!;
         public Post  Post { get; private set; } = null!;
@@ -157,6 +159,28 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.Comments.Add(Comment);
 
+            this.CommentDelete = new Comment()
+            {
+                Id = 2,
+                Title = "Test Comment Title",
+                Description = "Test Comment Description",
+                PostId = 1,
+                Author = "test@test.com",
+            };
+
+            this.data.Comments.Add(CommentDelete);
+
+            this.CommentEdit = new Comment()
+            {
+                Id = 3,
+                Title = "Test Comment Title",
+                Description = "Test Comment Description",
+                PostId = 1,
+                Author = "test@test.com",
+            };
+
+            this.data.Comments.Add(CommentEdit);
+
             this.Request = new Request()
             {
                 Id = 1,
@@ -169,7 +193,7 @@ namespace TravelApp.Tests.UnitTests
 
             this.data.Requests.Add(Request);
 
-            this.data.SaveChanges();
+            this.data.SaveChangesAsync();
         }
 
 
