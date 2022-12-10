@@ -167,5 +167,39 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert : number of trips is correct
             Assert.That(trips.Count() == tripsCount);
         }
+
+
+        [Test]
+        public void Test_TripService_EditCreateForm()
+        {
+            //Arrange
+            int tripId = 2;
+            var trip = tripService.GetTripById(tripId).Result;
+
+            //Act
+            var tripEditForm = tripService.EditCreateForm(tripId).Result;
+
+            //Assert
+            Assert.That(trip.Title == tripEditForm.Title);
+            Assert.That(trip.Rating == tripEditForm.Rating);
+
+        }
+
+        [Test]
+        public void Test_TownService_DeleteCreateForm()
+        {
+            //Arrange
+            int tripId = 3;
+            var trip = tripService.GetTripById(tripId).Result;
+
+            //Act
+            var tripDeleteForm = tripService.DeleteCreateForm(tripId).Result;
+
+            //Assert
+            Assert.That(trip.Id == tripDeleteForm.Id);
+            Assert.That(trip.Title == tripDeleteForm.Title);
+            Assert.That(trip.Rating == tripDeleteForm.Rating);
+
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : create and add new comment
             var commentToAdd = new AddCommentModel()
             {
-                
+
                 Title = "Test Comment Title",
                 Description = "Test Comment Description",
                 PostId = 1,
@@ -63,7 +63,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             };
 
             commentService.Edit(commentId, commentToEdit);
-            
+
             //Assert : description of comment is changed
             Assert.That(comment.Description, Is.EqualTo("Changed Test Comment Description"));
         }
@@ -162,5 +162,37 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert : number of comments is correct
             Assert.That(commentsCount == postCommentsCount);
         }
+
+        [Test]
+        public void Test_CommentService_EditCreateForm()
+        {
+            //Arrange
+            int commentId = 3;
+            var comment = commentService.GetCommentById(commentId).Result;
+
+            //Act
+            var commentEditForm = commentService.EditCreateForm(commentId).Result;
+
+            //Assert
+            Assert.That(comment.Title == commentEditForm.Title);
+            Assert.That(comment.Description == commentEditForm.Description);
+        }
+
+        [Test]
+        public void Test_CommentService_DeleteCreateForm()
+        {
+            //Arrange
+            int commentId = 3;
+            var comment = commentService.GetCommentById(commentId).Result;
+
+            //Act
+            var commentDeleteForm = commentService.DeleteCreateForm(commentId).Result;
+
+            //Assert
+            Assert.That(comment.Id == commentDeleteForm.Id);
+            Assert.That(comment.Title == commentDeleteForm.Title);
+            Assert.That(comment.Description == commentDeleteForm.Description);
+        }
+
     }
 }

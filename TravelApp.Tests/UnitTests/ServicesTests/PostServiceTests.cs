@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TravelApp.Core.Contracts;
 using TravelApp.Core.Services;
+using TravelApp.Data.Entities;
 using TravelApp.Data.Models.CommentModels;
 using TravelApp.Data.Models.PostModels;
 using TravelApp.Data.Repositories;
@@ -176,6 +177,40 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
             //Assert : number of countries is correct
             Assert.That(posts.Count() == postsCount);
+        }
+
+
+        [Test]
+        public void Test_PostService_EditCreateForm()
+        {
+            //Arrange
+            int postId = 2;
+            var post = postService.GetPostById(postId).Result;
+
+            //Act
+            var postEditForm = postService.EditCreateForm(postId).Result;
+
+            //Assert
+            Assert.That(post.Title == postEditForm.Title);
+            Assert.That(post.Description == postEditForm.Description);
+            Assert.That(post.Image == postEditForm.Image);
+
+        }
+
+        [Test]
+        public void Test_PostService_DeleteCreateForm()
+        {
+            //Arrange
+            int postId = 3;
+            var post = postService.GetPostById(postId).Result;
+
+            //Act
+            var postDeleteForm = postService.DeleteCreateForm(postId).Result;
+
+            //Assert
+            Assert.That(post.Title == postDeleteForm.Title);
+            Assert.That(post.Description == postDeleteForm.Description);
+
         }
     }
 }

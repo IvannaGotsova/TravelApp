@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TravelApp.Core.Contracts;
 using TravelApp.Core.Services;
+using TravelApp.Data.Entities;
 using TravelApp.Data.Models.CountryModels;
 using TravelApp.Data.Models.JourneyModels;
 using TravelApp.Data.Repositories;
@@ -188,5 +189,45 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await journeyService.GetJourneyDetailsById(journeyId));
         }
+
+
+        [Test]
+        public void Test_JourneyService_EditCreateForm()
+        {
+            //Arrange
+            int journeyId = 2;
+            var journey = journeyService.GetJourneyById(journeyId).Result;
+
+            //Act
+            var journeyEditForm = journeyService.EditCreateForm(journeyId).Result;
+
+            //Assert
+            Assert.That(journey.Title == journeyEditForm.Title);
+            Assert.That(journey.Description == journeyEditForm.Description);
+            Assert.That(journey.StartDate == journeyEditForm.StartDate);
+            Assert.That(journey.EndDate == journeyEditForm.EndDate);
+            Assert.That(journey.Price == journeyEditForm.Price);
+            Assert.That(journey.NumberOfPeople == journeyEditForm.NumberOfPeople);
+            Assert.That(journey.Days == journeyEditForm.Days);
+            Assert.That(journey.Image == journeyEditForm.Image);
+
+        }
+
+        [Test]
+        public void Test_JourneyService_DeleteCreateForm()
+        {
+            //Arrange
+            int journeyId = 3;
+            var journey = journeyService.GetJourneyById(journeyId).Result;
+
+            //Act
+            var journeyDeleteForm = journeyService.DeleteCreateForm(journeyId).Result;
+
+            //Assert
+            Assert.That(journey.Title == journeyDeleteForm.Title);
+            Assert.That(journey.Description == journeyDeleteForm.Description);
+           
+        }
+
     }
 }

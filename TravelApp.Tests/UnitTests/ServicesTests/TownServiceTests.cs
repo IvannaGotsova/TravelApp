@@ -172,5 +172,39 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.ThrowsAsync<ArgumentNullException>(async () => await townService.GetTownDetailsById(townId));
         }
 
+        [Test]
+        public void Test_TownService_EditCreateForm()
+        {
+            //Arrange
+            int townId = 2;
+            var town = townService.GetTownById(townId).Result;
+
+            //Act
+            var townEditForm = townService.EditCreateForm(townId).Result;
+
+            //Assert
+            Assert.That(town.Name == townEditForm.Name);
+            Assert.That(town.Description == townEditForm.Description);
+            Assert.That(town.Population == townEditForm.Population);
+            Assert.That(town.Area == townEditForm.Area);
+            Assert.That(town.Image == townEditForm.Image);
+
+        }
+
+        [Test]
+        public void Test_TownService_DeleteCreateForm()
+        {
+            //Arrange
+            int townId = 3;
+            var town = townService.GetTownById(townId).Result;
+
+            //Act
+            var townDeleteForm = townService.DeleteCreateForm(townId).Result;
+
+            //Assert
+            Assert.That(town.Name == townDeleteForm.Name);
+            Assert.That(town.Description == townDeleteForm.Description);
+
+        }
     }
 }
