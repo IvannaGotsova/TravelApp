@@ -66,28 +66,6 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
 
         [Test]
-        public void Test_TripService_Edit()
-        {
-            //Arrange
-            int tripId = 2;
-            var trip = this.data.Trips.Where(t => t.Id == tripId).First();
-
-            //Act : edit a trip
-            var tripToEdit = new EditTripModel()
-            {
-                Id = 2,
-                Title = "Changed Test Trip Title",
-                Rating = 10,
-                JourneyId = 1
-            };
-
-            tripService.Edit(tripId, tripToEdit);
-
-            //Assert : description of trip is changed
-            Assert.That(trip.Title, Is.EqualTo("Changed Test Trip Title"));
-        }
-
-        [Test]
         public void Test_TripService_GetAllTrips()
         {
             //Arange
