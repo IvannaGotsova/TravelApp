@@ -74,7 +74,7 @@ namespace TravelApp.Areas.Admin.Controllers
 
                 //remove cache 
 
-                this.memoryCache.Remove(CountryCacheKey);
+                this.memoryCache.Remove(TownCacheKey);
 
                 return RedirectToAction("All", "Towns", new { area = "" });
             }
