@@ -38,11 +38,8 @@ namespace TravelApp.Controllers
                 var countries = this.memoryCache
                     .Get<IEnumerable<AllCountriesModel>>(CountryCacheKey);
                 
-                if (countries == null)
-                {
-                    countries = await countryService
+                countries ??= await countryService
                         .GetAllCountries();
-                }
 
                 var cacheOptions = new MemoryCacheEntryOptions()
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(2));

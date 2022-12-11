@@ -37,11 +37,8 @@ namespace TravelApp.Controllers
             var towns = this.memoryCache
                    .Get<IEnumerable<AllTownsModel>>(TownCacheKey);
 
-            if (towns == null)
-            {
-                towns = await townService
+            towns ??= await townService
                     .GetAllTowns();
-            }
 
             var cacheOptions = new MemoryCacheEntryOptions()
                 .SetAbsoluteExpiration(TimeSpan.FromMinutes(2));

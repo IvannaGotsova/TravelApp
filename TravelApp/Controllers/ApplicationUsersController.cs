@@ -41,7 +41,7 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            RegisterModelView modelToBeRegistered = new RegisterModelView();
+            RegisterModelView modelToBeRegistered = new();
 
             return View(modelToBeRegistered);
         }
@@ -59,7 +59,7 @@ namespace TravelApp.Controllers
                 return View(modelToBeRegistered);
             }
             //creates new ApplicationUser
-            ApplicationUser userToBeRegistered = new ApplicationUser()
+            ApplicationUser userToBeRegistered = new()
             {
                 UserName = modelToBeRegistered.UserName,
                 Email = modelToBeRegistered.Email,
@@ -105,7 +105,7 @@ namespace TravelApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            LoginModelView modelToBeLogin = new LoginModelView();
+            LoginModelView modelToBeLogin = new();
 
             TempData["message"] = $"Hello! Have a great time!";
 

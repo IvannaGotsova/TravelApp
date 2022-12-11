@@ -39,11 +39,8 @@ namespace TravelApp.Controllers
                 var journeys = this.memoryCache
                    .Get<IEnumerable<AllJourneysModel>>(JourneyCacheKey);
 
-                if (journeys == null)
-                {
-                    journeys = await journeyService
+                journeys ??= await journeyService
                         .GetAllJourneys();
-                }
 
                 var cacheOptions = new MemoryCacheEntryOptions()
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(2));
