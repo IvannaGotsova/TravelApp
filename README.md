@@ -30,10 +30,12 @@ There are three levels of access to the information:
 * sees all posts with brief information about them:
    - can see details about all the posts;
    - if the login user is the author of the post, there is possibility to edit or delete this post;
+   - the login user can make post only about his trips; 
    - from here it can be done post for particular journey;
    - can see all the comments about this post;
    - can access the particular journey;
 * sees all comments with brief information about them and can access details of every comment;
+   -  if the login user is the author of the comment, there is possibility to edit or delete this comment;
 ### Admin - has the right to access the following information (everything guest and user can do, and additional rights):
 * Become User - the rights user have;
 * Become Admin – additional rights:
