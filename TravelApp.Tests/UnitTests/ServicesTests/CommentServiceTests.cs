@@ -206,7 +206,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_CommentService_Edit()
         {
             //Arrange
-            int commentId = 2;
+            int commentId = 3;
             var comment = this.data.Comments.Where(c => c.Id == commentId).First();
 
             //Act : edit a comment
