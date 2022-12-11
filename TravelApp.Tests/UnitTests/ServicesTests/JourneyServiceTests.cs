@@ -71,33 +71,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(data.Journeys.Count(), Is.EqualTo(journeysCount - 1));
         }
 
-        [Test]
-        public void Test_JourneyService_Edit()
-        {
-            //Arrange
-            int journeyId = 2;
-            var journey = this.data.Journeys.Where(c => c.Id == journeyId).First();
-
-            //Act : edit a journey
-            var journeyToEdit = new EditJourneyModel()
-            {
-                Title = "Test Journey Title",
-                Description = "Changed Test Journey Description",
-                StartDate = DateTime.ParseExact("01/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                EndDate = DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                Price = 1000,
-                NumberOfPeople = 3,
-                Days = 5,
-                Image = "/Photos/Test"
-            };
-
-
-            journeyService.Edit(journeyId, journeyToEdit);
-
-            //Assert : description of journey is changed
-            Assert.That(journey.Description, Is.EqualTo("Changed Test Journey Description"));
-        }
-
+       
 
         [Test]
         public void Test_JourneyService_GetAllJourneys()

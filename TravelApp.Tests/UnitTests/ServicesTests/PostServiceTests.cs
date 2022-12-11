@@ -64,27 +64,6 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         }
 
 
-        [Test]
-        public void Test_PostService_Edit()
-        {
-            //Arrange
-            int postId = 2;
-            var post = this.data.Posts.Where(p => p.Id == postId).First();
-
-            //Act : edit a comment
-            var postToEdit = new EditPostModel()
-            {
-                Title = "Test Post Title",
-                Description = "Changed Test Post Description",
-                TripId = 1,
-                Image = "/Photos/Test"
-            };
-
-            postService.Edit(postId, postToEdit);
-
-            //Assert : description of post is changed
-            Assert.That(post.Description, Is.EqualTo("Changed Test Post Description"));
-        }
 
         [Test]
         public void Test_PostService_GetAllPosts()

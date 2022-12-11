@@ -126,19 +126,6 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         }
 
 
-        [Test]
-        public void Test_RequestService_Approve()
-        {
-            //Arrange
-            int requestId = 3;
-
-            //Act
-            requestService.Approve(requestId);
-            var request = requestService.GetRequestById(requestId).Result;
-
-            //Assert
-            Assert.That(request.IsApproved, Is.EqualTo(true));
-        }
 
         [Test]
         public void Test_RequestService_ApproveNullRequest()
@@ -160,20 +147,6 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act 
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await requestService.Approve(requestId));
-        }
-
-        [Test]
-        public void Test_RequestService_Decline()
-        {
-            //Arrange
-            int requestId = 2;
-
-            //Act
-            requestService.Decline(requestId);
-            var request = requestService.GetRequestById(requestId).Result;
-
-            //Assert
-            Assert.That(request.IsApproved, Is.EqualTo(false));
         }
 
         [Test]

@@ -52,29 +52,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(this.data.Towns.Count(), Is.EqualTo(townsCount + 1));
         }
 
-        [Test]
-        public void Test_TownService_Edit()
-        {
-            //Arrange
-            int townId = 2;
-            var town = this.data.Towns.Where(t => t.Id == townId).First();
-
-            //Act : edit a town
-            var townToEdit = new EditTownModel()
-            {
-                Name = "Test Town Name 4",
-                Population = 8930002,
-                Area = 77818,
-                Description = "Changed Test Town Description",
-                CountryId = 1,
-                Image = "/Photos/Test"
-            };
-
-            townService.Edit(townId, townToEdit);
-
-            //Assert : description of town is changed
-            Assert.That(town.Description, Is.EqualTo("Changed Test Town Description"));
-        }
+     
 
         [Test]
         public void Test_TownService_Delete()

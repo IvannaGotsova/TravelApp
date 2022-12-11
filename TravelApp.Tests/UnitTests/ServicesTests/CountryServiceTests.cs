@@ -50,31 +50,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(this.data.Countries.Count(), Is.EqualTo(countriesCount + 1));
         }
 
-        [Test]
-        public void Test_CountryService_Edit()
-        {
-            //Arrange
-            int countryId = 2;
-            var country = this.data.Countries.Where(c => c.Id == countryId).First();
-
-            //Act : edit a country
-             var countryToEdit = new EditCountryModel()
-            {
-                Id = 2,
-                Name = "Test Country Name 4",
-                Description = "Changed Test Country Description",
-                Population = 6823493,
-                Image = "/Photos/Test",
-                Area = 110994,
-            };
-
-            countryService.Edit(countryId, countryToEdit);
-         
-
-            //Assert : description of country is changed
-            Assert.That(country.Description, Is.EqualTo("Changed Test Country Description"));
-        }
-
+    
         [Test]
         public void Test_CountryService_Delete()
         {

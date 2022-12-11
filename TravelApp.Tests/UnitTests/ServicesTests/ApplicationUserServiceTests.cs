@@ -107,20 +107,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(VIPusers.Count(), Is.EqualTo(VIPUsersCount));
         }
 
-        [Test]
-        public void Test_ApplicationUserService_MakeVIP()
-        {
-            //Arange
-            string userId = "TestuserIdNonVip";           
-            var user = this.data.Users.Where(u => u.Id == userId).First();
-
-            //Act : make user VIP
-             applicationUserService.MakeVIP(userId);
-            
-            //Assert : user status is VIP
-            Assert.That(user.IsVIP, Is.True);
-
-        }
+       
 
         [Test]
         public void Test_ApplicationUserService_MakeVIPNull()
@@ -143,20 +130,6 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act 
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.MakeVIP(userId));
-        }
-
-        [Test]
-        public void Test_ApplicationUserService_RemoveVIP()
-        {
-            //Arange
-            string userId = "TestuserIdVip";
-
-            //Act : remove user VIP Status
-            applicationUserService.RemoveVIP(userId);
-            var user = applicationUserService.GetApplicaionUserById(userId).Result;
-
-            //Assert : user status is not VIP
-            Assert.That(user.IsVIP, Is.EqualTo(false));
         }
 
         [Test]
