@@ -12,12 +12,13 @@ namespace TravelApp.Tests.Mocks
 {
     public static class DatabaseMock
     {
+        
         public static TravelAppDbContext Instance
         {
             get
             {
-                var dbContextOptions = new DbContextOptionsBuilder<TravelAppDbContext>()
-                    .UseInMemoryDatabase("TravelAppInMemoryDb"
+                var dbContextOptions = new DbContextOptionsBuilder<TravelAppDbContext>()                         
+                    .UseInMemoryDatabase("TravelAppInMemoryDb" 
                     + DateTime.Now.Ticks.ToString())
                     .Options;
 

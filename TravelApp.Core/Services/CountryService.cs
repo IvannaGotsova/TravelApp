@@ -96,7 +96,7 @@ namespace TravelApp.Core.Services
             countryToBeEdited.Area = editCountryModel.Area;
             countryToBeEdited.Image = editCountryModel.Image;
 
-            this.data.Update(countryToBeEdited);
+            this.data.Update<Country>(countryToBeEdited);
             await this.data.SaveChangesAsync();
         }
         /// <summary>

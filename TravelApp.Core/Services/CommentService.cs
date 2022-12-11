@@ -77,8 +77,8 @@ namespace TravelApp.Core.Services
 
             this.data.Update<Comment>(commentToBeEdited);
             await this.data.SaveChangesAsync();
-
         }
+
         /// <summary>
         /// This method returns IEnumerable of all comments.
         /// </summary>

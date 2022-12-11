@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using TravelApp.Common;
 using TravelApp.Controllers;
 using TravelApp.Core.Contracts;

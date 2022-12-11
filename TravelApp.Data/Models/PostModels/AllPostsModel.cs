@@ -28,5 +28,7 @@ namespace TravelApp.Data.Models.PostModels
         public int TripId { get; set; }
         public IEnumerable<Trip> Trips { get; set; } = new List<Trip>();
 
+        public string Author { get; set; } = null!;
+
     }
 }

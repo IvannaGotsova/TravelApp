@@ -123,6 +123,7 @@ namespace TravelApp.Core.Services
             var posts = await data
                  .AllReadonly<Post>()
                  .Include(p => p.Trip)
+                 .ThenInclude(t => t!.ApplicationUser)
                  .ToListAsync();
 
             return posts
@@ -130,10 +131,11 @@ namespace TravelApp.Core.Services
                 {
                     Id = p.Id,
                     Title = p.Title,
-                    Description = p.Description, 
+                    Description = p.Description,
                     Image = p.Image,
                     TripName = p.Trip!.Title,
-                    TripId = p.TripId
+                    TripId = p.TripId,
+                    Author = p.Trip!.ApplicationUser!.UserName
                 })
                 .ToList();
         }

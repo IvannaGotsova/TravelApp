@@ -59,6 +59,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : edit a country
             var countryToEdit = new EditCountryModel()
             {
+                Id = 2,
                 Name = "Test Country Name 4",
                 Description = "Changed Test Country Description",
                 Population = 6823493,

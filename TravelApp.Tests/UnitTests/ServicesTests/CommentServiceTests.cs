@@ -21,7 +21,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         private IRepository repository;
 
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
             repository = new Repository(data);
@@ -205,6 +205,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         [Test]
         public void Test_CommentService_Edit()
         {
+
             //Arrange
             int commentId = 3;
             var comment = this.data.Comments.Where(c => c.Id == commentId).First();
@@ -212,7 +213,6 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : edit a comment
             var commentToEdit = new EditCommentModel()
             {
-
                 Title = "Test Comment Title",
                 Description = "Changed Test Comment Description",
             };
@@ -222,7 +222,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
             //Assert : description of comment is changed
             Assert.That(comment.Description, Is.EqualTo("Changed Test Comment Description"));
-
+           
         }
     }
 }
