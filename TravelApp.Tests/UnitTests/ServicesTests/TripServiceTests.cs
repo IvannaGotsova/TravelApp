@@ -170,10 +170,11 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_TripService_GetTripsForSelect()
         {
             //Arange
-            int tripsCount = data.Trips.Count();
+            string userId = "TestuserId";
+            int tripsCount = data.Trips.Where(t => t.ApplicationUserId == userId).Count();
 
             //Act : get all trips
-            var trips = tripService.GetTripsForSelect().Result;
+            var trips = tripService.GetTripsForSelect(userId).Result;
 
             //Assert : number of trips is correct
             Assert.That(trips.Count(), Is.EqualTo(tripsCount));
