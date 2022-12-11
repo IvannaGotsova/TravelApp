@@ -139,6 +139,21 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await postService.GetPostDetailsById(postId));
         }
+
+
+
+        [Test]
+        public void TestPostService_GetPostDetailsByIdNull_2()
+        {
+            //Arange
+            int postId = -56;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await postService.GetPostDetailsById(postId));
+        }
+
+
         [Test]
         public void Test_PostService_GetPostById()
         {
@@ -166,6 +181,18 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.ThrowsAsync<ArgumentNullException>(async () => await postService.GetPostById(postId));
         }
 
+
+        [Test]
+        public void Test_CommentService_GetCommentByIdNull_2()
+        {
+            //Arange
+            int postId = -56;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await postService.GetPostById(postId));
+
+        }
         [Test]
         public void Test_PostService_GetPostsForSelect()
         {

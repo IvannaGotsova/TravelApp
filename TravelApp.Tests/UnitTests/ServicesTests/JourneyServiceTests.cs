@@ -148,6 +148,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(journey.Image == "/Photos/Test");
 
         }
+
         [Test]
         public void Test_JourneyService_GetCommentByIdNull()
         {
@@ -158,6 +159,19 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await journeyService.GetJourneyById(journeyId));
         }
+
+
+        [Test]
+        public void Test_JourneyService_GetCommentByIdNull_2()
+        {
+            //Arange
+            int journeyId = -56;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await journeyService.GetJourneyById(journeyId));
+        }
+
 
         [Test]
         public void Test_JourneyService_GetCountryDetailsById()
@@ -179,11 +193,23 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(journey.Image == "/Photos/Test");
 
         }
+
         [Test]
         public void Test_ApplicationUserService_GetCommentDetailsByIdNull()
         {
 
             int journeyId = 10001;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await journeyService.GetJourneyDetailsById(journeyId));
+        }
+
+        [Test]
+        public void Test_ApplicationUserService_GetCommentDetailsByIdNull_2()
+        {
+
+            int journeyId = -56;
 
             //Act 
             //Assert :throw ArgumentNullException

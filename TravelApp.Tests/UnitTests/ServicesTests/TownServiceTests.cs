@@ -134,11 +134,24 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(town.CountryId == 1);
 
         }
+
         [Test]
         public void Test_TownService_GetTownByIdNull()
         {
             //Arange
             int townId = 10001;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await townService.GetTownById(townId));
+        }
+
+
+        [Test]
+        public void Test_TownService_GetTownByIdNull_2()
+        {
+            //Arange
+            int townId = -56;
 
             //Act 
             //Assert :throw ArgumentNullException
@@ -161,11 +174,23 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(town.Area == 77818);
             Assert.That(town.Image == "/Photos/Test");
         }
+
         [Test]
         public void Test_TownService_GetTownDetailsByIdNull()
         {
             //Arange
             int townId = 10001;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await townService.GetTownDetailsById(townId));
+        }
+
+        [Test]
+        public void Test_TownService_GetTownDetailsByIdNull_2()
+        {
+            //Arange
+            int townId = -56;
 
             //Act 
             //Assert :throw ArgumentNullException

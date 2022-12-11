@@ -117,7 +117,6 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(trip.Rating == 10);
         }
 
-
         [Test]
         public void TestPostService_GetPostDetailsByIdNull()
         {
@@ -128,6 +127,19 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await tripService.GetTripDetailsById(tripId));
         }
+
+
+        [Test]
+        public void TestPostService_GetPostDetailsByIdNull_2()
+        {
+            //Arange
+            int tripId = -56;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await tripService.GetTripDetailsById(tripId));
+        }
+
         [Test]
         public void Test_TripService_GetTripById()
         {
@@ -154,6 +166,19 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await tripService.GetTripDetailsById(tripId));
         }
+
+
+        [Test]
+        public void Test_CommentService_GetCommentByIdNull_2()
+        {
+            //Arange
+            int tripId = -56;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await tripService.GetTripDetailsById(tripId));
+        }
+
 
         [Test]
         public void Test_TripService_GetTripsForSelect()

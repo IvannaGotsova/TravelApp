@@ -132,11 +132,23 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(country.Image == "/Photos/Test");
 
         }
+
         [Test]
         public void Test_CountryService_GetCountryByIdNull()
         {
             //Arange
             int countryId = 10001;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await countryService.GetCountryById(countryId));
+        }
+
+        [Test]
+        public void Test_CountryService_GetCountryByIdNull_2()
+        {
+            //Arange
+            int countryId = -56;
 
             //Act 
             //Assert :throw ArgumentNullException
@@ -160,6 +172,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(country.Image == "/Photos/Test");
 
         }
+
         [Test]
         public void Test_CountryService_GetCountryDetailsByIdNull()
         {
@@ -171,6 +184,19 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await countryService.GetCountryDetailsById(countryId));
         }
+
+        [Test]
+        public void Test_CountryService_GetCountryDetailsByIdNull_2()
+        {
+
+            //Arange
+            int countryId = -56;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await countryService.GetCountryDetailsById(countryId));
+        }
+
 
         [Test]
         public void Test_CountryService_EditCreateForm()

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -26,28 +27,10 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             repository = new Repository(data);
 
             commentService = new CommentService(repository);
+
         }
 
-        [Test]
-        public void Test_CommentService_Edit()
-        {
-            //Arrange
-            int commentId = 3;
-            var comment = commentService.GetCommentById(commentId).Result;
 
-            //Act : edit a comment
-            var commentToEdit = new EditCommentModel()
-            {
-
-                Title = "Test Comment Title",
-                Description = "Changed Test Comment Description",
-            };
-
-            commentService.Edit(commentId, commentToEdit);
-
-            //Assert : description of comment is changed
-            Assert.That(comment.Description, Is.EqualTo("Changed Test Comment Description"));
-        }
         [Test]
         public void Test_CommentService_Add()
         {
@@ -110,6 +93,18 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await commentService.GetCommentDetailsById(commentId));
         }
+
+        [Test]
+        public void TestCommentService_GetCommentDetailsByIdNull_2()
+        {
+            //Arange
+            int commentId = -56;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await commentService.GetCommentDetailsById(commentId));
+        }
+
         [Test]
         public void Test_CommentService_GetCommentById()
         {
@@ -131,6 +126,17 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         {
             //Arange
             int commentId = 10001;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await commentService.GetCommentById(commentId));
+        }
+
+        [Test]
+        public void Test_CommentService_GetCommentByIdNull_2()
+        {
+            //Arange
+            int commentId = -56;
 
             //Act 
             //Assert :throw ArgumentNullException
@@ -184,7 +190,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         public void Test_CommentService_DeleteCreateForm()
         {
             //Arrange
-            int commentId = 4 ;
+            int commentId = 4;
             var comment = commentService.GetCommentById(commentId).Result;
 
             //Act
@@ -196,5 +202,27 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.That(comment.Description == commentDeleteForm.Description);
         }
 
+        [Test]
+        public void Test_CommentService_Edit()
+        {
+            //Arrange
+            int commentId = 2;
+            var comment = this.data.Comments.Where(c => c.Id == commentId).First();
+
+            //Act : edit a comment
+            var commentToEdit = new EditCommentModel()
+            {
+
+                Title = "Test Comment Title",
+                Description = "Changed Test Comment Description",
+            };
+
+            
+            commentService.Edit(commentId, commentToEdit);
+
+            //Assert : description of comment is changed
+            Assert.That(comment.Description, Is.EqualTo("Changed Test Comment Description"));
+
+        }
     }
 }

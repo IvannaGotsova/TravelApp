@@ -69,6 +69,17 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.GetApplicaionUserById(idExpected));
         }
 
+        [Test]
+        public void Test_ApplicationUserService_GetApplicaionUserByIdNull_2()
+        {
+            //Arrange 
+            var idExpected = "Null";
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.GetApplicaionUserById(idExpected));
+        }
+
 
         [Test]
         public void Test_ApplicationUserService_GetApplicationUsers()
@@ -104,7 +115,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var user = this.data.Users.Where(u => u.Id == userId).First();
 
             //Act : make user VIP
-            applicationUserService.MakeVIP(userId);
+             applicationUserService.MakeVIP(userId);
             
             //Assert : user status is VIP
             Assert.IsTrue(user.IsVIP);
@@ -116,6 +127,18 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         {
             //Arange
             string userId = "TestuserId1Null";
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.MakeVIP(userId));
+        }
+
+
+        [Test]
+        public void Test_ApplicationUserService_MakeVIPNull_2()
+        {
+            //Arange
+            string userId = "";
 
             //Act 
             //Assert :throw ArgumentNullException
@@ -141,6 +164,17 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
         {
             //Arange
             string userId = "TestuserId1Null";
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.RemoveVIP(userId));
+        }
+
+        [Test]
+        public void Test_ApplicationUserService_RemoveVIPNull_2()
+        {
+            //Arange
+            string userId = "";
 
             //Act 
             //Assert :throw ArgumentNullException

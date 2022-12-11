@@ -69,6 +69,25 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.ThrowsAsync<ArgumentNullException>(async () => await requestService.Add(requestToAdd,  userId, journeyId));
         }
 
+
+        [Test]
+        public void Test_RequestService_AddNullUser_2()
+        {
+            //Arange
+            int journeyId = 1;
+            string userId = "";
+            var requestToAdd = new AddRequestModel()
+            {
+                NumberOfPeople = 2,
+                JourneyId = 1,
+                ApplicationUserId = "TestuserId",
+            };
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await requestService.Add(requestToAdd, userId, journeyId));
+        }
+
         [Test]
         public void Test_RequestService_AddNullJourney()
         {
@@ -87,6 +106,26 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.ThrowsAsync<ArgumentNullException>(async () => await requestService.Add(requestToAdd, userId, journeyId));
         }
 
+
+        [Test]
+        public void Test_RequestService_AddNullJourney_2()
+        {
+            //Arange
+            int journeyId = -56;
+            string userId = "TestuserId";
+            var requestToAdd = new AddRequestModel()
+            {
+                NumberOfPeople = 2,
+                JourneyId = 1,
+                ApplicationUserId = "TestuserId",
+            };
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await requestService.Add(requestToAdd, userId, journeyId));
+        }
+
+
         [Test]
         public void Test_RequestService_Approve()
         {
@@ -100,6 +139,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert
             Assert.That(request.IsApproved == true);
         }
+
         [Test]
         public void Test_RequestService_ApproveNullRequest()
         {
@@ -110,6 +150,18 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert :throw ArgumentNullException
             Assert.ThrowsAsync<ArgumentNullException>(async () => await requestService.Approve(requestId));
         }
+
+        [Test]
+        public void Test_RequestService_ApproveNullRequest_2()
+        {
+            //Arrange
+            int requestId = -56;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await requestService.Approve(requestId));
+        }
+
         [Test]
         public void Test_RequestService_Decline()
         {
@@ -123,11 +175,23 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Assert
             Assert.That(request.IsApproved == false);
         }
+
         [Test]
         public void Test_RequestService_DeclineNullRequest()
         {
             //Arrange
             int requestId = 300000;
+
+            //Act 
+            //Assert :throw ArgumentNullException
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await requestService.Decline(requestId));
+        }
+
+        [Test]
+        public void Test_RequestService_DeclineNullRequest_2()
+        {
+            //Arrange
+            int requestId = -56;
 
             //Act 
             //Assert :throw ArgumentNullException
