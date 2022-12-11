@@ -90,10 +90,7 @@ namespace TravelApp.Data.Repositories
             entry.State = EntityState.Detached;
         }
 
-        public void Dispose()
-        {
-            this.Context.Dispose();
-        }
+        public void Dispose() => this.Context.Dispose();
 
         public async Task<T> GetByIdAsync<T>(object id) where T : class
         {

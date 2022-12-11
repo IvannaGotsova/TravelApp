@@ -19,7 +19,7 @@ namespace TravelApp.Data.Seeds
             builder.HasData(CreateRequests());
         }
 
-        private List<Request> CreateRequests()
+        private static List<Request> CreateRequests()
         {
             var requests = new List<Request>()
             {

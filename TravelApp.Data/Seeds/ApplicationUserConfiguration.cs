@@ -21,7 +21,7 @@ namespace TravelApp.Data.Seeds
             builder.HasData(CreateApplicationUsers());
         }
 
-        private List<ApplicationUser> CreateApplicationUsers()
+        private static List<ApplicationUser> CreateApplicationUsers()
         {
             var applicationUsers = new List<ApplicationUser>();
             var hasher = new PasswordHasher<ApplicationUser>();

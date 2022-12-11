@@ -20,7 +20,7 @@ namespace TravelApp.Data.Seeds
             builder.HasData(CreateApplicationUsersJourneys());
         }
 
-        private List<ApplicationUserJourney> CreateApplicationUsersJourneys()
+        private static List<ApplicationUserJourney> CreateApplicationUsersJourneys()
         {
             var applicationUsersJourneys = new List<ApplicationUserJourney>()
             {

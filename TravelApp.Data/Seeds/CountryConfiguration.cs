@@ -20,7 +20,7 @@ namespace TravelApp.Data.Seeds
             builder.HasData(CreateCountries());
         }
 
-        private List<Country> CreateCountries()
+        private static List<Country> CreateCountries()
         {
             var countries = new List<Country>()
             {

@@ -10,7 +10,7 @@ namespace TravelApp.Data
     /// </summary>
     public class TravelAppDbContext : IdentityDbContext<ApplicationUser>
     {
-        private bool seedDb;
+        private readonly bool seedDb;
         public TravelAppDbContext(DbContextOptions<TravelAppDbContext> options, bool seed = true)
             : base(options)
         {

@@ -20,7 +20,7 @@ namespace TravelApp.Data.Seeds
             builder.HasData(CreatePosts());
         }
 
-        private List<Post> CreatePosts()
+        private static List<Post> CreatePosts()
         {
             var posts = new List<Post>()
             {
