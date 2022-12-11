@@ -181,11 +181,13 @@ namespace TravelApp.Core.Services
         /// This method returns IEnumerable of all Trips used for Select.
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Trip>> GetTripsForSelect()
+        public async Task<IEnumerable<Trip>> GetTripsForSelect(string userId)
         {
             return await
                this.data
                .AllReadonly<Trip>()
+               .Include(t => t.ApplicationUser)
+               .Where(t => t.ApplicationUserId == userId)
                .ToListAsync();
         }
     }

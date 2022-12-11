@@ -8,7 +8,7 @@ using TravelApp.Data.Models.PostModels;
 using TravelApp.Data.Models.TownModels;
 using TravelApp.Data.Models.TripModels;
 using static TravelApp.ErrorConstants.ErrorConstants.GlobalErrorConstants;
-
+using static TravelApp.Common.GetCurrentUser;
 namespace TravelApp.Controllers
 {
     /// <summary>
@@ -49,11 +49,13 @@ namespace TravelApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            string userId = this.User
+                .GetCurrentUserId();
 
             var modelPost = new AddPostModel()
             {
                 Trips = await 
-                tripService.GetTripsForSelect(),
+                tripService.GetTripsForSelect(userId),
             };
 
             return View(modelPost);
@@ -66,11 +68,15 @@ namespace TravelApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddPostModel addPostModel)
         {
+            string userId = this.User
+              .GetCurrentUserId();
+
             //check if the model state is valid
             if (!ModelState.IsValid)
             {
+              
                 addPostModel.Trips = await 
-                    tripService.GetTripsForSelect();
+                    tripService.GetTripsForSelect(userId);
 
                 return View(addPostModel);
             }
@@ -89,7 +95,7 @@ namespace TravelApp.Controllers
                 ModelState.AddModelError("", somethingWrong);
 
                 addPostModel.Trips = await 
-                    tripService.GetTripsForSelect();
+                    tripService.GetTripsForSelect(userId);
 
                 return View(addPostModel);
             }
@@ -133,6 +139,9 @@ namespace TravelApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            string userId = this.User
+             .GetCurrentUserId();
+
             //check if the post is null
             if (await postService
                 .GetPostDetailsById(id) == null)
@@ -147,7 +156,7 @@ namespace TravelApp.Controllers
                     .EditCreateForm(id);
                 //get trips for the select 
                 editFormModel.Trips = await 
-                    tripService.GetTripsForSelect();
+                    tripService.GetTripsForSelect(userId);
 
                 return View(editFormModel);
             }
@@ -167,6 +176,9 @@ namespace TravelApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditPostModel editPostModel)
         {
+            string userId = this.User
+          .GetCurrentUserId();
+
             //check if the post is null
             if (await postService
                 .GetPostById(id) == null)
@@ -188,7 +200,7 @@ namespace TravelApp.Controllers
                 ModelState.AddModelError("", somethingWrong);
 
                 editPostModel.Trips = await 
-                    tripService.GetTripsForSelect();
+                    tripService.GetTripsForSelect(userId);
 
                 return View(editPostModel);
             }

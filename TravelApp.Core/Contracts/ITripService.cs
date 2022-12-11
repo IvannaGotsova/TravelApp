@@ -32,7 +32,7 @@ namespace TravelApp.Core.Contracts
         /// This method returns IEnumerable of all Trips used for Select.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Trip>> GetTripsForSelect();
+        Task<IEnumerable<Trip>> GetTripsForSelect(string userId);
         /// <summary>
         /// This method returns Details of particular trip with given id.
         /// </summary>
