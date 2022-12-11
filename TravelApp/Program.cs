@@ -31,6 +31,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>
         options.SignIn.RequireConfirmedAccount = false;
         options.Password.RequiredLength = 8;
         options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireDigit = true; 
+        options.User.RequireUniqueEmail = true;
+        
     })
     .AddRoles<ApplicationRole>()
     .AddEntityFrameworkStores<TravelAppDbContext>();
