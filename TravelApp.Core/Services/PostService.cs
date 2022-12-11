@@ -169,7 +169,7 @@ namespace TravelApp.Core.Services
 
             if (post == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(post));
             }
 
             return post;
@@ -200,7 +200,7 @@ namespace TravelApp.Core.Services
 
             if (post == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(post));
             }
 
             return post;

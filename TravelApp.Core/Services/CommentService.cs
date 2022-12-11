@@ -127,7 +127,7 @@ namespace TravelApp.Core.Services
             //check if comment is null
             if (comment == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(comment));
             }
 
             return comment;
@@ -149,7 +149,7 @@ namespace TravelApp.Core.Services
             //check if comment is null
             if (comment == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(comment));
             }
 
             return comment;

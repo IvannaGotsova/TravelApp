@@ -46,12 +46,19 @@ namespace TravelApp.Core.Services
                 .AllReadonly<Journey>()
                 .Where(j => j.Id == journeyId)
                 .FirstOrDefaultAsync();
-            //check if login user or journey is null
-            if (currentUser == null || journey == null)
+            //check if login user is null
+            if (currentUser == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(currentUser));
 
             }
+            //check if journey is null
+            if (journey == null)
+            {
+                throw new ArgumentNullException(null, nameof(journey));
+
+            }
+
             var requestToBeAdded = new Request()
             {
                 NumberOfPeople = addRequestModel.NumberOfPeople,
@@ -80,7 +87,7 @@ namespace TravelApp.Core.Services
             //check if request is null;
             if (request == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(request));
             }
             //check if request is managed
             if (request.IsManaged == true)
@@ -118,7 +125,7 @@ namespace TravelApp.Core.Services
             //check if the request is null
             if (request == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(request));
             }
 
             request.IsManaged = true;
@@ -193,7 +200,7 @@ namespace TravelApp.Core.Services
             //check if request is null
             if (request == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(request));
             }
 
             return request;

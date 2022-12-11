@@ -69,7 +69,7 @@ namespace TravelApp.Core.Services
             if (await this.data
                 .GetByIdAsync<ApplicationUser>(userId) == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(userId));
             }
 
             return await
@@ -146,7 +146,7 @@ namespace TravelApp.Core.Services
             //check if user is null
             if (user == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(user));
             }
 
             user.IsVIP = true;
@@ -169,7 +169,7 @@ namespace TravelApp.Core.Services
             //check if user is null
             if (user == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(user));
             }
 
             user.IsVIP = false;

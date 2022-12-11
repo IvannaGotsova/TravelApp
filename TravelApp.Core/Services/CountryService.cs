@@ -169,7 +169,7 @@ namespace TravelApp.Core.Services
             //check if country is null
             if (country == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(country));
             }
 
             return country;
@@ -206,7 +206,7 @@ namespace TravelApp.Core.Services
             //check if country is null
             if (country == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(country));
             }
 
             return country;

@@ -144,7 +144,7 @@ namespace TravelApp.Core.Services
             //check if trip is null
             if (trip == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(trip));
             }
 
             return trip;
@@ -172,7 +172,7 @@ namespace TravelApp.Core.Services
             //check if trip is null
             if (trip == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(trip));
             }
 
             return trip;

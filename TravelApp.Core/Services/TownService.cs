@@ -160,7 +160,7 @@ namespace TravelApp.Core.Services
             //check if town is null
             if (town == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(town));
             }
 
             return town;
@@ -197,7 +197,7 @@ namespace TravelApp.Core.Services
             //check if town is null
             if (town == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(null, nameof(town));
             }
 
             return town;
