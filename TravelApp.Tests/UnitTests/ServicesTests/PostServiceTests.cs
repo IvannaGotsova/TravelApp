@@ -44,8 +44,9 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             };
 
             postService.Add(postToAdd);
+
             //Assert : new post is added
-            Assert.That(this.data.Posts.Count() == postsCount + 1);
+            Assert.That(this.data.Posts.Count(), Is.EqualTo(postsCount + 1));
         }
 
         [Test]
@@ -95,7 +96,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var posts = postService.GetAllPosts().Result;
 
             //Assert : number of posts is correct
-            Assert.That(posts.Count() == postsCount);
+            Assert.That(posts.Count(), Is.EqualTo(postsCount));
         }
 
 
@@ -110,7 +111,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             int tripPostsCount = postService.GetAllPostsByTrip(tripId).Result.Count();
 
             //Assert : number of posts is correct
-            Assert.That(postsCount == tripPostsCount);
+            Assert.That(postsCount, Is.EqualTo(tripPostsCount));
         }
 
         [Test]
@@ -122,12 +123,15 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get post
             var post = postService.GetPostDetailsById(postId).Result;
 
-            //Assert : post properties are correct
-            Assert.That(post.Title == "Test Post Title");
-            Assert.That(post.Description == "Test Post Description");
-            Assert.That(post.Image == "/Photos/Test");
-        }
+            Assert.Multiple(() =>
+            {
 
+                //Assert : post properties are correct
+                Assert.That(post.Title, Is.EqualTo("Test Post Title"));
+                Assert.That(post.Description, Is.EqualTo("Test Post Description"));
+                Assert.That(post.Image, Is.EqualTo("/Photos/Test"));
+            });
+        }
 
         [Test]
         public void TestPostService_GetPostDetailsByIdNull()
@@ -163,11 +167,15 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get post
             var post = postService.GetPostById(postId).Result;
 
-            //Assert : post properties are correct
-            Assert.That(post.Title == "Test Post Title");
-            Assert.That(post.Description == "Test Post Description");
-            Assert.That(post.TripId == 1);
-            Assert.That(post.Image == "/Photos/Test");
+            Assert.Multiple(() =>
+            {
+
+                //Assert : post properties are correct
+                Assert.That(post.Title, Is.EqualTo("Test Post Title"));
+                Assert.That(post.Description, Is.EqualTo("Test Post Description"));
+                Assert.That(post.TripId, Is.EqualTo(1));
+                Assert.That(post.Image, Is.EqualTo("/Photos/Test"));
+            });
         }
 
         [Test]
@@ -203,7 +211,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var posts = postService.GetPostsForSelect().Result;
 
             //Assert : number of countries is correct
-            Assert.That(posts.Count() == postsCount);
+            Assert.That(posts.Count(), Is.EqualTo(postsCount));
         }
 
 
@@ -217,11 +225,14 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var postEditForm = postService.EditCreateForm(postId).Result;
 
-            //Assert
-            Assert.That(post.Title == postEditForm.Title);
-            Assert.That(post.Description == postEditForm.Description);
-            Assert.That(post.Image == postEditForm.Image);
+            Assert.Multiple(() =>
+            {
 
+                //Assert
+                Assert.That(post.Title, Is.EqualTo(postEditForm.Title));
+                Assert.That(post.Description, Is.EqualTo(postEditForm.Description));
+                Assert.That(post.Image, Is.EqualTo(postEditForm.Image));
+            });
         }
 
         [Test]
@@ -234,10 +245,13 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var postDeleteForm = postService.DeleteCreateForm(postId).Result;
 
-            //Assert
-            Assert.That(post.Title == postDeleteForm.Title);
-            Assert.That(post.Description == postDeleteForm.Description);
+            Assert.Multiple(() =>
+            {
 
+                //Assert
+                Assert.That(post.Title, Is.EqualTo(postDeleteForm.Title));
+                Assert.That(post.Description, Is.EqualTo(postDeleteForm.Description));
+            });
         }
     }
 }

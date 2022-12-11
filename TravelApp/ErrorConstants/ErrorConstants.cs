@@ -13,6 +13,9 @@
         public static class UserErrorConstants
         {
             public const string invalidLogin = "Invalid Login";
+            public const string unAvailableUserName = "This UserName is unavailable. Please try another one";
+            public const string unAvailableEmail = "This Email is unavailable. Please try another one";
+
         }
 
         public static class JourneyErrorConstants
@@ -27,5 +30,6 @@
         {
             public const string wrongNumberOfPeople = "Number of people must be greater or equal to available";
         }
+
     }
 }

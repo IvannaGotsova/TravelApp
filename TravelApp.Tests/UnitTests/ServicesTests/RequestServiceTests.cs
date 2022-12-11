@@ -48,7 +48,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             requestService.Add(requestToAdd,userId, journeyId);
 
             //Assert : new town is added
-            Assert.That(this.data.Requests.Count() == requestsCount + 1);
+            Assert.That(this.data.Requests.Count(), Is.EqualTo(requestsCount + 1));
         }
 
         [Test]
@@ -137,7 +137,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var request = requestService.GetRequestById(requestId).Result;
 
             //Assert
-            Assert.That(request.IsApproved == true);
+            Assert.That(request.IsApproved, Is.EqualTo(true));
         }
 
         [Test]
@@ -173,7 +173,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var request = requestService.GetRequestById(requestId).Result;
 
             //Assert
-            Assert.That(request.IsApproved == false);
+            Assert.That(request.IsApproved, Is.EqualTo(false));
         }
 
         [Test]
@@ -208,14 +208,17 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get request
             var request = requestService.GetRequestById(requestId).Result;
 
-            //Assert : request properties are correct
-            Assert.That(request.Id == 1);
-            Assert.That(request.NumberOfPeople == 2);
-            Assert.That(request.JourneyId == 1);
-            Assert.That(request.ApplicationUserId == "TestuserId");
-            Assert.That(request.IsApproved == false);
-            Assert.That(request.IsManaged == false);
+            Assert.Multiple(() =>
+            {
 
+                //Assert : request properties are correct
+                Assert.That(request.Id, Is.EqualTo(1));
+                Assert.That(request.NumberOfPeople, Is.EqualTo(2));
+                Assert.That(request.JourneyId, Is.EqualTo(1));
+                Assert.That(request.ApplicationUserId, Is.EqualTo("TestuserId"));
+                Assert.That(request.IsApproved, Is.EqualTo(false));
+                Assert.That(request.IsManaged, Is.EqualTo(false));
+            });
         }
 
         [Test]
@@ -228,7 +231,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var requests = requestService.GetAllRequests().Result;
 
             //Assert : number of requests is correct
-            Assert.That(requests.Count() == requestsCount);
+            Assert.That(requests.Count(), Is.EqualTo(requestsCount));
         }
 
         [Test]
@@ -242,7 +245,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var requests = requestService.GetMyRequests(userId).Result;
 
             //Assert : number of my requests is correct
-            Assert.That(requests.Count() == myRequestsCount);
+            Assert.That(requests.Count(), Is.EqualTo(myRequestsCount));
         }
 
     }

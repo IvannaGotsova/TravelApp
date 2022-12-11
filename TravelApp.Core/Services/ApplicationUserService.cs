@@ -21,7 +21,6 @@ namespace TravelApp.Core.Services
     public class ApplicationUserService : IApplicationUserService
     {
         private readonly IRepository data;
-
         public ApplicationUserService(IRepository data)
         {
             this.data = data;
@@ -33,6 +32,7 @@ namespace TravelApp.Core.Services
         /// <returns></returns>
         public async Task Delete(string userId)
         {
+
             await this.data
                 .DeleteAsync<ApplicationUser>(userId);
             await this.data

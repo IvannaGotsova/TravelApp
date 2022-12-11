@@ -47,7 +47,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             tripService.Add(tripToAdd, userId);
 
             //Assert : new trip is added
-            Assert.That(this.data.Trips.Count() == tripsCount + 1);
+            Assert.That(this.data.Trips.Count(), Is.EqualTo(tripsCount + 1));
         }
 
         [Test]
@@ -98,7 +98,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var trips = tripService.GetAllTrips(userId).Result;
 
             //Assert : number of all my trips is correct
-            Assert.That(trips.Count() == tripsCount);
+            Assert.That(trips.Count(), Is.EqualTo(tripsCount));
         }
 
 
@@ -112,9 +112,13 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get trip
             var trip = tripService.GetTripDetailsById(tripId).Result;
 
-            //Assert : trip properties are correct
-            Assert.That(trip.Title == "Test Trip Title");          
-            Assert.That(trip.Rating == 10);
+            Assert.Multiple(() =>
+            {
+
+                //Assert : trip properties are correct
+                Assert.That(trip.Title, Is.EqualTo("Test Trip Title"));
+                Assert.That(trip.Rating, Is.EqualTo(10));
+            });
         }
 
         [Test]
@@ -149,11 +153,15 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get trip
             var trip = tripService.GetTripById(tripId).Result;
 
-            //Assert : post properties are correct
-            Assert.That(trip.Title == "Test Trip Title");
-            Assert.That(trip.ApplicationUserId == "TestuserId");
-            Assert.That(trip.Rating == 10);
-            Assert.That(trip.JourneyId == 1);
+            Assert.Multiple(() =>
+            {
+
+                //Assert : post properties are correct
+                Assert.That(trip.Title, Is.EqualTo("Test Trip Title"));
+                Assert.That(trip.ApplicationUserId, Is.EqualTo("TestuserId"));
+                Assert.That(trip.Rating, Is.EqualTo(10));
+                Assert.That(trip.JourneyId, Is.EqualTo(1));
+            });
         }
 
         [Test]
@@ -190,7 +198,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var trips = tripService.GetTripsForSelect().Result;
 
             //Assert : number of trips is correct
-            Assert.That(trips.Count() == tripsCount);
+            Assert.That(trips.Count(), Is.EqualTo(tripsCount));
         }
 
 
@@ -204,10 +212,13 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var tripEditForm = tripService.EditCreateForm(tripId).Result;
 
-            //Assert
-            Assert.That(trip.Title == tripEditForm.Title);
-            Assert.That(trip.Rating == tripEditForm.Rating);
+            Assert.Multiple(() =>
+            {
 
+                //Assert
+                Assert.That(trip.Title, Is.EqualTo(tripEditForm.Title));
+                Assert.That(trip.Rating, Is.EqualTo(tripEditForm.Rating));
+            });
         }
 
         [Test]
@@ -220,11 +231,14 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var tripDeleteForm = tripService.DeleteCreateForm(tripId).Result;
 
-            //Assert
-            Assert.That(trip.Id == tripDeleteForm.Id);
-            Assert.That(trip.Title == tripDeleteForm.Title);
-            Assert.That(trip.Rating == tripDeleteForm.Rating);
+            Assert.Multiple(() =>
+            {
 
+                //Assert
+                Assert.That(trip.Id, Is.EqualTo(tripDeleteForm.Id));
+                Assert.That(trip.Title, Is.EqualTo(tripDeleteForm.Title));
+                Assert.That(trip.Rating, Is.EqualTo(tripDeleteForm.Rating));
+            });
         }
     }
 }

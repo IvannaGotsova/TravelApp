@@ -47,8 +47,9 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             };
 
             townService.Add(townToAdd);
+
             //Assert : new town is added
-            Assert.That(this.data.Towns.Count() == townsCount + 1);
+            Assert.That(this.data.Towns.Count(), Is.EqualTo(townsCount + 1));
         }
 
         [Test]
@@ -99,7 +100,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var towns = townService.GetAllTowns().Result;
 
             //Assert : number of towns is correct
-            Assert.That(towns.Count() == townsCount);
+            Assert.That(towns.Count(), Is.EqualTo(townsCount));
         }
 
         [Test]
@@ -112,7 +113,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var towns = townService.GetTownsForSelect().Result;
 
             //Assert : number of towns is correct
-            Assert.That(towns.Count() == townsCount);
+            Assert.That(towns.Count(), Is.EqualTo(townsCount));
         }
 
 
@@ -125,14 +126,17 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get town
             var town = townService.GetTownById(townId).Result;
 
-            //Assert : town properties are correct
-            Assert.That(town.Name == "Test Town Name");
-            Assert.That(town.Description == "Test Town Description");
-            Assert.That(town.Population == 8930002);
-            Assert.That(town.Area == 77818);
-            Assert.That(town.Image == "/Photos/Test");
-            Assert.That(town.CountryId == 1);
+            Assert.Multiple(() =>
+            {
 
+                //Assert : town properties are correct
+                Assert.That(town.Name, Is.EqualTo("Test Town Name"));
+                Assert.That(town.Description, Is.EqualTo("Test Town Description"));
+                Assert.That(town.Population, Is.EqualTo(8930002));
+                Assert.That(town.Area, Is.EqualTo(77818));
+                Assert.That(town.Image, Is.EqualTo("/Photos/Test"));
+                Assert.That(town.CountryId, Is.EqualTo(1));
+            });
         }
 
         [Test]
@@ -167,12 +171,16 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get town
             var town = townService.GetTownDetailsById(townId).Result;
 
-            //Assert : town properties are correct
-            Assert.That(town.Name == "Test Town Name");
-            Assert.That(town.Description == "Test Town Description");
-            Assert.That(town.Population == 8930002);
-            Assert.That(town.Area == 77818);
-            Assert.That(town.Image == "/Photos/Test");
+            Assert.Multiple(() =>
+            {
+
+                //Assert : town properties are correct
+                Assert.That(town.Name, Is.EqualTo("Test Town Name"));
+                Assert.That(town.Description, Is.EqualTo("Test Town Description"));
+                Assert.That(town.Population, Is.EqualTo(8930002));
+                Assert.That(town.Area, Is.EqualTo(77818));
+                Assert.That(town.Image, Is.EqualTo("/Photos/Test"));
+            });
         }
 
         [Test]
@@ -207,13 +215,16 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var townEditForm = townService.EditCreateForm(townId).Result;
 
-            //Assert
-            Assert.That(town.Name == townEditForm.Name);
-            Assert.That(town.Description == townEditForm.Description);
-            Assert.That(town.Population == townEditForm.Population);
-            Assert.That(town.Area == townEditForm.Area);
-            Assert.That(town.Image == townEditForm.Image);
+            Assert.Multiple(() =>
+            {
 
+                //Assert
+                Assert.That(town.Name, Is.EqualTo(townEditForm.Name));
+                Assert.That(town.Description, Is.EqualTo(townEditForm.Description));
+                Assert.That(town.Population, Is.EqualTo(townEditForm.Population));
+                Assert.That(town.Area, Is.EqualTo(townEditForm.Area));
+                Assert.That(town.Image, Is.EqualTo(townEditForm.Image));
+            });
         }
 
         [Test]
@@ -226,10 +237,13 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var townDeleteForm = townService.DeleteCreateForm(townId).Result;
 
-            //Assert
-            Assert.That(town.Name == townDeleteForm.Name);
-            Assert.That(town.Description == townDeleteForm.Description);
+            Assert.Multiple(() =>
+            {
 
+                //Assert
+                Assert.That(town.Name, Is.EqualTo(townDeleteForm.Name));
+                Assert.That(town.Description, Is.EqualTo(townDeleteForm.Description));
+            });
         }
     }
 }

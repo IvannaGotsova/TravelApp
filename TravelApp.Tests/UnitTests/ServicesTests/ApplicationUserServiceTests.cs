@@ -54,7 +54,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var idActual = applicationUser.Id;
 
             //Assert : id of found user is equal to expected one
-            Assert.That(idActual == idSearched);
+            Assert.That(idActual, Is.EqualTo(idSearched));
         }
 
 
@@ -91,7 +91,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var users = applicationUserService.GetApplicationUsers().Result;
 
             //Assert : number of users is correct
-            Assert.That(users.Count() == usersCount);
+            Assert.That(users.Count(), Is.EqualTo(usersCount));
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var VIPusers = applicationUserService.GetApplicationVIPUsers().Result;
 
             //Assert : number of VIP users is correct
-            Assert.That(VIPusers.Count() == VIPUsersCount);
+            Assert.That(VIPusers.Count(), Is.EqualTo(VIPUsersCount));
         }
 
         [Test]
@@ -118,7 +118,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
              applicationUserService.MakeVIP(userId);
             
             //Assert : user status is VIP
-            Assert.IsTrue(user.IsVIP);
+            Assert.That(user.IsVIP, Is.True);
 
         }
 

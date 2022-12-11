@@ -54,6 +54,6 @@ namespace TravelApp.Core.Contracts
         /// <param name="userId"></param>
         /// <returns></returns>
         Task RemoveVIP(string userId);
-
+      
     }
 }

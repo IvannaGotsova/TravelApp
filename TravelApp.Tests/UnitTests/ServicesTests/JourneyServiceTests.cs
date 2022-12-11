@@ -53,7 +53,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
             journeyService.Add(journeyToAdd, currentUserId);
             //Assert : new journey is added
-            Assert.That(this.data.Journeys.Count() == journeysCount + 1);
+            Assert.That(this.data.Journeys.Count(), Is.EqualTo(journeysCount + 1));
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var journeys = journeyService.GetAllJourneys().Result;
 
             //Assert : number of journeys is correct
-            Assert.That(journeys.Count() == journeys.Count());
+            Assert.That(journeys.Count(), Is.EqualTo(journeysCount));
         }
 
 
@@ -124,7 +124,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var journeys = journeyService.GetJourneysForSelect().Result;
 
             //Assert : number of journeys is correct
-            Assert.That(journeys.Count() == journeysCount);
+            Assert.That(journeys.Count(), Is.EqualTo(journeysCount));
         }
 
 
@@ -137,16 +137,19 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get journey
             var journey = journeyService.GetJourneyById(journeyId).Result;
 
-            //Assert : journey properties are correct
-            Assert.That(journey.Title == "Test Journey Title");
-            Assert.That(journey.Description == "Test Journey Description");
-            Assert.That(journey.StartDate == DateTime.ParseExact("01/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture));
-            Assert.That(journey.EndDate == DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture));
-            Assert.That(journey.Price == 1000);
-            Assert.That(journey.NumberOfPeople == 3);
-            Assert.That(journey.Days == 5);
-            Assert.That(journey.Image == "/Photos/Test");
+            Assert.Multiple(() =>
+            {
 
+                //Assert : journey properties are correct
+                Assert.That(journey.Title, Is.EqualTo("Test Journey Title"));
+                Assert.That(journey.Description, Is.EqualTo("Test Journey Description"));
+                Assert.That(journey.StartDate, Is.EqualTo(DateTime.ParseExact("01/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture)));
+                Assert.That(journey.EndDate, Is.EqualTo(DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture)));
+                Assert.That(journey.Price, Is.EqualTo(1000));
+                Assert.That(journey.NumberOfPeople, Is.EqualTo(3));
+                Assert.That(journey.Days, Is.EqualTo(5));
+                Assert.That(journey.Image, Is.EqualTo("/Photos/Test"));
+            });
         }
 
         [Test]
@@ -182,16 +185,19 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get journey
             var journey = journeyService.GetJourneyDetailsById(journeyId).Result;
 
-            //Assert : journey properties are correct
-            Assert.That(journey.Title == "Test Journey Title");
-            Assert.That(journey.Description == "Test Journey Description");
-            Assert.That(journey.StartDate == DateTime.ParseExact("01/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture));
-            Assert.That(journey.EndDate == DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture));
-            Assert.That(journey.Price == 1000);
-            Assert.That(journey.NumberOfPeople == 3);
-            Assert.That(journey.Days == 5);
-            Assert.That(journey.Image == "/Photos/Test");
+            Assert.Multiple(() =>
+            {
 
+                //Assert : journey properties are correct
+                Assert.That(journey.Title, Is.EqualTo("Test Journey Title"));
+                Assert.That(journey.Description, Is.EqualTo("Test Journey Description"));
+                Assert.That(journey.StartDate, Is.EqualTo(DateTime.ParseExact("01/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture)));
+                Assert.That(journey.EndDate, Is.EqualTo(DateTime.ParseExact("11/02/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture)));
+                Assert.That(journey.Price, Is.EqualTo(1000));
+                Assert.That(journey.NumberOfPeople, Is.EqualTo(3));
+                Assert.That(journey.Days, Is.EqualTo(5));
+                Assert.That(journey.Image, Is.EqualTo("/Photos/Test"));
+            });
         }
 
         [Test]
@@ -227,16 +233,19 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var journeyEditForm = journeyService.EditCreateForm(journeyId).Result;
 
-            //Assert
-            Assert.That(journey.Title == journeyEditForm.Title);
-            Assert.That(journey.Description == journeyEditForm.Description);
-            Assert.That(journey.StartDate == journeyEditForm.StartDate);
-            Assert.That(journey.EndDate == journeyEditForm.EndDate);
-            Assert.That(journey.Price == journeyEditForm.Price);
-            Assert.That(journey.NumberOfPeople == journeyEditForm.NumberOfPeople);
-            Assert.That(journey.Days == journeyEditForm.Days);
-            Assert.That(journey.Image == journeyEditForm.Image);
+            Assert.Multiple(() =>
+            {
 
+                //Assert
+                Assert.That(journey.Title, Is.EqualTo(journeyEditForm.Title));
+                Assert.That(journey.Description, Is.EqualTo(journeyEditForm.Description));
+                Assert.That(journey.StartDate, Is.EqualTo(journeyEditForm.StartDate));
+                Assert.That(journey.EndDate, Is.EqualTo(journeyEditForm.EndDate));
+                Assert.That(journey.Price, Is.EqualTo(journeyEditForm.Price));
+                Assert.That(journey.NumberOfPeople, Is.EqualTo(journeyEditForm.NumberOfPeople));
+                Assert.That(journey.Days, Is.EqualTo(journeyEditForm.Days));
+                Assert.That(journey.Image, Is.EqualTo(journeyEditForm.Image));
+            });
         }
 
         [Test]
@@ -249,11 +258,13 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var journeyDeleteForm = journeyService.DeleteCreateForm(journeyId).Result;
 
-            //Assertm
-            Assert.That(journey.Title == journeyDeleteForm.Title);
-            Assert.That(journey.Description == journeyDeleteForm.Description);
-           
-        }
+            Assert.Multiple(() =>
+            {
 
+                //Assertm
+                Assert.That(journey.Title, Is.EqualTo(journeyDeleteForm.Title));
+                Assert.That(journey.Description, Is.EqualTo(journeyDeleteForm.Description));
+            });
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
     public class CountryServiceTests : UnitTestsBase
     {
         private ICountryService countryService;
-        private IJourneyService journeyService;
+        private readonly IJourneyService journeyService;
         private IRepository repository;
 
 
@@ -45,8 +45,9 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             };
 
             countryService.Add(countryToAdd);
+
             //Assert : new comment is added
-            Assert.That(this.data.Countries.Count() == countriesCount + 1);
+            Assert.That(this.data.Countries.Count(), Is.EqualTo(countriesCount + 1));
         }
 
         [Test]
@@ -97,7 +98,8 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var countries = countryService.GetAllCountries().Result;
 
             //Assert : number of countries is correct
-            Assert.That(countries.Count() == countriesCount);
+
+            Assert.That(countries.Count(), Is.EqualTo(countriesCount));
         }
 
 
@@ -112,7 +114,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var countries = countryService.GetCountriesForSelect().Result;
 
             //Assert : number of countries is correct
-            Assert.That(countries.Count() == countriesCount);
+            Assert.That(countries.Count(), Is.EqualTo(countriesCount));
         }
 
 
@@ -125,13 +127,16 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get country
             var country = countryService.GetCountryById(countryId).Result;
 
-            //Assert : country properties are correct
-            Assert.That(country.Name == "Test Country Name");
-            Assert.That(country.Description == "Test Country Description");
-            Assert.That(country.Population == 6823493);
-            Assert.That(country.Area == 110994);
-            Assert.That(country.Image == "/Photos/Test");
+            Assert.Multiple(() =>
+            {
 
+                //Assert : country properties are correct
+                Assert.That(country.Name, Is.EqualTo("Test Country Name"));
+                Assert.That(country.Description, Is.EqualTo("Test Country Description"));
+                Assert.That(country.Population, Is.EqualTo(6823493));
+                Assert.That(country.Area, Is.EqualTo(110994));
+                Assert.That(country.Image, Is.EqualTo("/Photos/Test"));
+            });
         }
 
         [Test]
@@ -165,13 +170,16 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get country
             var country = countryService.GetCountryDetailsById(countryId).Result;
 
-            //Assert : country properties are correct
-            Assert.That(country.Name == "Test Country Name");
-            Assert.That(country.Description == "Test Country Description");
-            Assert.That(country.Population == 6823493);
-            Assert.That(country.Area == 110994);
-            Assert.That(country.Image == "/Photos/Test");
+            Assert.Multiple(() =>
+            {
 
+                //Assert : country properties are correct
+                Assert.That(country.Name, Is.EqualTo("Test Country Name"));
+                Assert.That(country.Description, Is.EqualTo("Test Country Description"));
+                Assert.That(country.Population, Is.EqualTo(6823493));
+                Assert.That(country.Area, Is.EqualTo(110994));
+                Assert.That(country.Image, Is.EqualTo("/Photos/Test"));
+            });
         }
 
         [Test]
@@ -209,14 +217,16 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var countryEditForm = countryService.EditCreateForm(countryId).Result;
 
-            //Assert
-            Assert.That(country.Name == countryEditForm.Name);
-            Assert.That(country.Description == countryEditForm.Description);
-            Assert.That(country.Population == countryEditForm.Population);
-            Assert.That(country.Area == countryEditForm.Area);
-            Assert.That(country.Image == countryEditForm.Image);
+            Assert.Multiple(() =>
+            {
 
-
+                //Assert
+                Assert.That(country.Name, Is.EqualTo(countryEditForm.Name));
+                Assert.That(country.Description, Is.EqualTo(countryEditForm.Description));
+                Assert.That(country.Population, Is.EqualTo(countryEditForm.Population));
+                Assert.That(country.Area, Is.EqualTo(countryEditForm.Area));
+                Assert.That(country.Image, Is.EqualTo(countryEditForm.Image));
+            });
         }
 
         [Test]
@@ -229,12 +239,14 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var countryDeleteForm = countryService.DeleteCreateForm(countryId).Result;
 
-            //Assert
-            Assert.That(country.Id == countryDeleteForm.Id);
-            Assert.That(country.Name == countryDeleteForm.Name);
-            Assert.That(country.Description == countryDeleteForm.Description);
+            Assert.Multiple(() =>
+            {
+
+                //Assert
+                Assert.That(country.Id, Is.EqualTo(countryDeleteForm.Id));
+                Assert.That(country.Name, Is.EqualTo(countryDeleteForm.Name));
+                Assert.That(country.Description, Is.EqualTo(countryDeleteForm.Description));
+            });
         }
-
-
     }
 }

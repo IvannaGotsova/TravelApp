@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.Extensions.Caching.Memory;
 using System.Reflection.Metadata;
 using TravelApp.Common;
+using TravelApp.Core.Contracts;
 using TravelApp.Data.Entities;
 using TravelApp.Data.Models.ApplicationUser;
 using static TravelApp.ErrorConstants.ErrorConstants.UserErrorConstants;
@@ -18,7 +19,7 @@ namespace TravelApp.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-       
+
         public ApplicationUsersController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)

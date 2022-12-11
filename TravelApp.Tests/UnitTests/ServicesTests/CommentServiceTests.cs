@@ -49,7 +49,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
             commentService.Add(commentToAdd);
             //Assert : new comment is added
-            Assert.That(this.data.Comments.Count() == commentsCount + 1);
+            Assert.That(this.data.Comments.Count(), Is.EqualTo(commentsCount + 1));
         }
 
 
@@ -63,7 +63,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var comments = commentService.GetAllComments().Result;
 
             //Assert : number of comments is correct
-            Assert.That(comments.Count() == commentsCount);
+            Assert.That(comments.Count(), Is.EqualTo(commentsCount));
         }
 
         [Test]
@@ -75,13 +75,16 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get comment
             var comment = commentService.GetCommentDetailsById(commentId).Result;
 
-            //Assert : comment properties are correct
-            Assert.That(comment.Title == "Test Comment Title");
-            Assert.That(comment.Description == "Test Comment Description");
-            Assert.That(comment.PostId == 1);
-            Assert.That(comment.Author == "test@test.com");
-        }
+            Assert.Multiple(() =>
+            {
 
+                //Assert : comment properties are correct
+                Assert.That(comment.Title, Is.EqualTo("Test Comment Title"));
+                Assert.That(comment.Description, Is.EqualTo("Test Comment Description"));
+                Assert.That(comment.PostId, Is.EqualTo(1));
+                Assert.That(comment.Author, Is.EqualTo("test@test.com"));
+            });
+        }
 
         [Test]
         public void TestCommentService_GetCommentDetailsByIdNull()
@@ -114,11 +117,15 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act : get comment
             var comment = commentService.GetCommentById(commentId).Result;
 
-            //Assert : comment properties are correct
-            Assert.That(comment.Title == "Test Comment Title");
-            Assert.That(comment.Description == "Test Comment Description");
-            Assert.That(comment.PostId == 1);
-            Assert.That(comment.Author == "test@test.com");
+            Assert.Multiple(() =>
+            {
+
+                //Assert : comment properties are correct
+                Assert.That(comment.Title, Is.EqualTo("Test Comment Title"));
+                Assert.That(comment.Description, Is.EqualTo("Test Comment Description"));
+                Assert.That(comment.PostId, Is.EqualTo(1));
+                Assert.That(comment.Author, Is.EqualTo("test@test.com"));
+            });
         }
 
         [Test]
@@ -168,7 +175,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             int postCommentsCount = commentService.GetAllCommentsByPost(postId).Result.Count();
 
             //Assert : number of comments is correct
-            Assert.That(commentsCount == postCommentsCount);
+            Assert.That(commentsCount, Is.EqualTo(postCommentsCount));
         }
 
         [Test]
@@ -181,9 +188,13 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var commentEditForm = commentService.EditCreateForm(commentId).Result;
 
-            //Assert
-            Assert.That(comment.Title == commentEditForm.Title);
-            Assert.That(comment.Description == commentEditForm.Description);
+            Assert.Multiple(() =>
+            {
+
+                //Assert
+                Assert.That(comment.Title, Is.EqualTo(commentEditForm.Title));
+                Assert.That(comment.Description, Is.EqualTo(commentEditForm.Description));
+            });
         }
 
         [Test]
@@ -196,10 +207,14 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             //Act
             var commentDeleteForm = commentService.DeleteCreateForm(commentId).Result;
 
-            //Assert
-            Assert.That(comment.Id == commentDeleteForm.Id);
-            Assert.That(comment.Title == commentDeleteForm.Title);
-            Assert.That(comment.Description == commentDeleteForm.Description);
+            Assert.Multiple(() =>
+            {
+
+                //Assert
+                Assert.That(comment.Id, Is.EqualTo(commentDeleteForm.Id));
+                Assert.That(comment.Title, Is.EqualTo(commentDeleteForm.Title));
+                Assert.That(comment.Description, Is.EqualTo(commentDeleteForm.Description));
+            });
         }
 
         [Test]
