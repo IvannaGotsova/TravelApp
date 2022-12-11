@@ -93,7 +93,7 @@ namespace TravelApp.Core.Services
             townToBeEdited.Population = editTownModel.Population;
             townToBeEdited.Area = editTownModel.Area;
 
-            this.data.Update(townToBeEdited);
+            this.data.Update<Town>(townToBeEdited);
             await this.data.SaveChangesAsync();
         }
         /// <summary>

@@ -83,7 +83,7 @@ namespace TravelApp.Core.Services
             tripToBeEdited.Rating = editTripModel.Rating;
     
 
-            this.data.Update(tripToBeEdited);
+            this.data.Update<Trip>(tripToBeEdited);
             await this.data.SaveChangesAsync();
         }
         /// <summary>

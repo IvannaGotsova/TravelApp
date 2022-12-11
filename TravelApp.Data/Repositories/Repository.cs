@@ -69,6 +69,11 @@ namespace TravelApp.Data.Repositories
             T entity = await GetByIdAsync<T>(id);
 
             Delete<T>(entity);
+        }      
+
+        public void Update<T>(T entity) where T : class
+        {
+            this.DbSet<T>().Update(entity);
         }
 
         public void Delete<T>(T entity) where T : class
@@ -105,11 +110,6 @@ namespace TravelApp.Data.Repositories
         public async Task<int> SaveChangesAsync()
         {
             return await this.Context.SaveChangesAsync();
-        }
-
-        public void Update<T>(T entity) where T : class
-        {
-            this.DbSet<T>().Update(entity);
         }
 
         public void UpdateRange<T>(IEnumerable<T> entities) where T : class

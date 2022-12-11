@@ -89,7 +89,7 @@ namespace TravelApp.Core.Services
             postToBeEdited.Image = editPostModel.Image;
             postToBeEdited.Description = editPostModel.Description;
 
-            this.data.Update(postToBeEdited);
+            this.data.Update<Post>(postToBeEdited);
             await this.data.SaveChangesAsync();
         }
         /// <summary>

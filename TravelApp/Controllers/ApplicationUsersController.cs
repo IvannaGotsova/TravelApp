@@ -43,6 +43,8 @@ namespace TravelApp.Controllers
 
             RegisterModelView modelToBeRegistered = new();
 
+            TempData["message"] = $"Hello! Welcome!";
+
             return View(modelToBeRegistered);
         }
         /// <summary>

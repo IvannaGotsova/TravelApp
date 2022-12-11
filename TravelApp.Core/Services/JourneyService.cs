@@ -172,7 +172,7 @@ namespace TravelApp.Core.Services
             journeyToBeEdited.Days = editJourneyModel.Days;
             journeyToBeEdited.NumberOfPeople = editJourneyModel.NumberOfPeople;
 
-            this.data.Update(journeyToBeEdited);
+            this.data.Update<Journey>(journeyToBeEdited);
 
             var countryJourneysToDlete = await
                 this.data

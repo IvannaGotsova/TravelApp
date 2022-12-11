@@ -58,7 +58,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             var country = this.data.Countries.Where(c => c.Id == countryId).First();
 
             //Act : edit a country
-            var countryToEdit = new EditCountryModel()
+             var countryToEdit = new EditCountryModel()
             {
                 Id = 2,
                 Name = "Test Country Name 4",
@@ -69,6 +69,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             };
 
             countryService.Edit(countryId, countryToEdit);
+         
 
             //Assert : description of country is changed
             Assert.That(country.Description, Is.EqualTo("Changed Test Country Description"));
