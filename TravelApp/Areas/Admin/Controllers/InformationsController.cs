@@ -48,7 +48,7 @@ namespace TravelApp.Areas.Admin.Controllers
             return View();
         }
         /// <summary>
-        /// This method returns all the registered users.
+        /// This method returns IEnumerable of all the registered users.
         /// </summary>
         public async Task<IActionResult> ApplicationUsers()
         {
@@ -59,7 +59,7 @@ namespace TravelApp.Areas.Admin.Controllers
             return View(users);
         }
         /// <summary>
-        /// This method returns all the comments.
+        /// This method returns IEnumerable of all the comments.
         /// </summary>
         public async Task<IActionResult> Comments()
         {
@@ -70,7 +70,9 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View(comments);
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all the countries.
+        /// </summary>
         public async Task<IActionResult> Countries()
         {
  

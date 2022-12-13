@@ -1,1 +1,24 @@
-﻿
+﻿@model IEnumerable<AllCountriesModel>
+
+@{
+    ViewBag.Title = "Countries Information";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<a class="btn btn-warning" asp-area="Admin" asp-controller="Informations" asp-action="Index" asp-route-id="" asp-route-information="" class="btn btn-success"> Back to Information</a>
+<hr />
+
+<p>Number of all Countries - @Model.Count()</p>
+<hr />
+
+@foreach (var item in Model.OrderByDescending(c => c.Area).ThenBy(c => c.Population))
+{
+   <p>Name: @item.Name</p>
+   <p>Population: @item.Population</p>
+   <p>Area: @item.Area</p>
+    <hr />
+}
+
+
