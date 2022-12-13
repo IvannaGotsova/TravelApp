@@ -1,5 +1,18 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Information Page";
 }
+
+<div class="text-center">
+    <p>Information</p>
+    <p>Here you can get statistical information of all.<p />
+
+    <hr />
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Information" asp-action="Journeys" sp-route-information="" class="btn btn-success">Journeys</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Information" asp-action="Countries" sp-route-information="" class="btn btn-success">Countries</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Information" asp-action="Towns" sp-route-information="" class="btn btn-success">Towns</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Information" asp-action="Trips" sp-route-information="" class="btn btn-success">Trips</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Information" asp-action="Requests" sp-route-information="" class="btn btn-success">Requests</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Information" asp-action="Posts" sp-route-information="" class="btn btn-success">Posts</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Information" asp-action="ApplicationUsers" sp-route-information="" class="btn btn-success">Users</a>
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Information" asp-action="Comments" sp-route-information="" class="btn btn-success">Comments</a>
+</div>
