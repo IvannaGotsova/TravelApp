@@ -222,5 +222,20 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
 
 
 
+        [Test]
+        public void Test_TripService_GetTrips()
+        {
+            //Arange
+            int tripsCount = data.Trips.Count();
+
+            //Act : get all trips of all users
+            var trips = tripService.GetTrips().Result;
+
+            //Assert : number of trips is correct
+            Assert.That(trips.Count(), Is.EqualTo(tripsCount));
+        }
+
+
+
     }
 }
