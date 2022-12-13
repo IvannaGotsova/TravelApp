@@ -82,7 +82,9 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View(countries);
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all the journeys.
+        /// </summary>
         public async Task<IActionResult> Journeys()
         {
            
@@ -128,7 +130,9 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View(trips);
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all the towns.
+        /// </summary>
         public async Task<IActionResult> Towns()
         {
          
