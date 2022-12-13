@@ -119,7 +119,9 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View(requests);
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all the trips..
+        /// </summary>
         public async Task<IActionResult> Trips()
         {
         

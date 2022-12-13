@@ -27,6 +27,7 @@
     @foreach (var item in Model.Select(c => c.TripName).Distinct())
     {
         <p>@item - @Model.Where(c => c.TripName == item).Count()</p>
-        ;
+
     }
+    <hr />
     <hr />

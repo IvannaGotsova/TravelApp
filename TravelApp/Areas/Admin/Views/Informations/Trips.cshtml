@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Trip>
+
+@{
+    ViewBag.Title = "Trips Information";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<a class="btn btn-warning" asp-area="Admin" asp-controller="Informations" asp-action="Index" asp-route-id="" asp-route-information="" class="btn btn-success"> Back to Information</a>
+<hr />
+
+<p>Number of all Trips - @Model.Count()</p>
+<p>Number of all Journeys with trips - @Model.Select(p => p.JourneyId).Distinct().Count()</p>
+<p>Number of all Users with trips - @Model.Select(u => u.ApplicationUserId).Distinct().Count()</p>
+<p>Average Rating - @Model.Select(r => r.Rating).Average()</p>
+<hr />
+<hr />
