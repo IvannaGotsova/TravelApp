@@ -17,6 +17,11 @@ namespace TravelApp.Core.Contracts
     public interface ITripService
     {
         /// <summary>
+        /// This method returns IEnumerable of all trips of all users.
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<Trip>> GetTrips();
+        /// <summary>
         /// This method returns IEnumerable of all trips of login user.
         /// </summary>
         /// <returns></returns>

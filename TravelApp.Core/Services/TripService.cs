@@ -178,6 +178,18 @@ namespace TravelApp.Core.Services
             return trip;
         }
         /// <summary>
+        /// This method returns IEnumerable of all Trips of all users.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<Trip>> GetTrips()
+        {
+            return await
+               this.data
+               .AllReadonly<Trip>()
+               .ToListAsync();
+        }
+
+        /// <summary>
         /// This method returns IEnumerable of all Trips used for Select.
         /// </summary>
         /// <returns></returns>

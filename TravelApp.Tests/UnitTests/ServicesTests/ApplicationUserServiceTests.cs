@@ -154,5 +154,7 @@ namespace TravelApp.Tests.UnitTests.ServicesTests
             Assert.ThrowsAsync<ArgumentNullException>(async () => await applicationUserService.RemoveVIP(userId));
         }
 
+
+
     }
 }
