@@ -58,7 +58,9 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View(users);
         }
-
+        /// <summary>
+        /// This method returns all the comments.
+        /// </summary>
         public async Task<IActionResult> Comments()
         {
 

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<AllCommentsModel>
+
+@{
+    ViewBag.Title = "Comments Information";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<a class="btn btn-warning" asp-area="Admin" asp-controller="Informations" asp-action="Index" asp-route-id="" asp-route-information="" class="btn btn-success"> Back to Information</a>
+<hr />
+
+<p>Number of all Comments - @Model.Count()</p>
+<p>Number of all commented Posts - @Model.Select(c => c.PostId).Distinct().Count()</p>
+<p>Number of all Users who made comments - @Model.Select(c => c.Author).Distinct().Count()</p>
+<hr />
+
+<p>Number of comments per User</p>
+@foreach(var item in Model.Select(c => c.Author).Distinct())
+{
+    <p>@item - @Model.Where(c => c.Author == item).Count()</p>;
+}
+
