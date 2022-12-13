@@ -47,7 +47,9 @@ namespace TravelApp.Areas.Admin.Controllers
 
             return View();
         }
-
+        /// <summary>
+        /// This method returns all the registered users.
+        /// </summary>
         public async Task<IActionResult> ApplicationUsers()
         {
             var users = await

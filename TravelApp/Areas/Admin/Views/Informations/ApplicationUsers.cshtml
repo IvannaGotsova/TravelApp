@@ -1,0 +1,24 @@
+﻿@model IEnumerable<AllUsersModelView>
+
+@{
+    ViewBag.Title = "Users Information";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<p>Number of all Users - @Model.Count()</p>
+<p>Number of all VIP Users - @Model.Where(u => u.IsVIP == "VIP").Count()</p>
+<p>Number of all Regular Users - @Model.Where(u => u.IsVIP == "Regular").Count()</p>
+<p>Number of all trips - @Model.Select(u => u.TripsCount).Sum()</p>
+<hr />
+
+
+@foreach(var item in Model)
+{
+    <h4>User: @item.UserName  </h4>
+    <p>@item.FirstName @item.LastName</p>
+    <p>@item.IsVIP</p>
+    <p>@item.TripsCount trips</p>
+    <hr/>
+}

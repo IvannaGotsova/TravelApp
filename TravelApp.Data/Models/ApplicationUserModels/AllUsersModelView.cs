@@ -18,6 +18,7 @@ namespace TravelApp.Data.Models.ApplicationUserModels
         public string? LastName { get; set; }
         public int TripsCount { get; set; }
         public string? IsVIP { get; set; }
+        
 
     }
 }
