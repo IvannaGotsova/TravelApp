@@ -95,7 +95,9 @@ namespace TravelApp.Areas.Admin.Controllers
           
             return View(journeys);
         }
-
+        /// <summary>
+        /// This method returns IEnumerable of all the posts.
+        /// </summary>
         public async Task<IActionResult> Posts()
         {
            

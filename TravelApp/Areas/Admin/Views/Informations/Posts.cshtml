@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AllPostsModel>
+
+    @{
+        ViewBag.Title = "Posts Information";
+    }
+
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <hr />
+
+    <a class="btn btn-warning" asp-area="Admin" asp-controller="Informations" asp-action="Index" asp-route-id="" asp-route-information="" class="btn btn-success"> Back to Information</a>
+    <hr />
+
+    <p>Number of all Posts - @Model.Count()</p>
+    <p>Number of all Trips with posts - @Model.Select(p => p.TripId).Distinct().Count()</p>
+    <p>Number of all Users with posts - @Model.Select(c => c.Author).Distinct().Count()</p>
+    <hr />
+
+    <p>Number of posts per User</p>
+    @foreach (var item in Model.Select(c => c.Author).Distinct())
+    {
+        <p>@item - @Model.Where(c => c.Author == item).Count()</p>
+        ;
+    }
+    <hr />
+
+     <p>Number of posts per Trip</p>
+    @foreach (var item in Model.Select(c => c.TripName).Distinct())
+    {
+        <p>@item - @Model.Where(c => c.TripName == item).Count()</p>
+        ;
+    }
+    <hr />
