@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AllRequestsModel>
+
+@{
+    ViewBag.Title = "Requests Information";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<a class="btn btn-warning" asp-area="Admin" asp-controller="Informations" asp-action="Index" asp-route-id="" asp-route-information="" class="btn btn-success"> Back to Information</a>
+<hr />
+
+<p>Number of all Requests - @Model.Count()</p>
+<p>Number of all Approved Requests - @Model.Where(r => r.Status == "Approved").Count()</p>
+<p>Number of all Not Approved Requests - @Model.Where(r => r.Status == "Not Approved").Count()</p>
+<p>Number of all Managed Requests - @Model.Where(r => r.Management == "Managed").Count()</p>
+<p>Number of all Not Managed Requests - @Model.Where(r => r.Management == "Not Managed").Count()</p>
+<p>Number of all Users who made requests - @Model.Select(r => r.ApplicationUserId).Distinct().Count()</p>
+<p>Number of average Sum - @Model.Select(r => r.FinalSum).Average()</p>
+<hr />
+
+<p>Number of requests per Journey</p>
+@foreach (var item in Model.Select(c => c.JourneyName).Distinct())
+{
+    <p>@item - @Model.Where(c => c.JourneyName == item).Count()</p>
+    ;
+}
+<hr />
+<hr />
