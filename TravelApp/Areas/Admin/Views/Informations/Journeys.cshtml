@@ -1,0 +1,23 @@
+﻿@model IEnumerable<AllJourneysModel>
+
+@{
+    ViewBag.Title = "Journeys Information";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<a class="btn btn-warning" asp-area="Admin" asp-controller="Informations" asp-action="Index" asp-route-id="" asp-route-information="" class="btn btn-success"> Back to Information</a>
+<hr />
+
+<p>Number of all Journeys - @Model.Count()</p>
+<hr />
+
+
+<hr />
+@foreach (var item in Model)
+{
+    <p>@item.Description - @item.Countries</p>
+    <hr/>
+}
+<hr />
